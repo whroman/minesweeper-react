@@ -1,14 +1,14 @@
-# [Angular Minesweeper](http://whroman.github.io/minesweeper-angular/)
+[![Build Status](https://travis-ci.org/whroman/minesweeper-react.svg?branch=master)](https://travis-ci.org/whroman/minesweeper-react)
+
+# Minesweeper React
 
 A single-page Minesweeper app built using:
 
-* [Angular](https://angularjs.org/)
+* [React](https://facebook.github.io/react/)
 * [Coffeescript](http://coffeescript.org/)
 * [Sass](http://sass-lang.com/)
 * [Gulp](http://gulpjs.com/)
-* [Bower](http://bower.io)
-
-View live [here](http://whroman.github.io/minesweeper-angular/).
+* [Jest](https://facebook.github.io/jest/)
 
 ##Application
 
@@ -17,7 +17,6 @@ To work on the front-end code of the application, you'll need to have the follow
 
 * [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
 * [Gulp](http://gulpjs.com/): Run `[sudo] npm install -g gulp`
-* [Bower](http://bower.io) *: Run `[sudo] npm install -g bower`
 * [Sass](http://sass-lang.com/install): Run `[sudo] gem install sass`. V 3.3 or higher is required (due to sourcemap support)
 
 
@@ -28,18 +27,23 @@ To work on the front-end code of the application, you'll need to have the follow
 ### Structure
 
 ```
-minesweeper-angular
-├── Gulpfile.js
+minesweeper-react
+├── Gulpfile.coffee
 │       // Holds project tasks, including:
 │       // - Spinning up a local server
 │       // - Sass compiling
-│       // - Coffeescript compiling
-│       // - JS Uglify-ing
+│       // - Scripts
+│       //      - Coffeescript compiling
+│       //      - Uglify-ing
+│       //      - Browserify-ing
+│       //      - Concatenation
+│       //      - Testing
+│
 └── Tasks
     │
-    ├── index.js   // Exports `paths.js` and `options.js`
-    ├── options.js // Exposes Gulp plugin option objects
-    └── paths.js   // Exposes file paths of Resources manipulated by Gulp tasks
+    ├── index   // Exports `paths` and `options`
+    ├── options // Exposes Gulp plugin option objects
+    └── paths   // Exposes file paths of Resources manipulated by Gulp tasks
 
 ```
 ### Usage
@@ -57,13 +61,12 @@ minesweeper-angular
 
 ### Getting Started
 
-It is imperative to have the default `gulp` (or `gulp dev`) task running while developing. The dev server is located at `http://localhost:8888`.
+It is imperative to have the default `gulp` (or `gulp dev`) task running while developing. The dev server is located at `http://localhost:8890`.
 
 ### Adding New JS Libraries
 
-1. Add lib to project using `bower` from the project root
-2. The lib will appear in `[root]/Resources/bower_components/....`
-3. Declare the path to the lib file in `[root]/Tasks//paths.js` as an Array item in `path.js.libs`. The files will be concat'd in listed order.
+1. Add lib to project using `npm` from the project root
+2. Declare the path to the lib file in `[root]/Tasks//paths.js` as an Array item in `path.js.libs`. The files will be concat'd in listed order.
 
 
 ### Adding New Coffeescript Files
