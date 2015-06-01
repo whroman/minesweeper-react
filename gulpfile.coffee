@@ -4,6 +4,7 @@ gulp = require 'gulp'
 del = require 'del'
 browserify = require 'browserify'
 coffee = require 'coffee-script'
+spawn = require('child_process').spawn
 vinyl =
     paths: require 'vinyl-paths'
     buffer: require 'vinyl-buffer'
@@ -71,6 +72,20 @@ gulp.task 'js:build', ['js:coffee'], ->
         .pipe gp.sourcemaps.write('./maps')
         .pipe gulp.dest paths.build
 
+
+gulp.task 'js:test', ['js:build'], ->
+    childProcess = spawn 'npm', ['test']
+    childProcess.stdout.on 'data', (data) ->
+        message =  String(data)
+        if data
+            console.log message
+
+    childProcess.stderr.on 'data', (data) ->
+        message =  String(data)
+        if data
+            console.log message
+
+
 gulp.task 'server', ->
     gp.liveServer.static '.', 8890, false
         .start()
@@ -78,11 +93,10 @@ gulp.task 'server', ->
 
 gulp.task 'watch', ->
     gulp.watch paths.scss.watch, options.gulpNoRead, ['sass']
-
-    gulp.watch paths.coffee.watch, options.gulpNoRead, ['js:build']
+    gulp.watch [paths.coffee.watch, paths.tests.watch], options.gulpNoRead, ['js:test']
 
 gulp.task 'build', [
-    'js:build'
+    'js:test'
     'sass'
 ]
 

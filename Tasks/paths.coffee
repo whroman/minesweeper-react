@@ -11,10 +11,13 @@ path.scss =
     src     : [path.root + 'scss/app.scss']
     build   : 'build.scss'
 
-path.coffee = {}
-path.coffee.src = path.root + 'coffee/app.coffee'
-path.coffee.dest = path.build + 'js/'
-path.coffee.watch = path.root + 'coffee/**/*.coffee'
+path.coffee =
+    src     : path.root + 'coffee/app.coffee'
+    dest    : path.build + 'js/'
+    watch   : path.root + 'coffee/**/*.coffee'
+
+path.tests =
+    watch   : './Spec/Unit/**/*.coffee'
 
 path.js =
     build   : path.build + 'build.js'
