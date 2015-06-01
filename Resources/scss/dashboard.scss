@@ -1,0 +1,30 @@
+#dashboard {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-width: 450px;
+}
+
+.button {
+    background-color: #999;
+    display: inline-block;
+    padding: 1px 14px 0 14px;
+    line-height: 2em;
+    color: #FFF;
+    letter-spacing: 2px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    font-weight: 200;
+    margin: 0 3px;
+}
+
+.button:hover {
+    background-color: #444;
+}
+
+.button:active {
+    background-color: #000;
+}

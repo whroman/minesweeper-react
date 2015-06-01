@@ -1,0 +1,10 @@
+@import "mixins";
+@import "base";
+@import "board";
+@import "dashboard";
+@import "overlay";
+
+
+[ng-cloak] {
+  display: none !important;
+}

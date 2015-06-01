@@ -1,0 +1,61 @@
+.board-wrapper {
+    margin: 0 auto;
+}
+
+#board {
+    display: inline-block;
+    clear: both;
+    border: 1px solid #999;
+    padding: 3px;
+    border-radius: 18px;
+    margin: 10px 0 38px 0;
+}
+
+#board::selection { background: transparent; }
+#board::-moz-selection { background: transparent; }
+
+.tile {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #999;
+    float: left;
+    border-radius: 100px;
+    margin: 2px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 100;
+    font-size: 20px;
+    color: #FFF;
+
+    & > * {
+        line-height: 32px;
+    }
+
+    &:hover {
+        background-color: #999;
+    }
+
+    &.nth {
+        clear: both;
+    }
+
+    &.flagged {
+        background-color: #F82;
+        border-color: #F82;
+    }
+
+    &.clear {
+        background-color: #21D330;
+        border-color: #21D330;
+    }
+
+    &.clear.zero {
+        background-color:  #999;
+        border-color:  #999;
+    }
+
+    &.clear.mine {
+        background-color: #D32;
+        border-color: #D32;
+    }
+}
