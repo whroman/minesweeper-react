@@ -6,7 +6,7 @@ Number.isInteger = Number.isInteger or (value) ->
     )
 
 module.exports =
-    class ModelTile
+    class TileModel
         constructor: (attrs) ->
             if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)
                 throw "`x` and `y` are required Integer attributes to instantiate Tile"
@@ -42,6 +42,7 @@ module.exports =
             @model.isFlagged = false
             @
 
+        # 
         click: ($event) ->
             if !$event
                 return @clear()

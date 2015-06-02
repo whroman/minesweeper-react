@@ -1,24 +1,20 @@
-ComponentTile = require './ComponentTile.coffee'
-ModelTile = require '../models/ModelTile.coffee'
+ComponentTiles = require './TilesComponent.coffee'
 
 R = React.DOM
 
-Tiles = React.createClass
+Game = React.createClass
     displayName: 'Tiles'
     getInitialState: ->
         all: []
 
     render: ->
-        tiles = this.state.all.map (item, index) =>
-            React.createElement ComponentTile, {
-                key: index
-                ref: item.model.uid
-                tile: item
-            }
+        Board = React.createElement ComponentTiles, {
+            tiles: this.state.all
+        }
 
-        R.ul {
-            id: 'board'
-        }, tiles
+        R.div {
+            id: 'game'
+        }, Board
 
     componentDidMount: ->
         collection = @
@@ -196,4 +192,4 @@ Tiles = React.createClass
 
         @
 
-module.exports = Tiles
+module.exports = Game

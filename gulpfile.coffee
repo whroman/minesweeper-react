@@ -54,7 +54,6 @@ gulp.task 'js:coffee', ['js:clean'], ->
             data += buf
 
         end = () ->
-            console.log(fileName)
             fileExt = fileExtensionRe.exec fileName
             if fileExt and fileExt[0] is '.coffee'
                 this.queue coffee.compile data
@@ -90,7 +89,9 @@ gulp.task 'js:test', ['js:build'], ->
             console.log String(data)
 
     childProcess.stdout.on 'data', print
-    childProcess.stderr.on 'data', print
+    childProcess.stderr.on 'data', (data) ->
+        print data
+        childProcess.kill()
 
 
 gulp.task 'server', ->

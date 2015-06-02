@@ -1,13 +1,13 @@
 jest.autoMockOff()
 
-ModelTile = require './../../../../Resources/coffee/models/ModelTile.coffee'
+TileModel = require './../../../../Resources/coffee/models/TileModel.coffee'
 tests = require './testStubs.coffee'
 
-describe 'ModelTile.set', ->
+describe 'TileModel.set', ->
 
     it 'should properly set given attributes', ->
         for test in tests
-            tile = new ModelTile(test.attrs)
+            tile = new TileModel(test.attrs)
 
             for attr of test.attrs
                 expect tile.model[attr]
@@ -15,7 +15,7 @@ describe 'ModelTile.set', ->
 
     it 'should properly set `.model.uid` based off of `x` and `y` class arguments', ->
         for test in tests
-            tile = new ModelTile(test.attrs)
+            tile = new TileModel(test.attrs)
 
             expect tile.model.uid
                 .toBe(test.expectedUid)

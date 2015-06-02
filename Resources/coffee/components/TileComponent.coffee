@@ -1,3 +1,5 @@
+TileActions = require '../actions/TileActions.coffee'
+
 R = React.DOM
 
 Tile = React.createClass
@@ -12,17 +14,21 @@ Tile = React.createClass
             onClick: this.clickHandler
         }, R.span null, @getText()
 
-    toggleFlag: ->
-        @setState isFlagged: !@props.tile.model.isFlagged
+    # 
+    clickHandler: ($event) ->
+        # click: ($event) ->
+        if !$event
+            return TileActions.clear @props.tile.model.uid
 
-    clear: ->
-        @setState(
-            @setState isClear: true
-            @setState isFlagged: false
+        flagKeyWasPressed = (
+            $event.shiftKey is true or
+            $event.altKey is true
         )
 
-    clickHandler: ($event) ->
-        this.props.tile.click($event)
+        if flagKeyWasPressed
+            return TileActions.toggleFlag @props.tile.model.uid
+        else
+            return TileActions.clear @props.tile.model.uid
 
     isFirstColumn: ->
         this.props.tile.model.x is 0

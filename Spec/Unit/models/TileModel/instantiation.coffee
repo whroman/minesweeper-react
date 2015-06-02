@@ -1,9 +1,9 @@
 jest.autoMockOff()
 
-ModelTile = require './../../../../Resources/coffee/models/ModelTile.coffee'
+TileModel = require './../../../../Resources/coffee/models/TileModel.coffee'
 
-describe 'ModelTile instantiation', ->
+describe 'TileModel instantiation', ->
     it 'should require `x` and `y` as properties of instantiation argument object', ->
         expect( ->
-            new ModelTile()
+            new TileModel()
         ).toThrow()

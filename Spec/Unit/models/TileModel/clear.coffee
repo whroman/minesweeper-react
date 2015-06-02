@@ -1,12 +1,12 @@
 jest.autoMockOff()
 
-ModelTile = require './../../../../Resources/coffee/models/ModelTile.coffee'
+TileModel = require './../../../../Resources/coffee/models/TileModel.coffee'
 tests = require './testStubs.coffee'
 
-describe 'ModelTile.clear', ->
+describe 'TileModel.clear', ->
     it 'should set `.model.isClear` to `true` and `.model.isFlagged` to `false`', ->
         for test in tests
-            tile = new ModelTile(test.attrs)
+            tile = new TileModel(test.attrs)
             tile.toggleFlag()
             expect tile.model.isFlagged
                 .toBe(!test.attrs.isFlagged)
