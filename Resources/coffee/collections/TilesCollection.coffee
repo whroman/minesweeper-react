@@ -4,6 +4,8 @@ class TilesCollection
     constructor: () ->
         @all = []
 
+        collection = @
+
         @model = class Model extends TileModel
             clear: ->
                 super()
@@ -17,11 +19,6 @@ class TilesCollection
             click: ($event) ->
                 collection.noMineFirstClick @
                 super $event
-
-                # Rerender `this` tile
-                tileRef = collection.refs[@model.uid]
-                if (tileRef)
-                    tileRef.forceUpdate()
 
         @newGame()
 

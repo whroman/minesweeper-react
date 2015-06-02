@@ -41,6 +41,8 @@ gulp.task 'js:coffee', ['js:clean'], ->
         entries: [
             paths.coffee.src
             paths.npm + 'flux/index.js'
+            # paths.npm + 'object-assign'
+
         ]
         debug: true
         paths: paths.npm
@@ -54,6 +56,7 @@ gulp.task 'js:coffee', ['js:clean'], ->
             data += buf
 
         end = () ->
+            console.log fileName
             fileExt = fileExtensionRe.exec fileName
             if fileExt and fileExt[0] is '.coffee'
                 this.queue coffee.compile data

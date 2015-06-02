@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "flux": "2.0.3",
+    "object-assign": "2.0.0",
     "react": "0.13.3"
   },
   "scripts": {

@@ -4,10 +4,19 @@ TileStore = require '../stores/TileStore.coffee'
 
 R = React.DOM
 
+getState = ->
+    all: TileStore.getAll()
+
 Tiles = React.createClass
     displayName: 'Tiles'
     getInitialState: ->
-        all: TileStore.getAll()
+        getState()
+
+    componentDidMount: ->
+        TileStore.addChangeListener this._onChange
+
+    componentWillUnmount: ->
+        TileStore.removeChangeListener this._onChange
 
     render: ->
         tiles = this.state.all.map (item, index) =>
@@ -17,18 +26,10 @@ Tiles = React.createClass
                 tile: item
             }
 
-        R.ul {
-            id: 'board'
-        }, tiles
+        R.ul id:'board', tiles
 
-    componentDidMount: ->
-        collection = @
-
-Dispatcher.register (event) ->
-    switch event.type
-        when 'TILE_FLAG_TOGGLE'
-            console.log 'tile flag'
-        when 'TILE_CLEAR'
-            console.log 'tile clear'
+    _onChange: ->
+        console.log 'change!'
+        this.setState getState()
 
 module.exports = Tiles
