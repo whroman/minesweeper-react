@@ -1,31 +1,31 @@
 require 'coffee-script/register'
 
-path =
+paths =
     root    : './Resources/'
 
-path.npm = './node_modules/'
-path.build = path.root + 'build/'
+paths.npm = './node_modules/'
+paths.build = paths.root + 'build/'
 
-path.scss =
-    watch   : path.root + 'scss/**/*.scss'
-    src     : [path.root + 'scss/app.scss']
+paths.scss =
+    watch   : paths.root + 'scss/**/*.scss'
+    src     : [paths.root + 'scss/app.scss']
     build   : 'build.scss'
 
-path.coffee =
-    src     : path.root + 'coffee/app.coffee'
-    dest    : path.build + 'js/'
-    watch   : path.root + 'coffee/**/*.coffee'
+paths.coffee =
+    src     : paths.root + 'coffee/app.coffee'
+    dest    : paths.build + 'js/'
+    watch   : paths.root + 'coffee/**/*.coffee'
 
-path.tests =
+paths.tests =
     watch   : './Spec/Unit/**/*.coffee'
 
-path.js =
-    build   : path.build + 'build.js'
+paths.js =
+    build   : paths.build + 'build.js'
 
     libs: [
         'react/dist/react.js'
-    ].map (file) -> path.npm + file
+    ].map (file) -> paths.npm + file
 
-path.js.all = path.js.libs.concat(path.coffee.dest + '**/*.js')
+paths.js.all = paths.js.libs.concat(paths.coffee.dest + '**/*.js')
 
-module.exports = path
+module.exports = paths

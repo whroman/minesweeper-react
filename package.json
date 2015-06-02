@@ -23,15 +23,26 @@
     "vinyl-source-stream": "1.1.0"
   },
   "dependencies": {
-    "react": "^0.13.3"
+    "flux": "2.0.3",
+    "react": "0.13.3"
   },
   "scripts": {
     "test": "jest"
   },
   "jest": {
     "scriptPreprocessor": "Spec/preprocessor.js",
-    "testFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"],
-    "moduleFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"],
+    "testFileExtensions": [
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ],
     "testDirectoryName": "Spec/Unit"
   }
 }

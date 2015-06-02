@@ -38,18 +38,28 @@ gulp.task 'js:clean', (cb) ->
 gulp.task 'js:coffee', ['js:clean'], ->
 
     b = browserify(
-        entries: paths.coffee.src
+        entries: [
+            paths.coffee.src
+            paths.npm + 'flux/index.js'
+        ]
         debug: true
+        paths: paths.npm
     )
 
-    b.transform (file) ->
+    b.transform (fileName) ->
         data = ''
+        fileExtensionRe = /\.[0-9a-z]+$/i
 
         write = (buf) ->
             data += buf
 
         end = () ->
-            this.queue coffee.compile data
+            console.log(fileName)
+            fileExt = fileExtensionRe.exec fileName
+            if fileExt and fileExt[0] is '.coffee'
+                this.queue coffee.compile data
+            else
+                this.queue data
             this.queue null
 
         through write, end
@@ -65,7 +75,6 @@ gulp.task 'js:coffee', ['js:clean'], ->
         .pipe gulp.dest paths.coffee.dest
 
 gulp.task 'js:build', ['js:coffee'], ->
-    console.log(paths.js.all)
     gulp.src paths.js.all
         .pipe gp.sourcemaps.init(loadMaps : true)
             .pipe gp.concat 'build.js'
@@ -75,15 +84,13 @@ gulp.task 'js:build', ['js:coffee'], ->
 
 gulp.task 'js:test', ['js:build'], ->
     childProcess = spawn 'npm', ['test']
-    childProcess.stdout.on 'data', (data) ->
-        message =  String(data)
-        if data
-            console.log message
 
-    childProcess.stderr.on 'data', (data) ->
-        message =  String(data)
+    print = (data) ->
         if data
-            console.log message
+            console.log String(data)
+
+    childProcess.stdout.on 'data', print
+    childProcess.stderr.on 'data', print
 
 
 gulp.task 'server', ->
