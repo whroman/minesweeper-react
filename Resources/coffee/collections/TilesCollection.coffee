@@ -64,28 +64,6 @@ class TilesCollection
         @all = []
         @
 
-
-    get : (attrs) ->
-        return @getAll(attrs)[0]
-
-    getAll : (attrs) ->
-        matches = []
-        if !attrs
-            return @all
-
-        for tile in @all
-            numOfAttrs = 0
-            numOfMatchedAttrs = 0
-            for key, val of attrs
-                numOfAttrs++
-                if tile.model[key] is val
-                    numOfMatchedAttrs++
-
-            if numOfMatchedAttrs is numOfAttrs
-                matches.push tile
-
-        return matches
-
     randomSafeTile : () ->
         findAttrs =
             isClear : false
@@ -170,5 +148,33 @@ class TilesCollection
 
                 if shouldClearNeighbor
                     neighbor.click()
+
+    get : (attrs) ->
+        return @getAll(attrs)[0]
+
+    getAll : (attrs) ->
+        matches = []
+        if !attrs
+            return @all
+
+        for tile in @all
+            numOfAttrs = 0
+            numOfMatchedAttrs = 0
+            for key, val of attrs
+                numOfAttrs++
+                if tile.model[key] is val
+                    numOfMatchedAttrs++
+
+            if numOfMatchedAttrs is numOfAttrs
+                matches.push tile
+
+        return matches
+
+    getInfo : () ->
+        numOfTiles: @all.length
+        numOfMines: @numOfMines
+        numOfFlags: @numOfFlags
+        numOfUncleared: @all.length - @numOfMines - @numOfClears
+
 
 module.exports = TilesCollection

@@ -5,18 +5,13 @@ R = React.DOM
 Tile = React.createClass
     displayName: 'Tile'
 
-    componentDidMount: ->
-        @props.tile.model.index = @props.index
-
     render: ->
         R.li {
             className: this.getClass(),
             onClick: this.clickHandler
         }, R.span null, @getText()
 
-    # 
     clickHandler: ($event) ->
-        # click: ($event) ->
         if !$event
             return TileActions.clear @props.tile.model.uid
 

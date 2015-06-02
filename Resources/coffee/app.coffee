@@ -1,8 +1,8 @@
-ComponentTiles = require './components/TilesComponent.coffee'
+GameComponent = require './components/GameComponent.coffee'
 
-ViewController = React.createElement ComponentTiles, null
+ViewController = React.createElement GameComponent, null
 
 React.render(
     ViewController,
-    document.getElementById 'game'
+    document.getElementById 'minesweeper'
 )

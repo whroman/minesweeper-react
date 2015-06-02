@@ -1,19 +1,32 @@
-ComponentTiles = require './TilesComponent.coffee'
+TilesComponent = require './TilesComponent.coffee'
+InfoComponent = require './InfoComponent.coffee'
+Dispatcher = require '../Dispatcher.coffee'
+TileStore = require '../stores/TileStore.coffee'
 
 R = React.DOM
 
+getState = ->
+    all: TileStore.getAll()
+    info: TileStore.getInfo()
+
 Game = React.createClass
-    displayName: 'Tiles'
+    displayName: 'Game'
     getInitialState: ->
-        all: []
+        getState()
+
+    componentDidMount: ->
+        TileStore.addChangeListener @_onChange
+
+    componentWillUnmount: ->
+        TileStore.removeChangeListener @_onChange
 
     render: ->
-        Board = React.createElement ComponentTiles, {
-            tiles: this.state.all
-        }
-
-        R.div {
-            id: 'game'
-        }, Board
+        R.div id:'game', [
+            React.createElement InfoComponent, info: @state.info
+            React.createElement TilesComponent, tiles: @state.all
+        ]
+    _onChange: ->
+        console.log 'change!'
+        @setState getState()
 
 module.exports = Game

@@ -10,6 +10,9 @@ TodoStore = assign {}, EventEmitter.prototype,
     getAll: ->
         Tiles.getAll()
 
+    getInfo: ->
+        Tiles.getInfo()
+
     emitChange: ->
         @emit @event
 
@@ -24,15 +27,15 @@ TodoStore = assign {}, EventEmitter.prototype,
 Dispatcher.register (event) ->
     switch event.type
         when 'TILE_FLAG_TOGGLE'
+            console.log 'tile flag'
             tile = Tiles.get uid:event.uid
             tile.toggleFlag()
             TodoStore.emitChange()
-            console.log 'tile flag'
         when 'TILE_CLEAR'
+            console.log 'tile clear'
             tile = Tiles.get uid:event.uid
             tile.clear()
             TodoStore.emitChange()
-            console.log 'tile clear'
 
 
 module.exports = TodoStore
