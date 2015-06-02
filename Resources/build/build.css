@@ -117,8 +117,6 @@ li {
   z-index: 1;
   display: inline-block;
   cursor: pointer; }
-  #overlay.show {
-    display: inline-block; }
 
 .message {
   -webkit-transition: background-color 0.3s ease;
@@ -211,7 +209,7 @@ li {
       background-color: #666;
       border-color: #666; }
 
-[ng-cloak] {
+.hide {
   display: none !important; }
 
 /*# sourceMappingURL=sass-maps/build.css.map */

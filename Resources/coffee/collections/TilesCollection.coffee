@@ -20,8 +20,6 @@ class TilesCollection
                 collection.noMineFirstClick @
                 super $event
 
-        @newGame 4, 7, 5
-
     newGame: (x, y, mines) ->
         @reset()
         @sizeY = x
@@ -109,27 +107,27 @@ class TilesCollection
         @moveUpdate()
 
     moveUpdate : ->
-        this.loss    = false
-        this.win     = false
-        this.numOfClears = 0
-        this.numOfFlags  = 0
+        @loss    = false
+        @win     = false
+        @numOfClears = 0
+        @numOfFlags  = 0
 
         for tile in @all
             # Cleared Tiles
             if tile.model.isClear == true
-                this.numOfClears++
+                @numOfClears++
 
             # Flagged Tiles
             if tile.model.isFlagged == true
-                this.numOfFlags++
+                @numOfFlags++
 
             # Check Game Loss
             if tile.model.isMine == true && tile.model.isClear == true
-                this.loss = true
+                @loss = true
 
         # Check Game Win
-        if this.loss == false && @all.length - this.numOfMines - this.numOfClears == 0
-            this.win = true
+        if @loss == false && @all.length - @numOfMines - @numOfClears == 0
+            @win = true
 
     clearNeighbors : (tile) ->
         shouldClearNeighbors = tile.model.adjacentMines is 0 and tile.model.isMine is false
@@ -169,12 +167,5 @@ class TilesCollection
                 matches.push tile
 
         return matches
-
-    getInfo : () ->
-        numOfTiles: @all.length
-        numOfMines: @numOfMines
-        numOfFlags: @numOfFlags
-        numOfUncleared: @all.length - @numOfMines - @numOfClears
-
 
 module.exports = TilesCollection

@@ -3,6 +3,7 @@ EventEmitter = require('events').EventEmitter
 assign = require 'object-assign'
 
 Tiles = new TilesCollection()
+Tiles.newGame 4, 7, 5
 
 TileStore = assign {}, EventEmitter.prototype,
     event: 'change'
@@ -14,7 +15,12 @@ TileStore = assign {}, EventEmitter.prototype,
         Tiles.getAll()
 
     getInfo: ->
-        Tiles.getInfo()
+        win: Tiles.win
+        loss: Tiles.loss
+        numOfTiles: Tiles.all.length
+        numOfMines: Tiles.numOfMines
+        numOfFlags: Tiles.numOfFlags
+        numOfUncleared: Tiles.all.length - Tiles.numOfMines - Tiles.numOfClears
 
     randomSafeTile: ->
         Tiles.randomSafeTile()
