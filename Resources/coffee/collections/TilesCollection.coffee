@@ -20,13 +20,13 @@ class TilesCollection
                 collection.noMineFirstClick @
                 super $event
 
-        @newGame()
+        @newGame 4, 7, 5
 
-    newGame: ->
+    newGame: (x, y, mines) ->
         @reset()
-        @sizeY = 4
-        @sizeX = 7
-        @numOfMines = 5
+        @sizeY = x
+        @sizeX = y
+        @numOfMines = mines
 
         for y in [0..@sizeY - 1]
             for x in [0..@sizeX - 1]

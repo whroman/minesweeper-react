@@ -5,10 +5,10 @@ Info = React.createClass
 
     render: ->
         R.ul id:'stats', [
-            R.li null, @props.info.numOfTiles + " tiles"
-            R.li null, @props.info.numOfMines + " mines"
-            R.li null, @props.info.numOfFlags + " flagged tiles"
-            R.li null, @props.info.numOfUncleared + " left to clear"
+            R.li key: 'tiles', @props.info.numOfTiles + " tiles"
+            R.li key: 'mines', @props.info.numOfMines + " mines"
+            R.li key: 'flagged', @props.info.numOfFlags + " flagged tiles"
+            R.li key: 'cleared', @props.info.numOfUncleared + " left to clear"
         ]
 
 module.exports = Info

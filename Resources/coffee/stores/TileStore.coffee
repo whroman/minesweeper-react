@@ -16,6 +16,12 @@ TileStore = assign {}, EventEmitter.prototype,
     getInfo: ->
         Tiles.getInfo()
 
+    randomSafeTile: ->
+        Tiles.randomSafeTile()
+
+    newGame: (x, y, mines) ->
+        Tiles.newGame x, y, mines
+
     emitChange: ->
         @emit @event
 

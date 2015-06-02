@@ -1,7 +1,10 @@
-TilesComponent = require './TilesComponent.coffee'
-InfoComponent = require './InfoComponent.coffee'
 Dispatcher = require '../Dispatcher.coffee'
 TileStore = require '../stores/TileStore.coffee'
+
+TilesComponent = require './TilesComponent.coffee'
+InfoComponent = require './InfoComponent.coffee'
+DashboardComponent = require './DashboardComponent.coffee'
+
 
 R = React.DOM
 
@@ -21,9 +24,24 @@ Game = React.createClass
         TileStore.removeChangeListener @_onChange
 
     render: ->
-        R.div id:'game', [
-            React.createElement InfoComponent, info: @state.info
-            React.createElement TilesComponent, tiles: @state.all
+        boardWrappper = R.div {
+            id:'board-wrappper'
+            key: 'board-wrappper'
+        }, [
+            React.createElement InfoComponent,
+                key: 'info'
+                info: @state.info
+            React.createElement TilesComponent,
+                key: 'tiles'
+                tiles: @state.all
+        ]
+
+        dashboard = React.createElement DashboardComponent,
+            key: 'dashboard'
+
+        R.div null, [
+            boardWrappper
+            dashboard
         ]
     _onChange: ->
         console.log 'change!'
