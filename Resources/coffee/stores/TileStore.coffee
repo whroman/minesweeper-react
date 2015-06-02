@@ -1,12 +1,15 @@
 TilesCollection = require '../collections/TilesCollection.coffee'
-Dispatcher = require '../Dispatcher.coffee'
 EventEmitter = require('events').EventEmitter
 assign = require 'object-assign'
 
 Tiles = new TilesCollection()
 
-TodoStore = assign {}, EventEmitter.prototype,
+TileStore = assign {}, EventEmitter.prototype,
     event: 'change'
+
+    get: (attrs) ->
+        Tiles.get attrs
+
     getAll: ->
         Tiles.getAll()
 
@@ -24,18 +27,4 @@ TodoStore = assign {}, EventEmitter.prototype,
     removeChangeListener: (callback) ->
         @removeListener @event, callback
 
-Dispatcher.register (event) ->
-    switch event.type
-        when 'TILE_FLAG_TOGGLE'
-            console.log 'tile flag'
-            tile = Tiles.get uid:event.uid
-            tile.toggleFlag()
-            TodoStore.emitChange()
-        when 'TILE_CLEAR'
-            console.log 'tile clear'
-            tile = Tiles.get uid:event.uid
-            tile.clear()
-            TodoStore.emitChange()
-
-
-module.exports = TodoStore
+module.exports = TileStore
