@@ -32,7 +32,10 @@ ModalOverlay = React.createClass
 
         R.div null, [
             overlay
-            React.createElement ModalInstructionsComponent, null
+            React.createElement ModalInstructionsComponent, {
+                key: 'instructions'
+                show: @props.modals.instructions
+            }
         ]
 
 module.exports = ModalOverlay

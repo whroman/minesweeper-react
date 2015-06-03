@@ -72,15 +72,15 @@ Game = React.createClass
         dashboard = React.createElement DashboardComponent,
             key: 'dashboard'
 
-        ModalOverlay = React.createElement ModalOverlayComponent,
+        overlays = React.createElement ModalOverlayComponent,
             key: 'modal-overlay'
             info: @state.info
             modals: @state.modals
 
         R.div null, [
+            overlays
             boardWrappper
             dashboard
-            ModalOverlay
         ]
 
 module.exports = Game
