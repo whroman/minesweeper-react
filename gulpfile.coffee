@@ -41,8 +41,6 @@ gulp.task 'js:coffee', ['js:clean'], ->
         entries: [
             paths.coffee.src
             paths.npm + 'flux/index.js'
-            # paths.npm + 'object-assign'
-
         ]
         debug: true
         paths: paths.npm

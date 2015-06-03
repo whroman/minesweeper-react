@@ -76,7 +76,7 @@ ModalOverlay = React.createClass
             }, 'got it!'
 
         R.div {
-            key: 'modal'
+            key: 'instructions-modal'
             className: @getClass()
         }, [
             description

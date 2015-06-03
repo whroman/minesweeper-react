@@ -25,7 +25,8 @@
   "dependencies": {
     "flux": "2.0.3",
     "object-assign": "2.0.0",
-    "react": "0.13.3"
+    "react": "0.13.3",
+    "react-slider": "^0.4.2"
   },
   "scripts": {
     "test": "jest"

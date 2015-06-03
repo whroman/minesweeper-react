@@ -1,0 +1,77 @@
+html,
+html body,
+html ul,
+html input {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    font-family: Arial,  sans-serif;
+    line-height: 1;
+    word-wrap: break-word;
+    -webkit-text-size-adjust: none;
+}
+
+html body a {
+    text-decoration: none;
+    color: inherit;
+}
+
+html body a:hover,
+html body a:active {
+    color: inherit
+}
+
+div, img, form, input, ul, li, a {
+    overflow: visible;
+    box-sizing: border-box;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input,
+textarea {
+    font-size: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: auto;
+    background: none;
+    padding: 0;
+}
+
+input:focus {
+    outline: 0;
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
+    font-size: 150%;
+    margin: 0 0.2em;
+}
+
+ul {
+    font-size: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    border: none;
+}

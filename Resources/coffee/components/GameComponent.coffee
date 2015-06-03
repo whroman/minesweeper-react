@@ -42,15 +42,10 @@ Game = React.createClass
         tilesState = getTileStoreState()
         @setState tilesState
         console.log 'tile store change!'
-        console.log tilesState.info.win, tilesState.info.loss
-        console.log getTileStoreState()
-        if tilesState.info.win or tilesState.info.loss
-            console.log 'WOOOOOOOO'
-            setTimeout (-> ModalActions.toggle 'newGame'), 0
 
     _onModalStoreChange: ->
-        console.log 'change!'
         @setState getModalStoreState()
+        console.log 'modeal change!'
 
     render: ->
         info = React.createElement InfoComponent,

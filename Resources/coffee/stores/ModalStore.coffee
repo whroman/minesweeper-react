@@ -16,9 +16,7 @@ ModalStore = assign {}, EventEmitter.prototype,
         Modals.reset()
 
     toggle: (modalName) ->
-        console.log Modals.show
         Modals.toggle modalName
-        console.log Modals.show
 
     emitChange: ->
         @emit @event

@@ -1,5 +1,6 @@
 ModalActions = require '../../actions/ModalActions.coffee'
-ModalInstructionsComponent = require './ModalInstructionsComponent.coffee'
+InstructionsComponent = require './ModalInstructionsComponent.coffee'
+NewGameComponent = require './ModalNewGameComponent.coffee'
 
 R = React.DOM
 
@@ -7,8 +8,6 @@ ModalOverlay = React.createClass
     displayName: 'ModalOverlay'
 
     getClass: ->
-        console.log (@props.modals)
-        console.log @props.info.loss, @props.info.win
         if @props.modals.newGame
             return ''
         else if @props.modals.instructions
@@ -32,9 +31,15 @@ ModalOverlay = React.createClass
 
         R.div null, [
             overlay
-            React.createElement ModalInstructionsComponent, {
-                key: 'instructions'
+            React.createElement InstructionsComponent, {
+                key: 'modal-instructions'
                 show: @props.modals.instructions
+            }
+            React.createElement NewGameComponent, {
+                key: 'modal-new-game'
+                show: @props.modals.newGame
+                win: @props.info.win
+                loss: @props.info.loss
             }
         ]
 
