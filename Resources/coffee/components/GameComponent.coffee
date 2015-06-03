@@ -41,11 +41,9 @@ Game = React.createClass
     _onTileStoreChange: ->
         tilesState = getTileStoreState()
         @setState tilesState
-        console.log 'tile store change!'
 
     _onModalStoreChange: ->
         @setState getModalStoreState()
-        console.log 'modeal change!'
 
     render: ->
         info = React.createElement InfoComponent,

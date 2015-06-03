@@ -22,26 +22,22 @@ onTilesChange = ->
 AppDispatcher.register (event) ->
     switch event.type
         when 'TILE_FLAG_TOGGLE'
-            console.log 'tile flag'
             tile = TileStore.get uid:event.uid
             tile.toggleFlag()
             onTilesChange()
 
         when 'TILE_CLEAR'
-            console.log 'tile clear'
             tile = TileStore.get uid:event.uid
             tile.clear()
             onTilesChange()
 
         when 'TILES_CLEAR_SAFE_RANDOM'
-            console.log 'tiles clear safe random'
             tile = TileStore.randomSafeTile()
             if tile
                 tile.clear()
                 onTilesChange()
 
         when 'TILES_NEW_GAME'
-            console.log 'newGame'
             TileStore.newGame 8, 4, 10
             onTilesChange()
             changeModal 'newGame'
@@ -51,7 +47,6 @@ AppDispatcher.register (event) ->
             ModalStore.emitChange()
 
         when 'MODAL_RESET'
-            console.log
             changeModal()
 
 module.exports = AppDispatcher

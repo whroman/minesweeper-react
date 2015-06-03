@@ -33,6 +33,7 @@ ModalOverlay = React.createClass
     renderButtons: ->
         buttons = [
             R.div {
+                key: 'new-game-start'
                 className: 'button'
                 onClick: @clickHandlerNewGame
             }, 'start!'
@@ -40,23 +41,25 @@ ModalOverlay = React.createClass
 
         if !@props.loss
             buttons.push R.div {
+                key: 'new-game-resume'
                 className: 'button'
                 onClick: @clickHandlerExitModal
             }, 'resume!'
 
-        R.div null, buttons
+        R.div key: 'new-game-buttons', buttons
 
     render: ->
-        title = R.div null,
-            R.div {
+        title = R.div {
+                key: 'new-game-title-wrapper'
                 className: 'border-bottom'
             },
                 R.div {
+                    key: 'new-game-title'
                     className: 'title'
                 }, @getTitleText()
 
         R.div {
-            key: 'modal'
+            key: 'new-game-modal'
             className: @getClass()
         }, [
             title

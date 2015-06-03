@@ -38,15 +38,19 @@ ModalOverlay = React.createClass
             ].join ' '
 
             R.div {
-                key: 'instructions-commands'
+                key: 'instructions-click'
             },
                 R.span {
+                    key: 'instructions-click-code'
                     className: 'code'
                 }, 'click'
-                R.span null,
+                R.span {
+                    key: 'instructions-click-text'
+                },
                     ' to reveal the squares of the grid.'
 
             R.div {
+                key: 'instructions-click-hint'
                 className: 'border-bottom'
             }, '(your first click will never land on a mine)'
         ]
@@ -55,16 +59,22 @@ ModalOverlay = React.createClass
             key: 'instructions-controls'
         }, [
                 R.span {
+                    key: 'instructions-controls-code1'
                     className: 'code'
                 }, 'shift + click'
 
-                R.span null, ' or '
+                R.span {
+                    key: 'instructions-controls-text1'
+                }, ' or '
 
                 R.span {
+                    key: 'instructions-controls-code2'
                     className: 'code'
                 }, 'alt + click'
 
-                R.span null, ' will "flag" a tile, helping you to remember where you think a mine is hidden'
+                R.span {
+                    key: 'instructions-controls-text2'
+                }, ' will "flag" a tile, helping you to remember where you think a mine is hidden'
         ]
 
         button = R.div {

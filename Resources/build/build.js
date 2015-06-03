@@ -19600,6 +19600,732 @@ module.exports = warning;
 
 },{"114":114}]},{},[1])(1)
 });
-!function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a="function"==typeof require&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}for(var i="function"==typeof require&&require,o=0;o<r.length;o++)s(r[o]);return s}({1:[function(require,module,exports){(function(){var GameComponent,ViewController;GameComponent=require("./components/GameComponent.coffee"),ViewController=React.createElement(GameComponent,null),React.render(ViewController,document.getElementById("minesweeper"))}).call(this)},{"./components/GameComponent.coffee":10}],2:[function(require,module,exports){module.exports.Dispatcher=require("./lib/Dispatcher")},{"./lib/Dispatcher":24}],3:[function(require,module,exports){(function(){var AppDispatcher,Dispatcher,ModalStore,TileStore,changeModal,onTilesChange;Dispatcher=require("Flux").Dispatcher,AppDispatcher=new Dispatcher,TileStore=require("./stores/TileStore.coffee"),ModalStore=require("./stores/ModalStore.coffee"),changeModal=function(name){return name?ModalStore.toggle(name):ModalStore.reset(),ModalStore.emitChange()},onTilesChange=function(){var info;return info=TileStore.getInfo(),(info.win||info.loss)&&ModalActions.toggle("newGame"),TileStore.emitChange()},AppDispatcher.register(function(event){var tile;switch(event.type){case"TILE_FLAG_TOGGLE":return console.log("tile flag"),tile=TileStore.get({uid:event.uid}),tile.toggleFlag(),onTilesChange();case"TILE_CLEAR":return console.log("tile clear"),tile=TileStore.get({uid:event.uid}),tile.clear(),onTilesChange();case"TILES_CLEAR_SAFE_RANDOM":if(console.log("tiles clear safe random"),tile=TileStore.randomSafeTile())return tile.clear(),onTilesChange();break;case"TILES_NEW_GAME":return console.log("newGame"),TileStore.newGame(8,4,10),onTilesChange(),changeModal("newGame");case"MODAL_TOGGLE":return ModalStore.toggle(event.name),ModalStore.emitChange();case"MODAL_RESET":return console.log,changeModal()}}),module.exports=AppDispatcher}).call(this)},{"./stores/ModalStore.coffee":18,"./stores/TileStore.coffee":19,Flux:20}],4:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={toggle:function(name){return console.log(name),Dispatcher.dispatch({type:"MODAL_TOGGLE",name:name})},reset:function(){return Dispatcher.dispatch({type:"MODAL_RESET"})}}}).call(this)},{"../Dispatcher.coffee":3}],5:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={toggleFlag:function(uid){return Dispatcher.dispatch({type:"TILE_FLAG_TOGGLE",uid:uid})},clear:function(uid){return Dispatcher.dispatch({type:"TILE_CLEAR",uid:uid})}}}).call(this)},{"../Dispatcher.coffee":3}],6:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={clearSafeRandomTile:function(){return console.log("csrt"),Dispatcher.dispatch({type:"TILES_CLEAR_SAFE_RANDOM"})},newGame:function(){return console.log("new game"),Dispatcher.dispatch({type:"TILES_NEW_GAME"})}}}).call(this)},{"../Dispatcher.coffee":3}],7:[function(require,module,exports){(function(){var ModalsCollection;ModalsCollection=function(){function ModalsCollection(){this.show={}}return ModalsCollection.prototype.set=function(fileName){return this.show[fileName]=!1,this},ModalsCollection.prototype.toggle=function(name){var isBeingShown,modalName,ref,results;ref=this.show,results=[];for(modalName in ref)isBeingShown=ref[modalName],results.push(modalName===name?this.show[modalName]=!isBeingShown:isBeingShown=!1);return results},ModalsCollection.prototype.reset=function(){var key,ref,showModal;ref=this.show;for(key in ref)showModal=ref[key],this.show[key]=!1;return this},ModalsCollection}(),module.exports=ModalsCollection}).call(this)},{}],8:[function(require,module,exports){(function(){var TileModel,TilesCollection,extend=function(child,parent){function ctor(){this.constructor=child}for(var key in parent)hasProp.call(parent,key)&&(child[key]=parent[key]);return ctor.prototype=parent.prototype,child.prototype=new ctor,child.__super__=parent.prototype,child},hasProp={}.hasOwnProperty;TileModel=require("../models/TileModel.coffee"),TilesCollection=function(){function TilesCollection(){var Model,collection;this.all=[],collection=this,this.model=Model=function(superClass){function Model(){return Model.__super__.constructor.apply(this,arguments)}return extend(Model,superClass),Model.prototype.clear=function(){return Model.__super__.clear.call(this),collection.clearNeighbors(this),collection.moveUpdate()},Model.prototype.toggleFlag=function(){return Model.__super__.toggleFlag.call(this),collection.moveUpdate()},Model.prototype.click=function($event){return collection.noMineFirstClick(this),Model.__super__.click.call(this,$event)},Model}(TileModel)}return TilesCollection.prototype.newGame=function(x,y,mines){var attrs,i,j,k,mineNum,ref,ref1,ref2,tile;for(this.reset(),this.sizeY=x,this.sizeX=y,this.numOfMines=mines,y=i=0,ref=this.sizeY-1;ref>=0?ref>=i:i>=ref;y=ref>=0?++i:--i)for(x=j=0,ref1=this.sizeX-1;ref1>=0?ref1>=j:j>=ref1;x=ref1>=0?++j:--j)attrs={x:x,y:y},this.add(attrs);for(mineNum=k=1,ref2=this.numOfMines;ref2>=1?ref2>=k:k>=ref2;mineNum=ref2>=1?++k:--k)tile=this.randomSafeTile(),tile.model.isMine=!0;return this.tallyMines(),this.gameUpdate()},TilesCollection.prototype.noMineFirstClick=function(tile){return 0===this.numOfClears&&tile.model.isMine===!0&&(tile.model.isMine=!1,this.randomSafeTile().model.isMine=!0,this.tallyMines()),tile},TilesCollection.prototype.add=function(model){var tile;return tile=new this.model(model),this.all.push(tile),tile},TilesCollection.prototype.handleTileClick=function(event,index){},TilesCollection.prototype.reset=function(){return this.all=[],this},TilesCollection.prototype.randomSafeTile=function(){var findAttrs,randomIndex,safeTiles;return findAttrs={isClear:!1,isMine:!1},safeTiles=this.getAll(findAttrs),randomIndex=Math.floor(Math.random()*safeTiles.length),safeTiles[randomIndex]},TilesCollection.prototype.tallyMines=function(){var adjacentTile,i,j,len,len1,neighborAttrs,neighborMine,neighborMines,neighborX,neighborY,ref,ref1,results,tile;for(ref=this.all,results=[],i=0,len=ref.length;len>i;i++){for(tile=ref[i],neighborMines=0,ref1=tile.adjacentTiles,j=0,len1=ref1.length;len1>j;j++)adjacentTile=ref1[j],neighborX=tile.model.x+adjacentTile[0],neighborY=tile.model.y+adjacentTile[1],neighborAttrs={isMine:!0,x:neighborX,y:neighborY},neighborMine=this.get(neighborAttrs),void 0!==neighborMine&&neighborMines++;results.push(tile.model.adjacentMines=neighborMines)}return results},TilesCollection.prototype.gameUpdate=function(){var i,len,ref,tile;for(this.x=Math.max.apply(this,this.all.map(function(tile){return tile.model.x})),this.y=Math.max.apply(this,this.all.map(function(tile){return tile.model.y})),this.x=this.x--,this.y=this.y--,this.numOfMines=0,ref=this.all,i=0,len=ref.length;len>i;i++)tile=ref[i],tile.model.isMine===!0&&this.numOfMines++;return this.moveUpdate()},TilesCollection.prototype.moveUpdate=function(){var i,len,ref,tile;for(this.loss=!1,this.win=!1,this.numOfClears=0,this.numOfFlags=0,ref=this.all,i=0,len=ref.length;len>i;i++)tile=ref[i],tile.model.isClear===!0&&this.numOfClears++,tile.model.isFlagged===!0&&this.numOfFlags++,tile.model.isMine===!0&&tile.model.isClear===!0&&(this.loss=!0);return this.loss===!1&&this.all.length-this.numOfMines-this.numOfClears===0?this.win=!0:void 0},TilesCollection.prototype.clearNeighbors=function(tile){var adjacentTile,i,len,neighbor,ref,results,shouldClearNeighbor,shouldClearNeighbors;if(shouldClearNeighbors=0===tile.model.adjacentMines&&tile.model.isMine===!1){for(ref=tile.adjacentTiles,results=[],i=0,len=ref.length;len>i;i++)adjacentTile=ref[i],neighbor=this.get({x:tile.model.x+adjacentTile[0],y:tile.model.y+adjacentTile[1]}),shouldClearNeighbor=neighbor&&neighbor.model.isClear===!1&&neighbor.model.isMine===!1,results.push(shouldClearNeighbor?neighbor.click():void 0);return results}},TilesCollection.prototype.get=function(attrs){return this.getAll(attrs)[0]},TilesCollection.prototype.getAll=function(attrs){var i,key,len,matches,numOfAttrs,numOfMatchedAttrs,ref,tile,val;if(matches=[],!attrs)return this.all;for(ref=this.all,i=0,len=ref.length;len>i;i++){tile=ref[i],numOfAttrs=0,numOfMatchedAttrs=0;for(key in attrs)val=attrs[key],numOfAttrs++,tile.model[key]===val&&numOfMatchedAttrs++;numOfMatchedAttrs===numOfAttrs&&matches.push(tile)}return matches},TilesCollection}(),module.exports=TilesCollection}).call(this)},{"../models/TileModel.coffee":17}],9:[function(require,module,exports){(function(){var Dashboard,ModalActions,R,TilesActions;ModalActions=require("../actions/ModalActions.coffee"),TilesActions=require("../actions/TilesActions.coffee"),R=React.DOM,Dashboard=React.createClass({displayName:"Dashboard",render:function(){return R.div({id:"dashboard"},[R.div({key:"new-game",className:"new-game button",onClick:function(){return ModalActions.toggle("newGame")}},"new game"),R.div({key:"select-tile",className:"select-tile button",onClick:TilesActions.clearSafeRandomTile},"clear a safe tile"),R.div({key:"instructions",className:"instructions button",onClick:function(){return ModalActions.toggle("instructions")}},"instructions")])}}),module.exports=Dashboard}).call(this)},{"../actions/ModalActions.coffee":4,"../actions/TilesActions.coffee":6}],10:[function(require,module,exports){(function(){var DashboardComponent,Dispatcher,Game,InfoComponent,ModalActions,ModalOverlayComponent,ModalStore,R,TileStore,TilesComponent,assign,getModalStoreState,getState,getTileStoreState;Dispatcher=require("../Dispatcher.coffee"),TileStore=require("../stores/TileStore.coffee"),ModalStore=require("../stores/ModalStore.coffee"),ModalActions=require("../actions/ModalActions.coffee"),TilesComponent=require("./TilesComponent.coffee"),InfoComponent=require("./InfoComponent.coffee"),DashboardComponent=require("./DashboardComponent.coffee"),ModalOverlayComponent=require("./modals/ModalOverlayComponent.coffee"),assign=require("object-assign"),R=React.DOM,getState=function(){return assign({},getTileStoreState(),getModalStoreState())},getTileStoreState=function(){return{all:TileStore.getAll(),info:TileStore.getInfo()}},getModalStoreState=function(){return{modals:ModalStore.getAll()}},Game=React.createClass({displayName:"Game",getInitialState:function(){return getState()},componentDidMount:function(){return TileStore.addChangeListener(this._onTileStoreChange),ModalStore.addChangeListener(this._onModalStoreChange)},componentWillUnmount:function(){return TileStore.removeChangeListener(this._onTileStoreChange),ModalStore.removeChangeListener(this._onModalStoreChange)},_onTileStoreChange:function(){var tilesState;return tilesState=getTileStoreState(),this.setState(tilesState),console.log("tile store change!")},_onModalStoreChange:function(){return this.setState(getModalStoreState()),console.log("modeal change!")},render:function(){var boardWrappper,dashboard,info,overlays,tiles;return info=React.createElement(InfoComponent,{key:"info",info:this.state.info}),tiles=React.createElement(TilesComponent,{key:"tiles",tiles:this.state.all}),boardWrappper=R.div({id:"board-wrappper",key:"board-wrappper"},[info,tiles]),dashboard=React.createElement(DashboardComponent,{key:"dashboard"}),overlays=React.createElement(ModalOverlayComponent,{key:"modal-overlay",info:this.state.info,modals:this.state.modals}),R.div(null,[overlays,boardWrappper,dashboard])}}),module.exports=Game}).call(this)},{"../Dispatcher.coffee":3,"../actions/ModalActions.coffee":4,"../stores/ModalStore.coffee":18,"../stores/TileStore.coffee":19,"./DashboardComponent.coffee":9,"./InfoComponent.coffee":11,"./TilesComponent.coffee":13,"./modals/ModalOverlayComponent.coffee":16,"object-assign":26}],11:[function(require,module,exports){(function(){var Info,R;R=React.DOM,Info=React.createClass({displayName:"Info",render:function(){return R.ul({id:"stats"},[R.li({key:"tiles"},this.props.info.numOfTiles+" tiles"),R.li({key:"mines"},this.props.info.numOfMines+" mines"),R.li({key:"flagged"},this.props.info.numOfFlags+" flagged tiles"),R.li({key:"cleared"},this.props.info.numOfUncleared+" left to clear")])}}),module.exports=Info}).call(this)},{}],12:[function(require,module,exports){(function(){var R,Tile,TileActions;TileActions=require("../actions/TileActions.coffee"),R=React.DOM,Tile=React.createClass({displayName:"Tile",render:function(){return R.li({className:this.getClass(),onClick:this.clickHandler},R.span(null,this.getText()))},clickHandler:function($event){var flagKeyWasPressed;return $event?(flagKeyWasPressed=$event.shiftKey===!0||$event.altKey===!0,flagKeyWasPressed?TileActions.toggleFlag(this.props.tile.model.uid):TileActions.clear(this.props.tile.model.uid)):TileActions.clear(this.props.tile.model.uid)},isFirstColumn:function(){return 0===this.props.tile.model.x},hasBeenFlagged:function(){return this.props.tile.model.isClear!==!0&&this.props.tile.model.isFlagged===!0},hasBeenCleared:function(){return this.props.tile.model.isClear===!0},hasMine:function(){return this.props.tile.model.isMine===!0},shouldDisplayMine:function(){return this.hasMine()&&this.hasBeenCleared()},hasZeroAdjacentMines:function(){return 0===this.props.tile.model.adjacentMines&&!this.hasMine()},getText:function(){var text;return text=this.props.tile.model.adjacentMines,this.hasBeenFlagged()?text="?":this.shouldDisplayMine()&&(text="X"),text},getClass:function(){return["tile",this.isFirstColumn()?"nth":void 0,this.hasBeenCleared()?"clear":void 0,this.hasBeenFlagged()?"flagged":void 0,this.shouldDisplayMine()?"mine":void 0,this.hasZeroAdjacentMines()?"clear zero":void 0].join(" ")}}),module.exports=Tile}).call(this)},{"../actions/TileActions.coffee":5}],13:[function(require,module,exports){(function(){var R,TileComponent,Tiles;TileComponent=require("./TileComponent.coffee"),R=React.DOM,Tiles=React.createClass({displayName:"Tiles",render:function(){var tiles;return tiles=this.props.tiles.map(function(_this){return function(item,index){return React.createElement(TileComponent,{key:index,ref:item.model.uid,tile:item})}}(this)),R.ul({id:"board"},tiles)}}),module.exports=Tiles}).call(this)},{"./TileComponent.coffee":12}],14:[function(require,module,exports){(function(){var ModalActions,ModalOverlay,R;ModalActions=require("../../actions/ModalActions.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalInstructions",getClass:function(){var classes;return classes=["message"],this.props.show||classes.push("hide"),classes.join(" ")},clickHandler:function(){return ModalActions.toggle("instructions")},render:function(){var button,controls,description;return description=R.div({key:"instructions-description"},[R.div({key:"instructions-header",className:"border-bottom"},"how to play"),R.div({key:"instructions-details",className:"border-bottom"},["the game is played by revealing tiles of the grid.","if a selected tile contains a mine, the player loses the game.","otherwise, a digit is revealed in the tile, indicating the number","of mines located in the eight adjacent tiles."].join(" ")),R.div({key:"instructions-commands"},R.span({className:"code"},"click"),R.span(null," to reveal the squares of the grid.")),R.div({className:"border-bottom"},"(your first click will never land on a mine)")]),controls=R.div({key:"instructions-controls"},[R.span({className:"code"},"shift + click"),R.span(null," or "),R.span({className:"code"},"alt + click"),R.span(null,' will "flag" a tile, helping you to remember where you think a mine is hidden')]),button=R.div({key:"instructions-button"},R.div({className:"button",onClick:this.clickHandler},"got it!")),R.div({key:"instructions-modal",className:this.getClass()},[description,controls,button])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4}],15:[function(require,module,exports){(function(){var ModalActions,ModalOverlay,R,TilesActions;ModalActions=require("../../actions/ModalActions.coffee"),TilesActions=require("../../actions/TilesActions.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalNewGame",getClass:function(){var classes;return classes=["message"],this.props.show||classes.push("hide"),classes.join(" ")},getTitleText:function(){return!this.props.show||this.props.win||this.props.loss?this.props.win&&!this.props.loss?"you won!":this.props.win||this.props.win?void 0:"you lost...":"new game?"},clickHandlerNewGame:function(){return TilesActions.newGame()},clickHandlerExitModal:function(){return ModalActions.reset()},renderButtons:function(){var buttons;return buttons=[R.div({className:"button",onClick:this.clickHandlerNewGame},"start!")],this.props.loss||buttons.push(R.div({className:"button",onClick:this.clickHandlerExitModal},"resume!")),R.div(null,buttons)},render:function(){var title;return title=R.div(null,R.div({className:"border-bottom"},R.div({className:"title"},this.getTitleText()))),R.div({key:"modal",className:this.getClass()},[title,this.renderButtons()])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4,"../../actions/TilesActions.coffee":6}],16:[function(require,module,exports){(function(){var InstructionsComponent,ModalActions,ModalOverlay,NewGameComponent,R;ModalActions=require("../../actions/ModalActions.coffee"),InstructionsComponent=require("./ModalInstructionsComponent.coffee"),NewGameComponent=require("./ModalNewGameComponent.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalOverlay",getClass:function(){return this.props.modals.newGame?"":this.props.modals.instructions?"":"hide"},resetHandler:function(){return this.props.info.loss||this.props.info.win?void 0:ModalActions.reset()},instructionsHandler:function(){return ModalActions.toggle("instructions")},render:function(){var overlay;return overlay=R.div({id:"overlay",key:"overlay",className:this.getClass(),onClick:this.resetHandler},null),R.div(null,[overlay,React.createElement(InstructionsComponent,{key:"modal-instructions",show:this.props.modals.instructions}),React.createElement(NewGameComponent,{key:"modal-new-game",show:this.props.modals.newGame,win:this.props.info.win,loss:this.props.info.loss})])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4,"./ModalInstructionsComponent.coffee":14,"./ModalNewGameComponent.coffee":15}],17:[function(require,module,exports){(function(){var TileModel;Number.isInteger=Number.isInteger||function(value){return"number"==typeof value&&isFinite(value)&&Math.floor(value)===value},module.exports=TileModel=function(){function TileModel(attrs){if(!Number.isInteger(attrs.x)||!Number.isInteger(attrs.y))throw"`x` and `y` are required Integer attributes to instantiate Tile";this.model={x:void 0,y:void 0,uid:void 0,isMine:!1,isClear:!1,isFlagged:!1,adjacentMines:0},this.adjacentTiles=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]],this.set(attrs)}return TileModel.prototype.set=function(attrs){var attr,key;for(key in attrs)attr=attrs[key],this.model[key]=attr,this.model.uid=String(attrs.x)+"-"+String(attrs.y);return this},TileModel.prototype.toggleFlag=function(){return this.model.isFlagged=!this.model.isFlagged,this},TileModel.prototype.clear=function(){return this.model.isClear=!0,this.model.isFlagged=!1,this},TileModel.prototype.click=function($event){var flagKeyWasPressed;return $event?(flagKeyWasPressed=$event.shiftKey===!0||$event.altKey===!0,flagKeyWasPressed?this.toggleFlag():this.clear()):this.clear()},TileModel}()}).call(this)},{}],18:[function(require,module,exports){(function(){var EventEmitter,ModalStore,Modals,ModalsCollection,assign;ModalsCollection=require("../collections/ModalsCollection.coffee"),EventEmitter=require("events").EventEmitter,assign=require("object-assign"),Modals=new ModalsCollection,Modals.set("newGame"),Modals.set("instructions"),ModalStore=assign({},EventEmitter.prototype,{event:"event",getAll:function(){return Modals.show},reset:function(){return Modals.reset()},toggle:function(modalName){return Modals.toggle(modalName)},emitChange:function(){return this.emit(this.event)},addChangeListener:function(callback){return this.on(this.event,callback)},removeChangeListener:function(callback){return this.removeListener(this.event,callback)}}),module.exports=ModalStore}).call(this)},{"../collections/ModalsCollection.coffee":7,events:23,"object-assign":26}],19:[function(require,module,exports){(function(){var EventEmitter,TileStore,Tiles,TilesCollection,assign;TilesCollection=require("../collections/TilesCollection.coffee"),EventEmitter=require("events").EventEmitter,assign=require("object-assign"),Tiles=new TilesCollection,Tiles.newGame(4,7,5),TileStore=assign({},EventEmitter.prototype,{event:"change",get:function(attrs){return Tiles.get(attrs)},getAll:function(){return Tiles.getAll()},getInfo:function(){return{win:Tiles.win,loss:Tiles.loss,numOfTiles:Tiles.all.length,numOfMines:Tiles.numOfMines,numOfFlags:Tiles.numOfFlags,numOfUncleared:Tiles.all.length-Tiles.numOfMines-Tiles.numOfClears}},randomSafeTile:function(){return Tiles.randomSafeTile()},newGame:function(x,y,mines){return Tiles.newGame(x,y,mines)},emitChange:function(){return this.emit(this.event)},addChangeListener:function(callback){return this.on(this.event,callback)},removeChangeListener:function(callback){return this.removeListener(this.event,callback)}}),module.exports=TileStore}).call(this)},{"../collections/TilesCollection.coffee":8,events:23,"object-assign":26}],20:[function(require,module,exports){arguments[4][2][0].apply(exports,arguments)},{"./lib/Dispatcher":21,dup:2}],21:[function(require,module,exports){"use strict";function Dispatcher(){this.$Dispatcher_callbacks={},this.$Dispatcher_isPending={},this.$Dispatcher_isHandled={},this.$Dispatcher_isDispatching=!1,this.$Dispatcher_pendingPayload=null}var invariant=require("./invariant"),_lastID=1,_prefix="ID_";Dispatcher.prototype.register=function(callback){var id=_prefix+_lastID++;return this.$Dispatcher_callbacks[id]=callback,id},Dispatcher.prototype.unregister=function(id){invariant(this.$Dispatcher_callbacks[id],"Dispatcher.unregister(...): `%s` does not map to a registered callback.",id),delete this.$Dispatcher_callbacks[id]},Dispatcher.prototype.waitFor=function(ids){invariant(this.$Dispatcher_isDispatching,"Dispatcher.waitFor(...): Must be invoked while dispatching.");for(var ii=0;ii<ids.length;ii++){var id=ids[ii];this.$Dispatcher_isPending[id]?invariant(this.$Dispatcher_isHandled[id],"Dispatcher.waitFor(...): Circular dependency detected while waiting for `%s`.",id):(invariant(this.$Dispatcher_callbacks[id],"Dispatcher.waitFor(...): `%s` does not map to a registered callback.",id),this.$Dispatcher_invokeCallback(id))}},Dispatcher.prototype.dispatch=function(payload){invariant(!this.$Dispatcher_isDispatching,"Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch."),this.$Dispatcher_startDispatching(payload);try{for(var id in this.$Dispatcher_callbacks)this.$Dispatcher_isPending[id]||this.$Dispatcher_invokeCallback(id)}finally{this.$Dispatcher_stopDispatching()}},Dispatcher.prototype.isDispatching=function(){return this.$Dispatcher_isDispatching},Dispatcher.prototype.$Dispatcher_invokeCallback=function(id){this.$Dispatcher_isPending[id]=!0,this.$Dispatcher_callbacks[id](this.$Dispatcher_pendingPayload),this.$Dispatcher_isHandled[id]=!0},Dispatcher.prototype.$Dispatcher_startDispatching=function(payload){for(var id in this.$Dispatcher_callbacks)this.$Dispatcher_isPending[id]=!1,this.$Dispatcher_isHandled[id]=!1;this.$Dispatcher_pendingPayload=payload,this.$Dispatcher_isDispatching=!0},Dispatcher.prototype.$Dispatcher_stopDispatching=function(){this.$Dispatcher_pendingPayload=null,this.$Dispatcher_isDispatching=!1},module.exports=Dispatcher},{"./invariant":22}],22:[function(require,module,exports){"use strict";var invariant=function(condition,format,a,b,c,d,e,f){if(!condition){var error;if(void 0===format)error=new Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var args=[a,b,c,d,e,f],argIndex=0;error=new Error("Invariant Violation: "+format.replace(/%s/g,function(){return args[argIndex++]}))}throw error.framesToPop=1,error}};module.exports=invariant},{}],23:[function(require,module,exports){function EventEmitter(){this._events=this._events||{},this._maxListeners=this._maxListeners||void 0}function isFunction(arg){return"function"==typeof arg}function isNumber(arg){return"number"==typeof arg}function isObject(arg){return"object"==typeof arg&&null!==arg}function isUndefined(arg){return void 0===arg}module.exports=EventEmitter,EventEmitter.EventEmitter=EventEmitter,EventEmitter.prototype._events=void 0,EventEmitter.prototype._maxListeners=void 0,EventEmitter.defaultMaxListeners=10,EventEmitter.prototype.setMaxListeners=function(n){if(!isNumber(n)||0>n||isNaN(n))throw TypeError("n must be a positive number");return this._maxListeners=n,this},EventEmitter.prototype.emit=function(type){var er,handler,len,args,i,listeners;if(this._events||(this._events={}),"error"===type&&(!this._events.error||isObject(this._events.error)&&!this._events.error.length)){if(er=arguments[1],er instanceof Error)throw er;throw TypeError('Uncaught, unspecified "error" event.')}if(handler=this._events[type],isUndefined(handler))return!1;if(isFunction(handler))switch(arguments.length){case 1:handler.call(this);break;case 2:handler.call(this,arguments[1]);break;case 3:handler.call(this,arguments[1],arguments[2]);break;default:for(len=arguments.length,args=new Array(len-1),i=1;len>i;i++)args[i-1]=arguments[i];handler.apply(this,args)}else if(isObject(handler)){for(len=arguments.length,args=new Array(len-1),i=1;len>i;i++)args[i-1]=arguments[i];for(listeners=handler.slice(),len=listeners.length,i=0;len>i;i++)listeners[i].apply(this,args)}return!0},EventEmitter.prototype.addListener=function(type,listener){var m;if(!isFunction(listener))throw TypeError("listener must be a function");if(this._events||(this._events={}),this._events.newListener&&this.emit("newListener",type,isFunction(listener.listener)?listener.listener:listener),this._events[type]?isObject(this._events[type])?this._events[type].push(listener):this._events[type]=[this._events[type],listener]:this._events[type]=listener,isObject(this._events[type])&&!this._events[type].warned){var m;m=isUndefined(this._maxListeners)?EventEmitter.defaultMaxListeners:this._maxListeners,m&&m>0&&this._events[type].length>m&&(this._events[type].warned=!0,console.error("(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.",this._events[type].length),"function"==typeof console.trace&&console.trace())}return this},EventEmitter.prototype.on=EventEmitter.prototype.addListener,EventEmitter.prototype.once=function(type,listener){function g(){this.removeListener(type,g),fired||(fired=!0,listener.apply(this,arguments))}if(!isFunction(listener))throw TypeError("listener must be a function");var fired=!1;return g.listener=listener,this.on(type,g),this},EventEmitter.prototype.removeListener=function(type,listener){var list,position,length,i;if(!isFunction(listener))throw TypeError("listener must be a function");if(!this._events||!this._events[type])return this;if(list=this._events[type],length=list.length,position=-1,list===listener||isFunction(list.listener)&&list.listener===listener)delete this._events[type],this._events.removeListener&&this.emit("removeListener",type,listener);else if(isObject(list)){for(i=length;i-->0;)if(list[i]===listener||list[i].listener&&list[i].listener===listener){position=i;break}if(0>position)return this;1===list.length?(list.length=0,delete this._events[type]):list.splice(position,1),this._events.removeListener&&this.emit("removeListener",type,listener)}return this},EventEmitter.prototype.removeAllListeners=function(type){var key,listeners;if(!this._events)return this;if(!this._events.removeListener)return 0===arguments.length?this._events={}:this._events[type]&&delete this._events[type],this;if(0===arguments.length){for(key in this._events)"removeListener"!==key&&this.removeAllListeners(key);return this.removeAllListeners("removeListener"),this._events={},this}if(listeners=this._events[type],isFunction(listeners))this.removeListener(type,listeners);else for(;listeners.length;)this.removeListener(type,listeners[listeners.length-1]);return delete this._events[type],this},EventEmitter.prototype.listeners=function(type){var ret;return ret=this._events&&this._events[type]?isFunction(this._events[type])?[this._events[type]]:this._events[type].slice():[]},EventEmitter.listenerCount=function(emitter,type){var ret;return ret=emitter._events&&emitter._events[type]?isFunction(emitter._events[type])?1:emitter._events[type].length:0}},{}],24:[function(require,module,exports){arguments[4][21][0].apply(exports,arguments)},{"./invariant":25,dup:21}],25:[function(require,module,exports){arguments[4][22][0].apply(exports,arguments)},{dup:22}],26:[function(require,module,exports){"use strict";function ToObject(val){if(null==val)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(val)}module.exports=Object.assign||function(target,source){for(var from,keys,to=ToObject(target),s=1;s<arguments.length;s++){from=arguments[s],keys=Object.keys(Object(from));for(var i=0;i<keys.length;i++)to[keys[i]]=from[keys[i]]}return to}},{}]},{},[1,2]);
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['react'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('react'));
+  } else {
+    root.ReactSlider = factory(root.React);
+  }
+}(this, function (React) {
+
+  /**
+   * To prevent text selection while dragging.
+   * http://stackoverflow.com/questions/5429827/how-can-i-prevent-text-element-selection-with-cursor-drag
+   */
+  function pauseEvent(e) {
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault) e.preventDefault();
+    e.cancelBubble = true;
+    e.returnValue = false;
+    return false;
+  }
+
+  function stopPropagation(e) {
+    if (e.stopPropagation) e.stopPropagation();
+    e.cancelBubble = true;
+  }
+
+
+  /**
+   * Spreads `count` values equally between `min` and `max`.
+   */
+  function linspace(min, max, count) {
+    var range = (max - min) / (count - 1);
+    var res = [];
+    for (var i = 0; i < count; i++) {
+      res.push(min + range * i);
+    }
+    return res;
+  }
+
+  function ensureArray(x) {
+    return x == null ? [] : Array.isArray(x) ? x : [x];
+  }
+
+  function undoEnsureArray(x) {
+    return x != null && x.length === 1 ? x[0] : x;
+  }
+
+  // undoEnsureArray(ensureArray(x)) === x
+
+  var ReactSlider = React.createClass({
+    displayName: 'ReactSlider',
+
+    propTypes: {
+
+      /**
+       * The minimum value of the slider.
+       */
+      min: React.PropTypes.number,
+
+      /**
+       * The maximum value of the slider.
+       */
+      max: React.PropTypes.number,
+
+      /**
+       * Value to be added or subtracted on each step the slider makes.
+       * Must be greater than zero.
+       * `max - min` should be evenly divisible by the step value.
+       */
+      step: React.PropTypes.number,
+
+      /**
+       * The minimal distance between any pair of handles.
+       * Must be positive, but zero means they can sit on top of each other.
+       */
+      minDistance: React.PropTypes.number,
+
+      /**
+       * Determines the initial positions of the handles and the number of handles if the component has no children.
+       *
+       * If a number is passed a slider with one handle will be rendered.
+       * If an array is passed each value will determine the position of one handle.
+       * The values in the array must be sorted.
+       * If the component has children, the length of the array must match the number of children.
+       */
+      defaultValue: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.arrayOf(React.PropTypes.number)
+      ]),
+
+      /**
+       * Like `defaultValue` but for [controlled components](http://facebook.github.io/react/docs/forms.html#controlled-components).
+       */
+      value: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.arrayOf(React.PropTypes.number)
+      ]),
+
+      /**
+       * Determines whether the slider moves horizontally (from left to right) or vertically (from top to bottom).
+       */
+      orientation: React.PropTypes.oneOf(['horizontal', 'vertical']),
+
+      /**
+       * The css class set on the slider node.
+       */
+      className: React.PropTypes.string,
+
+      /**
+       * The css class set on each handle node.
+       *
+       * In addition each handle will receive a numbered css class of the form `${handleClassName}-${i}`,
+       * e.g. `handle-0`, `handle-1`, ...
+       */
+      handleClassName: React.PropTypes.string,
+
+      /**
+       * The css class set on the handle that is currently being moved.
+       */
+      handleActiveClassName: React.PropTypes.string,
+
+      /**
+       * If `true` bars between the handles will be rendered.
+       */
+      withBars: React.PropTypes.bool,
+
+      /**
+       * The css class set on the bars between the handles.
+       * In addition bar fragment will receive a numbered css class of the form `${barClassName}-${i}`,
+       * e.g. `bar-0`, `bar-1`, ...
+       */
+      barClassName: React.PropTypes.string,
+
+      /**
+       * If `true` the active handle will push other handles
+       * within the constraints of `min`, `max`, `step` and `minDistance`.
+       */
+      pearling: React.PropTypes.bool,
+
+      /**
+       * If `true` the handles can't be moved.
+       */
+      disabled: React.PropTypes.bool,
+
+      /**
+       * Disables handle move when clicking the slider bar
+       */
+      snapDragDisabled: React.PropTypes.bool,
+
+      /**
+       * Inverts the slider.
+       */
+      invert: React.PropTypes.bool,
+
+      /**
+       * Callback called before starting to move a handle.
+       */
+      onBeforeChange: React.PropTypes.func,
+
+      /**
+       * Callback called on every value change.
+       */
+      onChange: React.PropTypes.func,
+
+      /**
+       * Callback called only after moving a handle has ended.
+       */
+      onAfterChange: React.PropTypes.func
+    },
+
+    getDefaultProps: function () {
+      return {
+        min: 0,
+        max: 100,
+        step: 1,
+        minDistance: 0,
+        defaultValue: 0,
+        orientation: 'horizontal',
+        className: 'slider',
+        handleClassName: 'handle',
+        handleActiveClassName: 'active',
+        barClassName: 'bar',
+        withBars: false,
+        pearling: false,
+        disabled: false,
+        snapDragDisabled: false,
+        invert: false
+      };
+    },
+
+    getInitialState: function () {
+      var value = this._or(ensureArray(this.props.value), ensureArray(this.props.defaultValue));
+
+      // reused throughout the component to store results of iterations over `value`
+      this.tempArray = value.slice();
+
+      var zIndices = [];
+      for (var i = 0; i < value.length; i++) {
+        value[i] = this._trimAlignValue(value[i], this.props);
+        zIndices.push(i);
+      }
+
+      return {
+        index: -1,
+        upperBound: 0,
+        sliderLength: 0,
+        value: value,
+        zIndices: zIndices
+      };
+    },
+
+    // Keep the internal `value` consistent with an outside `value` if present.
+    // This basically allows the slider to be a controlled component.
+    componentWillReceiveProps: function (newProps) {
+      var value = this._or(ensureArray(newProps.value), this.state.value);
+
+      // ensure the array keeps the same size as `value`
+      this.tempArray = value.slice();
+
+      for (var i = 0; i < value.length; i++) {
+        this.state.value[i] = this._trimAlignValue(value[i], newProps);
+      }
+    },
+
+    // Check if the arity of `value` or `defaultValue` matches the number of children (= number of custom handles).
+    // If no custom handles are provided, just returns `value` if present and `defaultValue` otherwise.
+    // If custom handles are present but neither `value` nor `defaultValue` are applicable the handles are spread out
+    // equally.
+    _or: function (value, defaultValue) {
+      var count = React.Children.count(this.props.children);
+      switch (count) {
+        case 0:
+          return value.length > 0 ? value : defaultValue;
+        case value.length:
+          return value;
+        case defaultValue.length:
+          return defaultValue;
+        default:
+          if (value.length !== count || defaultValue.length !== count) {
+            console.warn(this.constructor.displayName + ": Number of values does not match number of children.");
+          }
+          return linspace(this.props.min, this.props.max, count);
+      }
+    },
+
+    componentDidMount: function () {
+      window.addEventListener('resize', this._handleResize);
+      this._handleResize();
+    },
+
+    componentWillUnmount: function () {
+      window.removeEventListener('resize', this._handleResize);
+    },
+
+    getValue: function () {
+      return undoEnsureArray(this.state.value);
+    },
+
+    _handleResize: function () {
+      var slider = this.refs.slider.getDOMNode();
+      var handle = this.refs.handle0.getDOMNode();
+      var rect = slider.getBoundingClientRect();
+
+      var size = this._sizeKey();
+
+      var sliderMax = rect[this._posMaxKey()];
+      var sliderMin = rect[this._posMinKey()];
+
+      this.setState({
+        upperBound: slider[size] - handle[size],
+        sliderLength: Math.abs(sliderMax - sliderMin),
+        handleSize: handle[size],
+        sliderStart: this.props.invert ? sliderMax : sliderMin
+      });
+    },
+
+    // calculates the offset of a handle in pixels based on its value.
+    _calcOffset: function (value) {
+      var ratio = (value - this.props.min) / (this.props.max - this.props.min);
+      return ratio * this.state.upperBound;
+    },
+
+    // calculates the value corresponding to a given pixel offset, i.e. the inverse of `_calcOffset`.
+    _calcValue: function (offset) {
+      var ratio = offset / this.state.upperBound;
+      return ratio * (this.props.max - this.props.min) + this.props.min;
+    },
+
+    _buildHandleStyle: function (offset, i) {
+      var style = {
+        position: 'absolute',
+        willChange: this.state.index >= 0 ? this._posMinKey() : '',
+        zIndex: this.state.zIndices.indexOf(i) + 1
+      };
+      style[this._posMinKey()] = offset + 'px';
+      return style;
+    },
+
+    _buildBarStyle: function (min, max) {
+      var obj = {
+        position: 'absolute',
+        willChange: this.state.index >= 0 ? this._posMinKey() + ',' + this._posMaxKey() : ''
+      };
+      obj[this._posMinKey()] = min;
+      obj[this._posMaxKey()] = max;
+      return obj;
+    },
+
+    _getClosestIndex: function (pixelOffset) {
+      var minDist = Number.MAX_VALUE;
+      var closestIndex = -1;
+
+      var value = this.state.value;
+      var l = value.length;
+
+      for (var i = 0; i < l; i++) {
+        var offset = this._calcOffset(value[i]);
+        var dist = Math.abs(pixelOffset - offset);
+        if (dist < minDist) {
+          minDist = dist;
+          closestIndex = i;
+        }
+      }
+
+      return closestIndex;
+    },
+
+    // Snaps the nearest handle to the value corresponding to `position` and calls `callback` with that handle's index.
+    _forceValueFromPosition: function (position, callback) {
+      var pixelOffset = position - this.state.sliderStart;
+      if (this.props.invert) pixelOffset = this.state.sliderLength - pixelOffset;
+      pixelOffset -= (this.state.handleSize / 2);
+
+      var closestIndex = this._getClosestIndex(pixelOffset);
+
+      var nextValue = this._trimAlignValue(this._calcValue(pixelOffset));
+      var value = this.state.value;
+      value[closestIndex] = nextValue;
+
+      this.setState({value: value}, callback.bind(this, closestIndex));
+    },
+
+    _getMousePosition: function (e) {
+      return [
+        e['page' + this._axisKey()],
+        e['page' + this._orthogonalAxisKey()]
+      ];
+    },
+
+    _getTouchPosition: function (e) {
+      var touch = e.touches[0];
+      return [
+        touch['page' + this._axisKey()],
+        touch['page' + this._orthogonalAxisKey()]
+      ];
+    },
+
+    _getMouseEventMap: function () {
+      return {
+        'mousemove': this._onMouseMove,
+        'mouseup': this._onMouseUp
+      }
+    },
+
+    _getTouchEventMap: function () {
+      return {
+        'touchmove': this._onTouchMove,
+        'touchend': this._onTouchEnd
+      }
+    },
+
+    // create the `mousedown` handler for the i-th handle
+    _createOnMouseDown: function (i) {
+      return function (e) {
+        if (this.props.disabled) return;
+        var position = this._getMousePosition(e);
+        this._start(i, position[0]);
+        this._addHandlers(this._getMouseEventMap());
+        pauseEvent(e);
+      }.bind(this);
+    },
+
+    // create the `touchstart` handler for the i-th handle
+    _createOnTouchStart: function (i) {
+      return function (e) {
+        if (this.props.disabled || e.touches.length > 1) return;
+        var position = this._getTouchPosition(e);
+        this.startPosition = position;
+        this.isScrolling = undefined; // don't know yet if the user is trying to scroll
+        this._start(i, position[0]);
+        this._addHandlers(this._getTouchEventMap());
+        stopPropagation(e);
+      }.bind(this);
+    },
+
+    _addHandlers: function (eventMap) {
+      for (var key in eventMap) {
+        document.addEventListener(key, eventMap[key], false);
+      }
+    },
+
+    _removeHandlers: function (eventMap) {
+      for (var key in eventMap) {
+        document.removeEventListener(key, eventMap[key], false);
+      }
+    },
+
+    _start: function (i, position) {
+      if (document.activeElement) document.activeElement.blur();
+
+      this._fireEvent('onBeforeChange');
+
+      var zIndices = this.state.zIndices;
+      zIndices.splice(zIndices.indexOf(i), 1); // remove wherever the element is
+      zIndices.push(i); // add to end
+
+      this.setState({
+        startValue: this.state.value[i],
+        startPosition: position,
+        index: i,
+        zIndices: zIndices
+      });
+    },
+
+    _onMouseUp: function () {
+      this._onEnd(this._getMouseEventMap());
+    },
+
+    _onTouchEnd: function () {
+      this._onEnd(this._getTouchEventMap());
+    },
+
+    _onEnd: function (eventMap) {
+      this._removeHandlers(eventMap);
+      this.setState({index: -1}, this._fireEvent.bind(this, 'onAfterChange'));
+    },
+
+    _onMouseMove: function (e) {
+      var position = this._getMousePosition(e);
+      this._move(position[0]);
+    },
+
+    _onTouchMove: function (e) {
+      if (e.touches.length > 1) return;
+
+      var position = this._getTouchPosition(e);
+
+      if (typeof this.isScrolling === 'undefined') {
+        var diffMainDir = position[0] - this.startPosition[0];
+        var diffScrollDir = position[1] - this.startPosition[1];
+        this.isScrolling = Math.abs(diffScrollDir) > Math.abs(diffMainDir);
+      }
+
+      if (this.isScrolling) {
+        this.setState({index: -1});
+        return;
+      }
+
+      pauseEvent(e);
+
+      this._move(position[0]);
+    },
+
+    _move: function (position) {
+      var props = this.props;
+      var state = this.state;
+      var index = state.index;
+
+      var value = state.value;
+      var l = value.length;
+      var oldValue = value[index];
+
+      var diffPosition = position - state.startPosition;
+      if (props.invert) diffPosition *= -1;
+
+      var diffValue = diffPosition / (state.sliderLength - state.handleSize) * (props.max - props.min);
+      var newValue = this._trimAlignValue(state.startValue + diffValue);
+
+      var minDistance = props.minDistance;
+
+      // if "pearling" (= handles pushing each other) is disabled,
+      // prevent the handle from getting closer than `minDistance` to the previous or next handle.
+      if (!props.pearling) {
+        if (index > 0) {
+          var valueBefore = value[index - 1];
+          if (newValue < valueBefore + minDistance) {
+            newValue = valueBefore + minDistance;
+          }
+        }
+
+        if (index < l - 1) {
+          var valueAfter = value[index + 1];
+          if (newValue > valueAfter - minDistance) {
+            newValue = valueAfter - minDistance;
+          }
+        }
+      }
+
+      value[index] = newValue;
+
+      // if "pearling" is enabled, let the current handle push the pre- and succeeding handles.
+      if (props.pearling && l > 1) {
+        if (newValue > oldValue) {
+          this._pushSucceeding(l, value, minDistance, index);
+          this._trimSucceeding(l, value, minDistance, props.max);
+        }
+        else if (newValue < oldValue) {
+          this._pushPreceding(l, value, minDistance, index);
+          this._trimPreceding(l, value, minDistance, props.min);
+        }
+      }
+
+      // Normally you would use `shouldComponentUpdate`, but since the slider is a low-level component,
+      // the extra complexity might be worth the extra performance.
+      if (newValue !== oldValue) {
+        this.setState({value: value}, this._fireEvent.bind(this, 'onChange'));
+      }
+    },
+
+    _pushSucceeding: function (l, value, minDistance, index) {
+      var i, padding;
+      for (i = index, padding = value[i] + minDistance;
+           value[i + 1] != null && padding > value[i + 1];
+           i++, padding = value[i] + minDistance) {
+        value[i + 1] = this._alignValue(padding);
+      }
+    },
+
+    _trimSucceeding: function (l, nextValue, minDistance, max) {
+      for (var i = 0; i < l; i++) {
+        var padding = max - i * minDistance;
+        if (nextValue[l - 1 - i] > padding) {
+          nextValue[l - 1 - i] = padding;
+        }
+      }
+    },
+
+    _pushPreceding: function (l, value, minDistance, index) {
+      var i, padding;
+      for (i = index, padding = value[i] - minDistance;
+           value[i - 1] != null && padding < value[i - 1];
+           i--, padding = value[i] - minDistance) {
+        value[i - 1] = this._alignValue(padding);
+      }
+    },
+
+    _trimPreceding: function (l, nextValue, minDistance, min) {
+      for (var i = 0; i < l; i++) {
+        var padding = min + i * minDistance;
+        if (nextValue[i] < padding) {
+          nextValue[i] = padding;
+        }
+      }
+    },
+
+    _axisKey: function () {
+      var orientation = this.props.orientation;
+      if (orientation === 'horizontal') return 'X';
+      if (orientation === 'vertical') return 'Y';
+    },
+
+    _orthogonalAxisKey: function () {
+      var orientation = this.props.orientation;
+      if (orientation === 'horizontal') return 'Y';
+      if (orientation === 'vertical') return 'X';
+    },
+
+    _posMinKey: function () {
+      var orientation = this.props.orientation;
+      if (orientation === 'horizontal') return this.props.invert ? 'right' : 'left';
+      if (orientation === 'vertical') return this.props.invert ? 'bottom' : 'top';
+    },
+
+    _posMaxKey: function () {
+      var orientation = this.props.orientation;
+      if (orientation === 'horizontal') return this.props.invert ? 'left' : 'right';
+      if (orientation === 'vertical') return this.props.invert ? 'top' : 'bottom';
+    },
+
+    _sizeKey: function () {
+      var orientation = this.props.orientation;
+      if (orientation === 'horizontal') return 'clientWidth';
+      if (orientation === 'vertical') return 'clientHeight';
+    },
+
+    _trimAlignValue: function (val, props) {
+      return this._alignValue(this._trimValue(val, props), props);
+    },
+
+    _trimValue: function (val, props) {
+      props = props || this.props;
+
+      if (val <= props.min) val = props.min;
+      if (val >= props.max) val = props.max;
+
+      return val;
+    },
+
+    _alignValue: function (val, props) {
+      props = props || this.props;
+
+      var valModStep = (val - props.min) % props.step;
+      var alignValue = val - valModStep;
+
+      if (Math.abs(valModStep) * 2 >= props.step) {
+        alignValue += (valModStep > 0) ? props.step : (-props.step);
+      }
+
+      return parseFloat(alignValue.toFixed(5));
+    },
+
+    _renderHandle: function (style, child, i) {
+      var className = this.props.handleClassName + ' ' +
+        (this.props.handleClassName + '-' + i) + ' ' +
+        (this.state.index === i ? this.props.handleActiveClassName : '');
+
+      return (
+        React.createElement('div', {
+            ref: 'handle' + i,
+            key: 'handle' + i,
+            className: className,
+            style: style,
+            onMouseDown: this._createOnMouseDown(i),
+            onTouchStart: this._createOnTouchStart(i)
+          },
+          child
+        )
+      );
+    },
+
+    _renderHandles: function (offset) {
+      var l = offset.length;
+
+      var styles = this.tempArray;
+      for (var i = 0; i < l; i++) {
+        styles[i] = this._buildHandleStyle(offset[i], i);
+      }
+
+      var res = this.tempArray;
+      var renderHandle = this._renderHandle;
+      if (React.Children.count(this.props.children) > 0) {
+        React.Children.forEach(this.props.children, function (child, i) {
+          res[i] = renderHandle(styles[i], child, i);
+        });
+      } else {
+        for (i = 0; i < l; i++) {
+          res[i] = renderHandle(styles[i], null, i);
+        }
+      }
+      return res;
+    },
+
+    _renderBar: function (i, offsetFrom, offsetTo) {
+      return (
+        React.createElement('div', {
+          key: 'bar' + i,
+          ref: 'bar' + i,
+          className: this.props.barClassName + ' ' + this.props.barClassName + '-' + i,
+          style: this._buildBarStyle(offsetFrom, this.state.upperBound - offsetTo)
+        })
+      );
+    },
+
+    _renderBars: function (offset) {
+      var bars = [];
+      var lastIndex = offset.length - 1;
+
+      bars.push(this._renderBar(0, 0, offset[0]));
+
+      for (var i = 0; i < lastIndex; i++) {
+        bars.push(this._renderBar(i + 1, offset[i], offset[i + 1]));
+      }
+
+      bars.push(this._renderBar(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+
+      return bars;
+    },
+
+    _onSliderMouseDown: function (e) {
+      if (this.props.disabled || this.props.snapDragDisabled) return;
+      var position = this._getMousePosition(e);
+      this._forceValueFromPosition(position[0], function (i) {
+        this._fireEvent('onChange');
+        this._start(i, position[0]);
+        this._addHandlers(this._getMouseEventMap());
+      }.bind(this));
+      pauseEvent(e);
+    },
+
+    _fireEvent: function (event) {
+      if (this.props[event]) {
+        this.props[event](undoEnsureArray(this.state.value));
+      }
+    },
+
+    render: function () {
+      var state = this.state;
+      var props = this.props;
+
+      var offset = this.tempArray;
+      var value = state.value;
+      var l = value.length;
+      for (var i = 0; i < l; i++) {
+        offset[i] = this._calcOffset(value[i], i);
+      }
+
+      var bars = props.withBars ? this._renderBars(offset) : null;
+      var handles = this._renderHandles(offset);
+
+      return (
+        React.createElement('div', {
+            ref: 'slider',
+            style: {position: 'relative'},
+            className: props.className + (props.disabled ? ' disabled' : ''),
+            onMouseDown: this._onSliderMouseDown
+          },
+          bars,
+          handles
+        )
+      );
+    }
+  });
+
+  return ReactSlider;
+}));
+!function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a="function"==typeof require&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}for(var i="function"==typeof require&&require,o=0;o<r.length;o++)s(r[o]);return s}({1:[function(require,module,exports){(function(){var GameComponent,ViewController;GameComponent=require("./components/GameComponent.coffee"),ViewController=React.createElement(GameComponent,null),React.render(ViewController,document.getElementById("minesweeper"))}).call(this)},{"./components/GameComponent.coffee":10}],2:[function(require,module,exports){module.exports.Dispatcher=require("./lib/Dispatcher")},{"./lib/Dispatcher":24}],3:[function(require,module,exports){(function(){var AppDispatcher,Dispatcher,ModalStore,TileStore,changeModal,onTilesChange;Dispatcher=require("Flux").Dispatcher,AppDispatcher=new Dispatcher,TileStore=require("./stores/TileStore.coffee"),ModalStore=require("./stores/ModalStore.coffee"),changeModal=function(name){return name?ModalStore.toggle(name):ModalStore.reset(),ModalStore.emitChange()},onTilesChange=function(){var info;return info=TileStore.getInfo(),(info.win||info.loss)&&ModalActions.toggle("newGame"),TileStore.emitChange()},AppDispatcher.register(function(event){var tile;switch(event.type){case"TILE_FLAG_TOGGLE":return tile=TileStore.get({uid:event.uid}),tile.toggleFlag(),onTilesChange();case"TILE_CLEAR":return tile=TileStore.get({uid:event.uid}),tile.clear(),onTilesChange();case"TILES_CLEAR_SAFE_RANDOM":if(tile=TileStore.randomSafeTile())return tile.clear(),onTilesChange();break;case"TILES_NEW_GAME":return TileStore.newGame(8,4,10),onTilesChange(),changeModal("newGame");case"MODAL_TOGGLE":return ModalStore.toggle(event.name),ModalStore.emitChange();case"MODAL_RESET":return changeModal()}}),module.exports=AppDispatcher}).call(this)},{"./stores/ModalStore.coffee":18,"./stores/TileStore.coffee":19,Flux:20}],4:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={toggle:function(name){return Dispatcher.dispatch({type:"MODAL_TOGGLE",name:name})},reset:function(){return Dispatcher.dispatch({type:"MODAL_RESET"})}}}).call(this)},{"../Dispatcher.coffee":3}],5:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={toggleFlag:function(uid){return Dispatcher.dispatch({type:"TILE_FLAG_TOGGLE",uid:uid})},clear:function(uid){return Dispatcher.dispatch({type:"TILE_CLEAR",uid:uid})}}}).call(this)},{"../Dispatcher.coffee":3}],6:[function(require,module,exports){(function(){var Dispatcher;Dispatcher=require("../Dispatcher.coffee"),module.exports={clearSafeRandomTile:function(){return Dispatcher.dispatch({type:"TILES_CLEAR_SAFE_RANDOM"})},newGame:function(){return Dispatcher.dispatch({type:"TILES_NEW_GAME"})}}}).call(this)},{"../Dispatcher.coffee":3}],7:[function(require,module,exports){(function(){var ModalsCollection;ModalsCollection=function(){function ModalsCollection(){this.show={}}return ModalsCollection.prototype.set=function(fileName){return this.show[fileName]=!1,this},ModalsCollection.prototype.toggle=function(name){var isBeingShown,modalName,ref,results;ref=this.show,results=[];for(modalName in ref)isBeingShown=ref[modalName],results.push(modalName===name?this.show[modalName]=!isBeingShown:isBeingShown=!1);return results},ModalsCollection.prototype.reset=function(){var key,ref,showModal;ref=this.show;for(key in ref)showModal=ref[key],this.show[key]=!1;return this},ModalsCollection}(),module.exports=ModalsCollection}).call(this)},{}],8:[function(require,module,exports){(function(){var TileModel,TilesCollection,extend=function(child,parent){function ctor(){this.constructor=child}for(var key in parent)hasProp.call(parent,key)&&(child[key]=parent[key]);return ctor.prototype=parent.prototype,child.prototype=new ctor,child.__super__=parent.prototype,child},hasProp={}.hasOwnProperty;TileModel=require("../models/TileModel.coffee"),TilesCollection=function(){function TilesCollection(){var Model,collection;this.all=[],collection=this,this.model=Model=function(superClass){function Model(){return Model.__super__.constructor.apply(this,arguments)}return extend(Model,superClass),Model.prototype.clear=function(){return Model.__super__.clear.call(this),collection.clearNeighbors(this),collection.moveUpdate()},Model.prototype.toggleFlag=function(){return Model.__super__.toggleFlag.call(this),collection.moveUpdate()},Model.prototype.click=function($event){return collection.noMineFirstClick(this),Model.__super__.click.call(this,$event)},Model}(TileModel)}return TilesCollection.prototype.newGame=function(x,y,mines){var attrs,i,j,k,mineNum,ref,ref1,ref2,tile;for(this.reset(),this.sizeY=x,this.sizeX=y,this.numOfMines=mines,y=i=0,ref=this.sizeY-1;ref>=0?ref>=i:i>=ref;y=ref>=0?++i:--i)for(x=j=0,ref1=this.sizeX-1;ref1>=0?ref1>=j:j>=ref1;x=ref1>=0?++j:--j)attrs={x:x,y:y},this.add(attrs);for(mineNum=k=1,ref2=this.numOfMines;ref2>=1?ref2>=k:k>=ref2;mineNum=ref2>=1?++k:--k)tile=this.randomSafeTile(),tile.model.isMine=!0;return this.tallyMines(),this.gameUpdate()},TilesCollection.prototype.noMineFirstClick=function(tile){return 0===this.numOfClears&&tile.model.isMine===!0&&(tile.model.isMine=!1,this.randomSafeTile().model.isMine=!0,this.tallyMines()),tile},TilesCollection.prototype.add=function(model){var tile;return tile=new this.model(model),this.all.push(tile),tile},TilesCollection.prototype.handleTileClick=function(event,index){},TilesCollection.prototype.reset=function(){return this.all=[],this},TilesCollection.prototype.randomSafeTile=function(){var findAttrs,randomIndex,safeTiles;return findAttrs={isClear:!1,isMine:!1},safeTiles=this.getAll(findAttrs),randomIndex=Math.floor(Math.random()*safeTiles.length),safeTiles[randomIndex]},TilesCollection.prototype.tallyMines=function(){var adjacentTile,i,j,len,len1,neighborAttrs,neighborMine,neighborMines,neighborX,neighborY,ref,ref1,results,tile;for(ref=this.all,results=[],i=0,len=ref.length;len>i;i++){for(tile=ref[i],neighborMines=0,ref1=tile.adjacentTiles,j=0,len1=ref1.length;len1>j;j++)adjacentTile=ref1[j],neighborX=tile.model.x+adjacentTile[0],neighborY=tile.model.y+adjacentTile[1],neighborAttrs={isMine:!0,x:neighborX,y:neighborY},neighborMine=this.get(neighborAttrs),void 0!==neighborMine&&neighborMines++;results.push(tile.model.adjacentMines=neighborMines)}return results},TilesCollection.prototype.gameUpdate=function(){var i,len,ref,tile;for(this.x=Math.max.apply(this,this.all.map(function(tile){return tile.model.x})),this.y=Math.max.apply(this,this.all.map(function(tile){return tile.model.y})),this.x=this.x--,this.y=this.y--,this.numOfMines=0,ref=this.all,i=0,len=ref.length;len>i;i++)tile=ref[i],tile.model.isMine===!0&&this.numOfMines++;return this.moveUpdate()},TilesCollection.prototype.moveUpdate=function(){var i,len,ref,tile;for(this.loss=!1,this.win=!1,this.numOfClears=0,this.numOfFlags=0,ref=this.all,i=0,len=ref.length;len>i;i++)tile=ref[i],tile.model.isClear===!0&&this.numOfClears++,tile.model.isFlagged===!0&&this.numOfFlags++,tile.model.isMine===!0&&tile.model.isClear===!0&&(this.loss=!0);return this.loss===!1&&this.all.length-this.numOfMines-this.numOfClears===0?this.win=!0:void 0},TilesCollection.prototype.clearNeighbors=function(tile){var adjacentTile,i,len,neighbor,ref,results,shouldClearNeighbor,shouldClearNeighbors;if(shouldClearNeighbors=0===tile.model.adjacentMines&&tile.model.isMine===!1){for(ref=tile.adjacentTiles,results=[],i=0,len=ref.length;len>i;i++)adjacentTile=ref[i],neighbor=this.get({x:tile.model.x+adjacentTile[0],y:tile.model.y+adjacentTile[1]}),shouldClearNeighbor=neighbor&&neighbor.model.isClear===!1&&neighbor.model.isMine===!1,results.push(shouldClearNeighbor?neighbor.click():void 0);return results}},TilesCollection.prototype.get=function(attrs){return this.getAll(attrs)[0]},TilesCollection.prototype.getAll=function(attrs){var i,key,len,matches,numOfAttrs,numOfMatchedAttrs,ref,tile,val;if(matches=[],!attrs)return this.all;for(ref=this.all,i=0,len=ref.length;len>i;i++){tile=ref[i],numOfAttrs=0,numOfMatchedAttrs=0;for(key in attrs)val=attrs[key],numOfAttrs++,tile.model[key]===val&&numOfMatchedAttrs++;numOfMatchedAttrs===numOfAttrs&&matches.push(tile)}return matches},TilesCollection}(),module.exports=TilesCollection}).call(this)},{"../models/TileModel.coffee":17}],9:[function(require,module,exports){(function(){var Dashboard,ModalActions,R,TilesActions;ModalActions=require("../actions/ModalActions.coffee"),TilesActions=require("../actions/TilesActions.coffee"),R=React.DOM,Dashboard=React.createClass({displayName:"Dashboard",render:function(){return R.div({id:"dashboard"},[R.div({key:"new-game",className:"new-game button",onClick:function(){return ModalActions.toggle("newGame")}},"new game"),R.div({key:"select-tile",className:"select-tile button",onClick:TilesActions.clearSafeRandomTile},"clear a safe tile"),R.div({key:"instructions",className:"instructions button",onClick:function(){return ModalActions.toggle("instructions")}},"instructions")])}}),module.exports=Dashboard}).call(this)},{"../actions/ModalActions.coffee":4,"../actions/TilesActions.coffee":6}],10:[function(require,module,exports){(function(){var DashboardComponent,Dispatcher,Game,InfoComponent,ModalActions,ModalOverlayComponent,ModalStore,R,TileStore,TilesComponent,assign,getModalStoreState,getState,getTileStoreState;Dispatcher=require("../Dispatcher.coffee"),TileStore=require("../stores/TileStore.coffee"),ModalStore=require("../stores/ModalStore.coffee"),ModalActions=require("../actions/ModalActions.coffee"),TilesComponent=require("./TilesComponent.coffee"),InfoComponent=require("./InfoComponent.coffee"),DashboardComponent=require("./DashboardComponent.coffee"),ModalOverlayComponent=require("./modals/ModalOverlayComponent.coffee"),assign=require("object-assign"),R=React.DOM,getState=function(){return assign({},getTileStoreState(),getModalStoreState())},getTileStoreState=function(){return{all:TileStore.getAll(),info:TileStore.getInfo()}},getModalStoreState=function(){return{modals:ModalStore.getAll()}},Game=React.createClass({displayName:"Game",getInitialState:function(){return getState()},componentDidMount:function(){return TileStore.addChangeListener(this._onTileStoreChange),ModalStore.addChangeListener(this._onModalStoreChange)},componentWillUnmount:function(){return TileStore.removeChangeListener(this._onTileStoreChange),ModalStore.removeChangeListener(this._onModalStoreChange)},_onTileStoreChange:function(){var tilesState;return tilesState=getTileStoreState(),this.setState(tilesState)},_onModalStoreChange:function(){return this.setState(getModalStoreState())},render:function(){var boardWrappper,dashboard,info,overlays,tiles;return info=React.createElement(InfoComponent,{key:"info",info:this.state.info}),tiles=React.createElement(TilesComponent,{key:"tiles",tiles:this.state.all}),boardWrappper=R.div({id:"board-wrappper",key:"board-wrappper"},[info,tiles]),dashboard=React.createElement(DashboardComponent,{key:"dashboard"}),overlays=React.createElement(ModalOverlayComponent,{key:"modal-overlay",info:this.state.info,modals:this.state.modals}),R.div(null,[overlays,boardWrappper,dashboard])}}),module.exports=Game}).call(this)},{"../Dispatcher.coffee":3,"../actions/ModalActions.coffee":4,"../stores/ModalStore.coffee":18,"../stores/TileStore.coffee":19,"./DashboardComponent.coffee":9,"./InfoComponent.coffee":11,"./TilesComponent.coffee":13,"./modals/ModalOverlayComponent.coffee":16,"object-assign":26}],11:[function(require,module,exports){(function(){var Info,R;R=React.DOM,Info=React.createClass({displayName:"Info",render:function(){return R.ul({id:"stats"},[R.li({key:"tiles"},this.props.info.numOfTiles+" tiles"),R.li({key:"mines"},this.props.info.numOfMines+" mines"),R.li({key:"flagged"},this.props.info.numOfFlags+" flagged tiles"),R.li({key:"cleared"},this.props.info.numOfUncleared+" left to clear")])}}),module.exports=Info}).call(this)},{}],12:[function(require,module,exports){(function(){var R,Tile,TileActions;TileActions=require("../actions/TileActions.coffee"),R=React.DOM,Tile=React.createClass({displayName:"Tile",render:function(){return R.li({className:this.getClass(),onClick:this.clickHandler},R.span(null,this.getText()))},clickHandler:function($event){var flagKeyWasPressed;return $event?(flagKeyWasPressed=$event.shiftKey===!0||$event.altKey===!0,flagKeyWasPressed?TileActions.toggleFlag(this.props.tile.model.uid):TileActions.clear(this.props.tile.model.uid)):TileActions.clear(this.props.tile.model.uid)},isFirstColumn:function(){return 0===this.props.tile.model.x},hasBeenFlagged:function(){return this.props.tile.model.isClear!==!0&&this.props.tile.model.isFlagged===!0},hasBeenCleared:function(){return this.props.tile.model.isClear===!0},hasMine:function(){return this.props.tile.model.isMine===!0},shouldDisplayMine:function(){return this.hasMine()&&this.hasBeenCleared()},hasZeroAdjacentMines:function(){return 0===this.props.tile.model.adjacentMines&&!this.hasMine()},getText:function(){var text;return text=this.props.tile.model.adjacentMines,this.hasBeenFlagged()?text="?":this.shouldDisplayMine()&&(text="X"),text},getClass:function(){return["tile",this.isFirstColumn()?"nth":void 0,this.hasBeenCleared()?"clear":void 0,this.hasBeenFlagged()?"flagged":void 0,this.shouldDisplayMine()?"mine":void 0,this.hasZeroAdjacentMines()?"clear zero":void 0].join(" ")}}),module.exports=Tile}).call(this)},{"../actions/TileActions.coffee":5}],13:[function(require,module,exports){(function(){var R,TileComponent,Tiles;TileComponent=require("./TileComponent.coffee"),R=React.DOM,Tiles=React.createClass({displayName:"Tiles",render:function(){var tiles;return tiles=this.props.tiles.map(function(_this){return function(item,index){return React.createElement(TileComponent,{key:index,ref:item.model.uid,tile:item})}}(this)),R.ul({id:"board"},tiles)}}),module.exports=Tiles}).call(this)},{"./TileComponent.coffee":12}],14:[function(require,module,exports){(function(){var ModalActions,ModalOverlay,R;ModalActions=require("../../actions/ModalActions.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalInstructions",getClass:function(){var classes;return classes=["message"],this.props.show||classes.push("hide"),classes.join(" ")},clickHandler:function(){return ModalActions.toggle("instructions")},render:function(){var button,controls,description;return description=R.div({key:"instructions-description"},[R.div({key:"instructions-header",className:"border-bottom"},"how to play"),R.div({key:"instructions-details",className:"border-bottom"},["the game is played by revealing tiles of the grid.","if a selected tile contains a mine, the player loses the game.","otherwise, a digit is revealed in the tile, indicating the number","of mines located in the eight adjacent tiles."].join(" ")),R.div({key:"instructions-click"},R.span({key:"instructions-click-code",className:"code"},"click"),R.span({key:"instructions-click-text"}," to reveal the squares of the grid.")),R.div({key:"instructions-click-hint",className:"border-bottom"},"(your first click will never land on a mine)")]),controls=R.div({key:"instructions-controls"},[R.span({key:"instructions-controls-code1",className:"code"},"shift + click"),R.span({key:"instructions-controls-text1"}," or "),R.span({key:"instructions-controls-code2",className:"code"},"alt + click"),R.span({key:"instructions-controls-text2"},' will "flag" a tile, helping you to remember where you think a mine is hidden')]),button=R.div({key:"instructions-button"},R.div({className:"button",onClick:this.clickHandler},"got it!")),R.div({key:"instructions-modal",className:this.getClass()},[description,controls,button])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4}],15:[function(require,module,exports){(function(){var ModalActions,ModalOverlay,R,TilesActions;ModalActions=require("../../actions/ModalActions.coffee"),TilesActions=require("../../actions/TilesActions.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalNewGame",getClass:function(){var classes;return classes=["message"],this.props.show||classes.push("hide"),classes.join(" ")},getTitleText:function(){return!this.props.show||this.props.win||this.props.loss?this.props.win&&!this.props.loss?"you won!":this.props.win||this.props.win?void 0:"you lost...":"new game?"},clickHandlerNewGame:function(){return TilesActions.newGame()},clickHandlerExitModal:function(){return ModalActions.reset()},renderButtons:function(){var buttons;return buttons=[R.div({key:"new-game-start",className:"button",onClick:this.clickHandlerNewGame},"start!")],this.props.loss||buttons.push(R.div({key:"new-game-resume",className:"button",onClick:this.clickHandlerExitModal},"resume!")),R.div({key:"new-game-buttons"},buttons)},render:function(){var title;return title=R.div({key:"new-game-title-wrapper",className:"border-bottom"},R.div({key:"new-game-title",className:"title"},this.getTitleText())),R.div({key:"new-game-modal",className:this.getClass()},[title,this.renderButtons()])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4,"../../actions/TilesActions.coffee":6}],16:[function(require,module,exports){(function(){var InstructionsComponent,ModalActions,ModalOverlay,NewGameComponent,R;ModalActions=require("../../actions/ModalActions.coffee"),InstructionsComponent=require("./ModalInstructionsComponent.coffee"),NewGameComponent=require("./ModalNewGameComponent.coffee"),R=React.DOM,ModalOverlay=React.createClass({displayName:"ModalOverlay",getClass:function(){return this.props.modals.newGame?"":this.props.modals.instructions?"":"hide"},resetHandler:function(){return this.props.info.loss||this.props.info.win?void 0:ModalActions.reset()},instructionsHandler:function(){return ModalActions.toggle("instructions")},render:function(){var overlay;return overlay=R.div({id:"overlay",key:"overlay",className:this.getClass(),onClick:this.resetHandler},null),R.div(null,[overlay,React.createElement(InstructionsComponent,{key:"modal-instructions",show:this.props.modals.instructions}),React.createElement(NewGameComponent,{key:"modal-new-game",show:this.props.modals.newGame,win:this.props.info.win,loss:this.props.info.loss})])}}),module.exports=ModalOverlay}).call(this)},{"../../actions/ModalActions.coffee":4,"./ModalInstructionsComponent.coffee":14,"./ModalNewGameComponent.coffee":15}],17:[function(require,module,exports){(function(){var TileModel;Number.isInteger=Number.isInteger||function(value){return"number"==typeof value&&isFinite(value)&&Math.floor(value)===value},module.exports=TileModel=function(){function TileModel(attrs){if(!Number.isInteger(attrs.x)||!Number.isInteger(attrs.y))throw"`x` and `y` are required Integer attributes to instantiate Tile";this.model={x:void 0,y:void 0,uid:void 0,isMine:!1,isClear:!1,isFlagged:!1,adjacentMines:0},this.adjacentTiles=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]],this.set(attrs)}return TileModel.prototype.set=function(attrs){var attr,key;for(key in attrs)attr=attrs[key],this.model[key]=attr,this.model.uid=String(attrs.x)+"-"+String(attrs.y);return this},TileModel.prototype.toggleFlag=function(){return this.model.isFlagged=!this.model.isFlagged,this},TileModel.prototype.clear=function(){return this.model.isClear=!0,this.model.isFlagged=!1,this},TileModel.prototype.click=function($event){var flagKeyWasPressed;return $event?(flagKeyWasPressed=$event.shiftKey===!0||$event.altKey===!0,flagKeyWasPressed?this.toggleFlag():this.clear()):this.clear()},TileModel}()}).call(this)},{}],18:[function(require,module,exports){(function(){var EventEmitter,ModalStore,Modals,ModalsCollection,assign;ModalsCollection=require("../collections/ModalsCollection.coffee"),EventEmitter=require("events").EventEmitter,assign=require("object-assign"),Modals=new ModalsCollection,Modals.set("newGame"),Modals.set("instructions"),ModalStore=assign({},EventEmitter.prototype,{event:"event",getAll:function(){return Modals.show},reset:function(){return Modals.reset()},toggle:function(modalName){return Modals.toggle(modalName)},emitChange:function(){return this.emit(this.event)},addChangeListener:function(callback){return this.on(this.event,callback)},removeChangeListener:function(callback){return this.removeListener(this.event,callback)}}),module.exports=ModalStore}).call(this)},{"../collections/ModalsCollection.coffee":7,events:23,"object-assign":26}],19:[function(require,module,exports){(function(){var EventEmitter,TileStore,Tiles,TilesCollection,assign;TilesCollection=require("../collections/TilesCollection.coffee"),EventEmitter=require("events").EventEmitter,assign=require("object-assign"),Tiles=new TilesCollection,Tiles.newGame(4,7,5),TileStore=assign({},EventEmitter.prototype,{event:"change",get:function(attrs){return Tiles.get(attrs)},getAll:function(){return Tiles.getAll()},getInfo:function(){return{win:Tiles.win,loss:Tiles.loss,numOfTiles:Tiles.all.length,numOfMines:Tiles.numOfMines,numOfFlags:Tiles.numOfFlags,numOfUncleared:Tiles.all.length-Tiles.numOfMines-Tiles.numOfClears}},randomSafeTile:function(){return Tiles.randomSafeTile()},newGame:function(x,y,mines){return Tiles.newGame(x,y,mines)},emitChange:function(){return this.emit(this.event)},addChangeListener:function(callback){return this.on(this.event,callback)},removeChangeListener:function(callback){return this.removeListener(this.event,callback)}}),module.exports=TileStore}).call(this)},{"../collections/TilesCollection.coffee":8,events:23,"object-assign":26}],20:[function(require,module,exports){arguments[4][2][0].apply(exports,arguments)},{"./lib/Dispatcher":21,dup:2}],21:[function(require,module,exports){"use strict";function Dispatcher(){this.$Dispatcher_callbacks={},this.$Dispatcher_isPending={},this.$Dispatcher_isHandled={},this.$Dispatcher_isDispatching=!1,this.$Dispatcher_pendingPayload=null}var invariant=require("./invariant"),_lastID=1,_prefix="ID_";Dispatcher.prototype.register=function(callback){var id=_prefix+_lastID++;return this.$Dispatcher_callbacks[id]=callback,id},Dispatcher.prototype.unregister=function(id){invariant(this.$Dispatcher_callbacks[id],"Dispatcher.unregister(...): `%s` does not map to a registered callback.",id),delete this.$Dispatcher_callbacks[id]},Dispatcher.prototype.waitFor=function(ids){invariant(this.$Dispatcher_isDispatching,"Dispatcher.waitFor(...): Must be invoked while dispatching.");for(var ii=0;ii<ids.length;ii++){var id=ids[ii];this.$Dispatcher_isPending[id]?invariant(this.$Dispatcher_isHandled[id],"Dispatcher.waitFor(...): Circular dependency detected while waiting for `%s`.",id):(invariant(this.$Dispatcher_callbacks[id],"Dispatcher.waitFor(...): `%s` does not map to a registered callback.",id),this.$Dispatcher_invokeCallback(id))}},Dispatcher.prototype.dispatch=function(payload){invariant(!this.$Dispatcher_isDispatching,"Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch."),this.$Dispatcher_startDispatching(payload);try{for(var id in this.$Dispatcher_callbacks)this.$Dispatcher_isPending[id]||this.$Dispatcher_invokeCallback(id)}finally{this.$Dispatcher_stopDispatching()}},Dispatcher.prototype.isDispatching=function(){return this.$Dispatcher_isDispatching},Dispatcher.prototype.$Dispatcher_invokeCallback=function(id){this.$Dispatcher_isPending[id]=!0,this.$Dispatcher_callbacks[id](this.$Dispatcher_pendingPayload),this.$Dispatcher_isHandled[id]=!0},Dispatcher.prototype.$Dispatcher_startDispatching=function(payload){for(var id in this.$Dispatcher_callbacks)this.$Dispatcher_isPending[id]=!1,this.$Dispatcher_isHandled[id]=!1;this.$Dispatcher_pendingPayload=payload,this.$Dispatcher_isDispatching=!0},Dispatcher.prototype.$Dispatcher_stopDispatching=function(){this.$Dispatcher_pendingPayload=null,this.$Dispatcher_isDispatching=!1},module.exports=Dispatcher},{"./invariant":22}],22:[function(require,module,exports){"use strict";var invariant=function(condition,format,a,b,c,d,e,f){if(!condition){var error;if(void 0===format)error=new Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var args=[a,b,c,d,e,f],argIndex=0;error=new Error("Invariant Violation: "+format.replace(/%s/g,function(){return args[argIndex++]}))}throw error.framesToPop=1,error}};module.exports=invariant},{}],23:[function(require,module,exports){function EventEmitter(){this._events=this._events||{},this._maxListeners=this._maxListeners||void 0}function isFunction(arg){return"function"==typeof arg}function isNumber(arg){return"number"==typeof arg}function isObject(arg){return"object"==typeof arg&&null!==arg}function isUndefined(arg){return void 0===arg}module.exports=EventEmitter,EventEmitter.EventEmitter=EventEmitter,EventEmitter.prototype._events=void 0,EventEmitter.prototype._maxListeners=void 0,EventEmitter.defaultMaxListeners=10,EventEmitter.prototype.setMaxListeners=function(n){if(!isNumber(n)||0>n||isNaN(n))throw TypeError("n must be a positive number");return this._maxListeners=n,this},EventEmitter.prototype.emit=function(type){var er,handler,len,args,i,listeners;if(this._events||(this._events={}),"error"===type&&(!this._events.error||isObject(this._events.error)&&!this._events.error.length)){if(er=arguments[1],er instanceof Error)throw er;throw TypeError('Uncaught, unspecified "error" event.')}if(handler=this._events[type],isUndefined(handler))return!1;if(isFunction(handler))switch(arguments.length){case 1:handler.call(this);break;case 2:handler.call(this,arguments[1]);break;case 3:handler.call(this,arguments[1],arguments[2]);break;default:for(len=arguments.length,args=new Array(len-1),i=1;len>i;i++)args[i-1]=arguments[i];handler.apply(this,args)}else if(isObject(handler)){for(len=arguments.length,args=new Array(len-1),i=1;len>i;i++)args[i-1]=arguments[i];for(listeners=handler.slice(),len=listeners.length,i=0;len>i;i++)listeners[i].apply(this,args)}return!0},EventEmitter.prototype.addListener=function(type,listener){var m;if(!isFunction(listener))throw TypeError("listener must be a function");if(this._events||(this._events={}),this._events.newListener&&this.emit("newListener",type,isFunction(listener.listener)?listener.listener:listener),this._events[type]?isObject(this._events[type])?this._events[type].push(listener):this._events[type]=[this._events[type],listener]:this._events[type]=listener,isObject(this._events[type])&&!this._events[type].warned){var m;m=isUndefined(this._maxListeners)?EventEmitter.defaultMaxListeners:this._maxListeners,m&&m>0&&this._events[type].length>m&&(this._events[type].warned=!0,console.error("(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.",this._events[type].length),"function"==typeof console.trace&&console.trace())}return this},EventEmitter.prototype.on=EventEmitter.prototype.addListener,EventEmitter.prototype.once=function(type,listener){function g(){this.removeListener(type,g),fired||(fired=!0,listener.apply(this,arguments))}if(!isFunction(listener))throw TypeError("listener must be a function");var fired=!1;return g.listener=listener,this.on(type,g),this},EventEmitter.prototype.removeListener=function(type,listener){var list,position,length,i;if(!isFunction(listener))throw TypeError("listener must be a function");if(!this._events||!this._events[type])return this;if(list=this._events[type],length=list.length,position=-1,list===listener||isFunction(list.listener)&&list.listener===listener)delete this._events[type],this._events.removeListener&&this.emit("removeListener",type,listener);else if(isObject(list)){for(i=length;i-->0;)if(list[i]===listener||list[i].listener&&list[i].listener===listener){position=i;break}if(0>position)return this;1===list.length?(list.length=0,delete this._events[type]):list.splice(position,1),this._events.removeListener&&this.emit("removeListener",type,listener)}return this},EventEmitter.prototype.removeAllListeners=function(type){var key,listeners;if(!this._events)return this;if(!this._events.removeListener)return 0===arguments.length?this._events={}:this._events[type]&&delete this._events[type],this;if(0===arguments.length){for(key in this._events)"removeListener"!==key&&this.removeAllListeners(key);return this.removeAllListeners("removeListener"),this._events={},this}if(listeners=this._events[type],isFunction(listeners))this.removeListener(type,listeners);else for(;listeners.length;)this.removeListener(type,listeners[listeners.length-1]);return delete this._events[type],this},EventEmitter.prototype.listeners=function(type){var ret;return ret=this._events&&this._events[type]?isFunction(this._events[type])?[this._events[type]]:this._events[type].slice():[]},EventEmitter.listenerCount=function(emitter,type){var ret;return ret=emitter._events&&emitter._events[type]?isFunction(emitter._events[type])?1:emitter._events[type].length:0}},{}],24:[function(require,module,exports){arguments[4][21][0].apply(exports,arguments)},{"./invariant":25,dup:21}],25:[function(require,module,exports){arguments[4][22][0].apply(exports,arguments)},{dup:22}],26:[function(require,module,exports){"use strict";function ToObject(val){if(null==val)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(val)}module.exports=Object.assign||function(target,source){for(var from,keys,to=ToObject(target),s=1;s<arguments.length;s++){from=arguments[s],keys=Object.keys(Object(from));for(var i=0;i<keys.length;i++)to[keys[i]]=from[keys[i]]}return to}},{}]},{},[1,2]);
 
 //# sourceMappingURL=maps/build.js.map

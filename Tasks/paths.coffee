@@ -24,6 +24,7 @@ paths.js =
 
     libs: [
         'react/dist/react.js'
+        'react-slider/react-slider.js'
     ].map (file) -> paths.npm + file
 
 paths.js.all = paths.js.libs.concat(paths.coffee.dest + '**/*.js')
