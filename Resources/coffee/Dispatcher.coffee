@@ -1,6 +1,7 @@
 Dispatcher = require('Flux').Dispatcher
 AppDispatcher = new Dispatcher()
 TileStore = require './stores/TileStore.coffee'
+ModalStore = require './stores/ModalStore.coffee'
 
 AppDispatcher.register (event) ->
     switch event.type
@@ -27,5 +28,13 @@ AppDispatcher.register (event) ->
             console.log 'newGame'
             TileStore.newGame 8, 4, 10
             TileStore.emitChange()
+
+        when 'MODAL_TOGGLE'
+            ModalStore.toggle event.name
+            ModalStore.emitChange()
+
+        when 'MODAL_RESET'
+            ModalStore.reset()
+            ModalStore.emitChange()
 
 module.exports = AppDispatcher

@@ -3,10 +3,23 @@ EventEmitter = require('events').EventEmitter
 assign = require 'object-assign'
 
 Modals = new ModalsCollection()
-Modals.set 'NewGame'
+Modals.set 'newGame'
+Modals.set 'instructions'
 
-ModalStore = assign {}, ,
+ModalStore = assign {}, EventEmitter.prototype,
     event: 'event'
+
+    getAll: ->
+        Modals.show
+
+    reset: ->
+        Modals.reset()
+
+    toggle: (modalName) ->
+        console.log Modals.show
+        Modals.toggle modalName
+        console.log Modals.show
+
     emitChange: ->
         @emit @event
 
@@ -17,3 +30,5 @@ ModalStore = assign {}, ,
     # To be called upon dismounting a given component
     removeChangeListener: (callback) ->
         @removeListener @event, callback
+
+module.exports = ModalStore

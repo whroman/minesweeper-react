@@ -1,20 +1,25 @@
 class ModalsCollection
     constructor: () ->
-        @show: {}
+        @show = {}
 
-    set : (fileNames) ->
-        for fileName in fileNames
-            this.show[fileName] = false
+    set : (fileName) ->
+        this.show[fileName] = false
         @
 
     toggle : (name) ->
-        if (this.show[name] == true)
-            this.show[name] = false
-        else
-            this.show[name] = true
-        @
+        for modalName, isBeingShown of @show
+            console.log modalName, name, isBeingShown
+            if modalName is name
+                @show[modalName] = !isBeingShown
+            else
+                isBeingShown = false
+            console.log modalName, name, isBeingShown
+
+        console.log this.show[name]
 
     reset : () ->
         for key, showModal of this.show
             this.show[key] = false
         @
+
+module.exports = ModalsCollection

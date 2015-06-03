@@ -1,3 +1,4 @@
+ModalActions = require '../actions/ModalActions.coffee'
 TilesActions = require '../actions/TilesActions.coffee'
 
 R = React.DOM
@@ -10,7 +11,8 @@ Dashboard = React.createClass
             R.div {
                 key: 'new-game'
                 className: 'new-game button'
-                onClick: TilesActions.newGame
+                onClick: ->
+                    ModalActions.toggle 'newGame'
             }, 'new game'
 
             R.div {
@@ -22,6 +24,8 @@ Dashboard = React.createClass
             R.div {
                 key: 'instructions'
                 className: 'instructions button'
+                onClick: ->
+                    ModalActions.toggle 'instructions'
             }, 'instructions'
         ]
 
