@@ -41,18 +41,3 @@ module.exports =
             @model.isClear = true
             @model.isFlagged = false
             @
-
-        # 
-        click: ($event) ->
-            if !$event
-                return @clear()
-
-            flagKeyWasPressed = (
-                $event.shiftKey is true or
-                $event.altKey is true
-            )
-
-            if flagKeyWasPressed
-                return @toggleFlag()
-            else
-                return @clear()

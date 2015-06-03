@@ -16,10 +16,6 @@ class TilesCollection
                 super()
                 collection.moveUpdate()
 
-            click: ($event) ->
-                collection.noMineFirstClick @
-                super $event
-
     newGame: (x, y, mines) ->
         @reset()
         @sizeY = x
@@ -42,7 +38,7 @@ class TilesCollection
         @gameUpdate()
 
     # Finds an empty tile and marks it as a mine if no tiles
-    # have yet to be clicked AND the given tile is a mine
+    # have yet to be cleared AND the given tile is a mine
     noMineFirstClick: (tile) ->
         if @numOfClears is 0 and tile.model.isMine is true
             tile.model.isMine = false
@@ -145,7 +141,7 @@ class TilesCollection
                 )
 
                 if shouldClearNeighbor
-                    neighbor.click()
+                    neighbor.clear()
 
     get : (attrs) ->
         return @getAll(attrs)[0]
