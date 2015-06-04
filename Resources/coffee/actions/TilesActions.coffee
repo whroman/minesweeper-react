@@ -1,10 +1,10 @@
 Dispatcher = require '../Dispatcher.coffee'
 
 module.exports =
-    clearSafeRandomTile: () ->
+    clearSafeRandomTile: ->
         Dispatcher.dispatch
             type: 'TILES_CLEAR_SAFE_RANDOM'
 
-    newGame: () ->
+    newGame: ->
         Dispatcher.dispatch
             type: 'TILES_NEW_GAME'

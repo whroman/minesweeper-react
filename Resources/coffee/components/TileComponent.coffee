@@ -39,8 +39,8 @@ Tile = React.createClass
         this.props.tile.model.isMine is true
 
     shouldDisplayMine: ->
-        @hasMine() and
-        @hasBeenCleared()
+        @hasBeenCleared() and
+        @hasMine()
 
     hasZeroAdjacentMines: ->
         @props.tile.model.adjacentMines is 0 and
@@ -49,6 +49,7 @@ Tile = React.createClass
 
     getText: ->
         text = ''
+        # if true
         if @hasBeenCleared()
             text = @props.tile.model.adjacentMines
         else if @hasBeenFlagged()
@@ -60,6 +61,7 @@ Tile = React.createClass
     getClass: ->
         [
             'tile'
+            # 'clear'
             if @isFirstColumn() then 'nth'
             if @hasBeenCleared() then 'clear'
             if @hasBeenFlagged() then 'flagged'

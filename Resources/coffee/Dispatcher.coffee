@@ -1,7 +1,9 @@
 Dispatcher = require('Flux').Dispatcher
 AppDispatcher = new Dispatcher()
+
 TileStore = require './stores/TileStore.coffee'
 ModalStore = require './stores/ModalStore.coffee'
+ModalActions = require './actions/ModalActions.coffee'
 
 changeModal = (name) ->
     if !name
@@ -13,8 +15,7 @@ changeModal = (name) ->
 
 onTilesChange = ->
     info = TileStore.getInfo()
-    if info.win or info.loss
-        ModalActions.toggle 'newGame'
+
 
     TileStore.emitChange()
 

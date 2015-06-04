@@ -1,4 +1,3 @@
-Dispatcher = require '../Dispatcher.coffee'
 TileStore = require '../stores/TileStore.coffee'
 ModalStore = require '../stores/ModalStore.coffee'
 
@@ -12,6 +11,9 @@ ModalOverlayComponent = require './modals/ModalOverlayComponent.coffee'
 assign = require 'object-assign'
 
 R = React.DOM
+
+queue = (fn) ->
+    setTimeout fn, 0
 
 getState = ->
     return assign {},
@@ -40,6 +42,9 @@ Game = React.createClass
 
     _onTileStoreChange: ->
         tilesState = getTileStoreState()
+        if tilesState.info.win or tilesState.info.loss
+            queue -> ModalActions.toggle 'newGame'
+
         @setState tilesState
 
     _onModalStoreChange: ->

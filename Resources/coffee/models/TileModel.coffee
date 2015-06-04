@@ -32,6 +32,9 @@ module.exports =
                 @model.uid = String(attrs.x) + '-' + String(attrs.y)
             @
 
+        getAdjacentTiles: ->
+            adjacentTiles
+
         toggleFlag: ->
             @model.isFlagged = !@model.isFlagged
             @
@@ -41,5 +44,3 @@ module.exports =
             @model.isFlagged = false
             @
 
-        getAdjacentTiles: ->
-            adjacentTiles
