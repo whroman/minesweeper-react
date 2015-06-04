@@ -44,13 +44,14 @@ Tile = React.createClass
 
     hasZeroAdjacentMines: ->
         @props.tile.model.adjacentMines is 0 and
-        !@hasMine()
-        # @hasBeenCleared()
+        # !@hasMine()
+        @hasBeenCleared()
 
     getText: ->
-        return @props.tile.model.x + '' + @props.tile.model.y
-        text = @props.tile.model.adjacentMines
-        if @hasBeenFlagged()
+        text = ''
+        if @hasBeenCleared()
+            text = @props.tile.model.adjacentMines
+        else if @hasBeenFlagged()
             text = '?'
         else if @shouldDisplayMine()
             text = 'X'
@@ -63,7 +64,7 @@ Tile = React.createClass
             if @hasBeenCleared() then 'clear'
             if @hasBeenFlagged() then 'flagged'
             if @shouldDisplayMine() then 'mine'
-            if @hasZeroAdjacentMines() then 'clear zero'
+            if @hasZeroAdjacentMines() then 'zero'
 
         ].join(' ')
 

@@ -3,7 +3,7 @@ EventEmitter = require('events').EventEmitter
 assign = require 'object-assign'
 
 Tiles = new TilesCollection()
-Tiles.newGame 4, 7, 5
+Tiles.newGame 10, 10, 25
 
 window.foo = Tiles
 

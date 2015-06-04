@@ -38,7 +38,7 @@ AppDispatcher.register (event) ->
                 onTilesChange()
 
         when 'TILES_NEW_GAME'
-            TileStore.newGame 8, 4, 10
+            TileStore.newGame 10, 10, 25
             onTilesChange()
             changeModal 'newGame'
 

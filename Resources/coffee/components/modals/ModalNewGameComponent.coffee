@@ -44,7 +44,7 @@ ModalOverlay = React.createClass
                 key: 'new-game-resume'
                 className: 'button'
                 onClick: @clickHandlerExitModal
-            }, 'resume!'
+            }, 'resume...'
 
         R.div key: 'new-game-buttons', buttons
 
