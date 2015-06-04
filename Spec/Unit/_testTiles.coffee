@@ -3,12 +3,15 @@ module.exports = [
         attrs:
             x: 0
             y: 0
-
-        expectedUid: '0-0'
+            adjacentMines: 0
 
         event:
             shiftKey: false
             altKey: true
+
+        expected:
+            uid: '0-0'
+            text: ''
     },
     {
         attrs:
@@ -23,7 +26,10 @@ module.exports = [
             shiftKey: true
             altKey: false
 
-        expectedUid: '10-1'
+        expected:
+            uid: '10-1'
+            text: 'X'
+
     },
     {
         attrs:
@@ -38,7 +44,9 @@ module.exports = [
             shiftKey: false
             altKey: false
 
-        expectedUid: '1-11'
+        expected:
+            uid: '1-11'
+            text: '?'
     },
     {
         attrs:
@@ -53,6 +61,8 @@ module.exports = [
             shiftKey: true
             altKey: true
 
-        expectedUid: '11-11'
+        expected:
+            uid: '11-11'
+            text: '4'
     },
 ]

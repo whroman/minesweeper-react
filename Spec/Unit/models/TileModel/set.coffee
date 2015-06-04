@@ -1,7 +1,7 @@
 jest.autoMockOff()
 
 TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
-tests = require './_tests.coffee'
+tests = require process.cwd() + '/Spec/Unit/_testTiles.coffee'
 
 describe 'TileModel.set', ->
 
@@ -18,4 +18,4 @@ describe 'TileModel.set', ->
             tile = new TileModel(test.attrs)
 
             expect tile.model.uid
-                .toBe(test.expectedUid)
+                .toBe(test.expected.uid)

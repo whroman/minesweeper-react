@@ -1,5 +1,6 @@
 TileActions = require '../actions/TileActions.coffee'
 
+React = require 'react/addons'
 R = React.DOM
 
 Tile = React.createClass
@@ -26,17 +27,17 @@ Tile = React.createClass
             return TileActions.clear @props.tile.model.uid
 
     isFirstColumn: ->
-        this.props.tile.model.x is 0
+        @props.tile.model.x is 0
 
     hasBeenFlagged: ->
-        this.props.tile.model.isClear isnt true and
-        this.props.tile.model.isFlagged is true
+        @props.tile.model.isClear isnt true and
+        @props.tile.model.isFlagged is true
 
     hasBeenCleared: ->
-        this.props.tile.model.isClear is true
+        @props.tile.model.isClear is true
 
     hasMine: ->
-        this.props.tile.model.isMine is true
+        @props.tile.model.isMine is true
 
     shouldDisplayMine: ->
         @hasBeenCleared() and
@@ -50,12 +51,13 @@ Tile = React.createClass
     getText: ->
         text = ''
         # if true
-        if @hasBeenCleared()
+        if @shouldDisplayMine()
+            text = 'X'
+        else if @hasBeenCleared()
             text = @props.tile.model.adjacentMines
         else if @hasBeenFlagged()
             text = '?'
-        else if @shouldDisplayMine()
-            text = 'X'
+
         text
 
     getClass: ->
