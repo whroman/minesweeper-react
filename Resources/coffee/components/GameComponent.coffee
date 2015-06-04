@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 TileStore = require '../stores/TileStore.coffee'
 ModalStore = require '../stores/ModalStore.coffee'
 
@@ -12,8 +14,7 @@ assign = require 'object-assign'
 
 R = React.DOM
 
-queue = (fn) ->
-    setTimeout fn, 0
+queue = (fn) -> setTimeout fn, 0
 
 getState = ->
     return assign {},

@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 ModalActions = require '../../actions/ModalActions.coffee'
 InstructionsComponent = require './ModalInstructionsComponent.coffee'
 NewGameComponent = require './ModalNewGameComponent.coffee'

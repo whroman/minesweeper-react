@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 ModalActions = require '../actions/ModalActions.coffee'
 TilesActions = require '../actions/TilesActions.coffee'
 

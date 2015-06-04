@@ -1,6 +1,7 @@
-ModalActions = require '../../actions/ModalActions.coffee'
-
+React = require 'react/addons'
 R = React.DOM
+
+ModalActions = require '../../actions/ModalActions.coffee'
 
 ModalOverlay = React.createClass
     displayName: 'ModalInstructions'

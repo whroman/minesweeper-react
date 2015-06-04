@@ -14,9 +14,7 @@ changeModal = (name) ->
     ModalStore.emitChange()
 
 onTilesChange = ->
-    info = TileStore.getInfo()
-
-
+    TileStore.getInfo()
     TileStore.emitChange()
 
 
@@ -28,7 +26,8 @@ AppDispatcher.register (event) ->
             onTilesChange()
 
         when 'TILE_CLEAR'
-            tile = TileStore.get uid:event.uid
+            attrs = uid: event.uid
+            tile = TileStore.get attrs
             tile.clear()
             onTilesChange()
 

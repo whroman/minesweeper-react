@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 GameComponent = require './components/GameComponent.coffee'
 
 ViewController = React.createElement GameComponent, null

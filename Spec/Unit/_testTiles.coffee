@@ -15,7 +15,7 @@ module.exports = [
     },
     {
         attrs:
-            x: 10
+            x: 9
             y: 1
             isMine: true
             isClear: true
@@ -27,14 +27,14 @@ module.exports = [
             altKey: false
 
         expected:
-            uid: '10-1'
+            uid: '9-1'
             text: 'X'
 
     },
     {
         attrs:
             x: 1
-            y: 11
+            y: 9
             isMine: false
             isClear: false
             isFlagged: true
@@ -45,13 +45,13 @@ module.exports = [
             altKey: false
 
         expected:
-            uid: '1-11'
+            uid: '1-9'
             text: '?'
     },
     {
         attrs:
-            x: 11
-            y: 11
+            x: 9
+            y: 9
             isMine: false
             isClear: true
             isFlagged: false
@@ -62,7 +62,7 @@ module.exports = [
             altKey: true
 
         expected:
-            uid: '11-11'
+            uid: '9-9'
             text: '4'
     },
 ]

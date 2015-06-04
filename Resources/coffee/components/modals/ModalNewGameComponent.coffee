@@ -1,7 +1,8 @@
+React = require 'react/addons'
+R = React.DOM
+
 ModalActions = require '../../actions/ModalActions.coffee'
 TilesActions = require '../../actions/TilesActions.coffee'
-
-R = React.DOM
 
 ModalOverlay = React.createClass
     displayName: 'ModalNewGame'
@@ -36,7 +37,7 @@ ModalOverlay = React.createClass
                 key: 'new-game-start'
                 className: 'button'
                 onClick: @clickHandlerNewGame
-            }, 'start!'
+            }, 'restart!'
         ]
 
         if !@props.loss

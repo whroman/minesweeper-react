@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 R = React.DOM
 
 Info = React.createClass

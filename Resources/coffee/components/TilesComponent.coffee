@@ -1,3 +1,5 @@
+React = require 'react/addons'
+
 TileComponent = require './TileComponent.coffee'
 
 R = React.DOM
