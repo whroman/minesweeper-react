@@ -1,7 +1,7 @@
 jest.autoMockOff()
 
-TileModel = require './../../../../Resources/coffee/models/TileModel.coffee'
-tests = require './testStubs.coffee'
+TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
+tests = require './_tests.coffee'
 
 describe 'TileModel.toggleFlag', ->
     it 'should toggle `.model.isFlagged`', ->

@@ -1,7 +1,7 @@
 jest.autoMockOff()
 
-TileModel = require './../../../../Resources/coffee/models/TileModel.coffee'
-tests = require './testStubs.coffee'
+TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
+tests = require './_tests.coffee'
 
 describe 'TileModel.clear', ->
     it 'should set `.model.isClear` to `true` and `.model.isFlagged` to `false`', ->

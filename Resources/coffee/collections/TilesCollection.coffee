@@ -18,8 +18,8 @@ class TilesCollection
 
     newGame: (x, y, mines) ->
         @reset()
-        @sizeY = x
-        @sizeX = y
+        @sizeX = x
+        @sizeY = y
         @numOfMines = mines
 
         for y in [0..@sizeY - 1]
@@ -51,8 +51,6 @@ class TilesCollection
         tile = new @model model
         @all.push tile
         tile
-
-    handleTileClick: (event, index) ->
 
     reset: ->
         @all = []

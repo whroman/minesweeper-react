@@ -48,6 +48,7 @@ Tile = React.createClass
         # @hasBeenCleared()
 
     getText: ->
+        return @props.tile.model.x + '' + @props.tile.model.y
         text = @props.tile.model.adjacentMines
         if @hasBeenFlagged()
             text = '?'

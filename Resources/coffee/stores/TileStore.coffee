@@ -5,6 +5,8 @@ assign = require 'object-assign'
 Tiles = new TilesCollection()
 Tiles.newGame 4, 7, 5
 
+window.foo = Tiles
+
 TileStore = assign {}, EventEmitter.prototype,
     event: 'change'
 
