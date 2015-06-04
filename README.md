@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/whroman/minesweeper-react.svg?branch=master)](https://travis-ci.org/whroman/minesweeper-react)
 
-# Minesweeper React
+# [Minesweeper React](http://whroman.github.io/minesweeper-react/)
 
 A single-page Minesweeper app built using:
 
@@ -10,6 +10,8 @@ A single-page Minesweeper app built using:
 * [Gulp](http://gulpjs.com/)
 * [Jest](https://facebook.github.io/jest/)
 
+View live [here](http://whroman.github.io/minesweeper-react/).
+
 ##Application
 
 ### Requirements
@@ -17,10 +19,6 @@ To work on the front-end code of the application, you'll need to have the follow
 
 * [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
 * [Gulp](http://gulpjs.com/): Run `[sudo] npm install -g gulp`
-* [Sass](http://sass-lang.com/install): Run `[sudo] gem install sass`. V 3.3 or higher is required (due to sourcemap support)
-
-
-\* Only necessary if user wants to add third-party libraries/frameworks to project
 
 ## Tasks
 
