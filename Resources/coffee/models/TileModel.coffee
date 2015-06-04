@@ -7,6 +7,11 @@ Number.isInteger = Number.isInteger or (value) ->
 
 module.exports =
     class TileModel
+        adjacentTiles = [
+            [-1, -1], [ 0, -1], [ 1, -1],
+            [-1,  0],           [ 1,  0],
+            [-1,  1], [ 0,  1], [ 1,  1],
+        ]
         constructor: (attrs) ->
             if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)
                 throw "`x` and `y` are required Integer attributes to instantiate Tile"
@@ -18,12 +23,6 @@ module.exports =
                 isClear : false
                 isFlagged : false
                 adjacentMines : 0
-
-            @adjacentTiles = [
-                [-1, -1], [ 0, -1], [ 1, -1],
-                [-1,  0],           [ 1,  0],
-                [-1,  1], [ 0,  1], [ 1,  1],
-            ]
 
             @set attrs
 
@@ -41,3 +40,6 @@ module.exports =
             @model.isClear = true
             @model.isFlagged = false
             @
+
+        getAdjacentTiles: ->
+            adjacentTiles

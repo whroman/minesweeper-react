@@ -68,7 +68,7 @@ class TilesCollection
     tallyMines : () ->
         for tile in @all
             neighborMines = 0
-            for adjacentTile in tile.adjacentTiles
+            for adjacentTile in tile.getAdjacentTiles()
                 neighborX = tile.model.x + adjacentTile[0]
                 neighborY = tile.model.y + adjacentTile[1]
                 neighborAttrs = {
@@ -126,7 +126,7 @@ class TilesCollection
     clearNeighbors : (tile) ->
         shouldClearNeighbors = tile.model.adjacentMines is 0 and tile.model.isMine is false
         if shouldClearNeighbors
-            for adjacentTile in tile.adjacentTiles
+            for adjacentTile in tile.getAdjacentTiles()
                 neighbor = @get(
                     x : tile.model.x + adjacentTile[0]
                     y : tile.model.y + adjacentTile[1]
