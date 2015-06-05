@@ -1,4 +1,4 @@
-Dispatcher = require('Flux').Dispatcher
+Dispatcher = (require 'flux' || require 'Flux').Dispatcher
 AppDispatcher = new Dispatcher()
 
 TileStore = require './stores/TileStore.coffee'
