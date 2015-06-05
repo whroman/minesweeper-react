@@ -18,12 +18,12 @@ class TilesCollection
 
     newGame: (x, y, mines) ->
         @reset()
-        @sizeX = x
-        @sizeY = y
+        @x = x
+        @y = y
         @numOfMines = mines
 
-        for y in [0..@sizeY - 1]
-            for x in [0..@sizeX - 1]
+        for y in [0..@y - 1]
+            for x in [0..@x - 1]
                 attrs = {
                     x   : x
                     y   : y
@@ -82,17 +82,6 @@ class TilesCollection
             tile.model.adjacentMines = neighborMines
 
     gameUpdate : ->
-        @x = Math.max.apply @, @all.map (tile) ->
-            tile.model.x
-
-        @y = Math.max.apply @, @all.map (tile) ->
-            tile.model.y
-
-        # Offset by 1 to account for 0 index
-        @x = @x--
-        @y = @y--
-
-
         @numOfMines = 0
         for tile in @all
             if tile.model.isMine is true
@@ -108,19 +97,19 @@ class TilesCollection
 
         for tile in @all
             # Cleared Tiles
-            if tile.model.isClear == true
+            if tile.model.isClear is true
                 @numOfClears++
 
             # Flagged Tiles
-            if tile.model.isFlagged == true
+            if tile.model.isFlagged is true
                 @numOfFlags++
 
             # Check Game Loss
-            if tile.model.isMine == true && tile.model.isClear == true
+            if tile.model.isMine is true && tile.model.isClear is true
                 @loss = true
 
         # Check Game Win
-        if @loss == false && @all.length - @numOfMines - @numOfClears == 0
+        if @loss is false && @all.length - @numOfMines - @numOfClears is 0
             @win = true
 
     clearNeighbors : (tile) ->

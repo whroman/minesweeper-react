@@ -38,7 +38,7 @@ tests = [
 ]
 
 describe 'TilesCollection.add(tileAttrs)', ->
-    it 'add a tiles to `.all` with the correct attributes', ->
+    it 'should add a tiles to `.all` with the correct attributes', ->
         for test in tests
             Tiles = new TilesCollection()
             tile = Tiles.add test
