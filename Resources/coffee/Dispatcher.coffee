@@ -1,3 +1,4 @@
+# TravisCI requires "flux", but local env requires "Flux"
 Dispatcher = (require 'flux' || require 'Flux').Dispatcher
 AppDispatcher = new Dispatcher()
 
