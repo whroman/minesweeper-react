@@ -10,9 +10,10 @@ ModalOverlay = React.createClass
     displayName: 'ModalOverlay'
 
     getClass: ->
-        if @props.modals.newGame
+        console.log @props.modals
+        if @props.modals and @props.modals.newGame
             return ''
-        else if @props.modals.instructions
+        else if @props.modals and @props.modals.instructions
             return ''
         return 'hide'
 
@@ -24,25 +25,26 @@ ModalOverlay = React.createClass
         ModalActions.toggle 'instructions'
 
     render: ->
-        overlay = R.div {
-                id: 'overlay'
-                key: 'overlay'
-                className: @getClass()
-                onClick: @resetHandler
-            }, null
+        if @props.modals
+            overlay = R.div {
+                    id: 'overlay'
+                    key: 'overlay'
+                    className: @getClass()
+                    onClick: @resetHandler
+                }, null
 
-        R.div null, [
-            overlay
-            React.createElement InstructionsComponent, {
-                key: 'modal-instructions'
-                show: @props.modals.instructions
-            }
-            React.createElement NewGameComponent, {
-                key: 'modal-new-game'
-                show: @props.modals.newGame
-                win: @props.info.win
-                loss: @props.info.loss
-            }
-        ]
+            R.div null, [
+                overlay
+                React.createElement InstructionsComponent, {
+                    key: 'modal-instructions'
+                    show: @props.modals.instructions
+                }
+                React.createElement NewGameComponent, {
+                    key: 'modal-new-game'
+                    show: @props.modals.newGame
+                    win: @props.info.win
+                    loss: @props.info.loss
+                }
+            ]
 
 module.exports = ModalOverlay

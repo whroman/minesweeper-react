@@ -8,13 +8,16 @@ Tiles = React.createClass
     displayName: 'Tiles'
 
     render: ->
-        tiles = @props.tiles.map (item, index) =>
-            React.createElement TileComponent, {
-                key: index
-                ref: item.model.uid
-                tile: item
-            }
+        console.log @props.tiles
+        # console.log @props.tiles.value
+        if @props.tiles.value
+            tiles = @props.tiles.value.map (item, index) =>
+                React.createElement TileComponent, {
+                    key: index
+                    ref: item.model.uid
+                    tile: item
+                }
 
-        R.ul id:'board', tiles
+            R.ul id:'board', tiles
 
 module.exports = Tiles

@@ -1,26 +1,43 @@
+Reflux = require 'reflux'
+
+TilesActions = require '../actions/TilesActions.coffee'
+ModalActions = require '../actions/ModalActions.coffee'
+
 TilesCollection = require '../collections/TilesCollection.coffee'
-EventEmitter = require('events').EventEmitter
-assign = require 'object-assign'
 
 Tiles = new TilesCollection()
 Tiles.newGame 10, 10, 25
 
-TileStore = assign {}, EventEmitter.prototype,
-    event: 'change'
+changeModal = (name) ->
+    if !name
+        ModalActions.reset()
+    else
+        ModalActions.toggle name
+
+onTilesChange = ->
+    TileStore.getInfo()
+
+TileStore = Reflux.createStore
+    listenables: [TilesActions]
+
+    all: []
+
+    info: {}
 
     get: (attrs) ->
         Tiles.get attrs
 
     getAll: ->
-        Tiles.getAll()
+        @all = Tiles.getAll()
 
     getInfo: ->
-        win: Tiles.win
-        loss: Tiles.loss
-        numOfTiles: Tiles.all.length
-        numOfMines: Tiles.numOfMines
-        numOfFlags: Tiles.numOfFlags
-        numOfUncleared: Tiles.all.length - Tiles.numOfMines - Tiles.numOfClears
+        @info =
+            win: Tiles.win
+            loss: Tiles.loss
+            numOfTiles: Tiles.all.length
+            numOfMines: Tiles.numOfMines
+            numOfFlags: Tiles.numOfFlags
+            numOfUncleared: Tiles.all.length - Tiles.numOfMines - Tiles.numOfClears
 
     randomSafeTile: ->
         Tiles.randomSafeTile()
@@ -28,15 +45,34 @@ TileStore = assign {}, EventEmitter.prototype,
     newGame: (x, y, mines) ->
         Tiles.newGame x, y, mines
 
-    emitChange: ->
-        @emit @event
+        # asdf
 
-    # To be called upon mounting a given component
-    addChangeListener: (callback) ->
-        @on @event, callback
+    onClearSafeRandomTile: ->
+        tile = @randomSafeTile()
+        if tile
+            tile.clear()
+            onTilesChange()
 
-    # To be called upon dismounting a given component
-    removeChangeListener: (callback) ->
-        @removeListener @event, callback
+        @trigger @getAll()
+
+    onNewGame: ->
+        @newGame 10, 10, 25
+        onTilesChange()
+        changeModal 'newGame'
+        @trigger @getAll()
+
+    onTileFlagToggle: (uid) ->
+        tile = @get uid: uid
+        tile.toggleFlag()
+        onTilesChange()
+        @trigger @getAll()
+
+    onTileClear: (uid) ->
+        console.log uid
+        attrs = uid: uid
+        tile = @get attrs
+        tile.clear()
+        onTilesChange()
+        @trigger @getAll()
 
 module.exports = TileStore

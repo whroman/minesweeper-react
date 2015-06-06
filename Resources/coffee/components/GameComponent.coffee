@@ -1,4 +1,5 @@
 React = require 'react/addons'
+Reflux = require 'reflux'
 
 TileStore = require '../stores/TileStore.coffee'
 ModalStore = require '../stores/ModalStore.coffee'
@@ -16,49 +17,56 @@ R = React.DOM
 
 queue = (fn) -> setTimeout fn, 0
 
-getState = ->
-    return assign {},
-        getTileStoreState(),
-        getModalStoreState()
+# getState = ->
+#     return assign {},
+#         getTileStoreState(),
+#         getModalStoreState()
 
-getTileStoreState = ->
-    all: TileStore.getAll()
-    info: TileStore.getInfo()
+# # getTileStoreState = ->
+#     all: TileStore.getAll()
+#     info: TileStore.getInfo()
 
-getModalStoreState = ->
-    modals: ModalStore.getAll()
+# getModalStoreState = ->
+#     modals: ModalStore.getAll()
 
-Game = React.createClass
+window.Game = Game = React.createClass
     displayName: 'Game'
+    mixins: [
+        mixins: [React.addons.LinkedStateMixin] # exposes this.linkState used in render
+        Reflux.connect(TileStore,"all")
+        Reflux.connect(TileStore,"info")
+        Reflux.connect(ModalStore,"modals")
+    ]
     getInitialState: ->
-        getState()
+        all: []
+        info: {}
+        modals: {}
 
-    componentDidMount: ->
-        TileStore.addChangeListener @_onTileStoreChange
-        ModalStore.addChangeListener @_onModalStoreChange
+    # componentDidMount: ->
+    #     TileStore.addChangeListener @_onTileStoreChange
+    #     ModalStore.addChangeListener @_onModalStoreChange
 
-    componentWillUnmount: ->
-        TileStore.removeChangeListener @_onTileStoreChange
-        ModalStore.removeChangeListener @_onModalStoreChange
+    # componentWillUnmount: ->
+    #     TileStore.removeChangeListener @_onTileStoreChange
+    #     ModalStore.removeChangeListener @_onModalStoreChange
 
     _onTileStoreChange: ->
-        tilesState = getTileStoreState()
-        if tilesState.info.win or tilesState.info.loss
+        # tilesState = getTileStoreState()
+        if @state.info.win or @state.info.loss
             queue -> ModalActions.toggle 'newGame'
 
-        @setState tilesState
-
     _onModalStoreChange: ->
-        @setState getModalStoreState()
+        # @setState getModalStoreState()
 
     render: ->
+        parent = this
         info = React.createElement InfoComponent,
             key: 'info'
-            info: @state.info
+            info: parent.linkState('info')
 
         tiles = React.createElement TilesComponent,
                 key: 'tiles'
-                tiles: @state.all
+                tiles: parent.linkState('all')
 
         boardWrappper = R.div {
             id:'board-wrappper'
@@ -73,8 +81,8 @@ Game = React.createClass
 
         overlays = React.createElement ModalOverlayComponent,
             key: 'modal-overlay'
-            info: @state.info
-            modals: @state.modals
+            info: parent.linkState('info')
+            modals: parent.linkState('modals')
 
         R.div null, [
             overlays

@@ -6,18 +6,6 @@ TileStore = require './stores/TileStore.coffee'
 ModalStore = require './stores/ModalStore.coffee'
 ModalActions = require './actions/ModalActions.coffee'
 
-changeModal = (name) ->
-    if !name
-        ModalStore.reset()
-    else
-        ModalStore.toggle name
-
-    ModalStore.emitChange()
-
-onTilesChange = ->
-    TileStore.getInfo()
-    TileStore.emitChange()
-
 
 AppDispatcher.register (event) ->
     switch event.type

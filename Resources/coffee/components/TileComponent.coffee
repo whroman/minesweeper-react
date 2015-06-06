@@ -1,4 +1,4 @@
-TileActions = require '../actions/TileActions.coffee'
+TilesActions = require '../actions/TilesActions.coffee'
 
 React = require 'react/addons'
 R = React.DOM
@@ -14,7 +14,8 @@ Tile = React.createClass
 
     clickHandler: ($event) ->
         if !$event
-            return TileActions.clear @props.tile.model.uid
+            console.log TilesActions
+            return TilesActions.tileClear @props.tile.model.uid
 
         flagKeyWasPressed = (
             $event.shiftKey is true or
@@ -22,9 +23,9 @@ Tile = React.createClass
         )
 
         if flagKeyWasPressed
-            return TileActions.toggleFlag @props.tile.model.uid
+            return TilesActions.tileToggleFlag @props.tile.model.uid
         else
-            return TileActions.clear @props.tile.model.uid
+            return TilesActions.tileClear @props.tile.model.uid
 
     isFirstColumn: ->
         @props.tile.model.x is 0

@@ -1,10 +1,8 @@
-Dispatcher = require '../Dispatcher.coffee'
+Reflux = require 'reflux'
 
-module.exports =
-    clearSafeRandomTile: ->
-        Dispatcher.dispatch
-            type: 'TILES_CLEAR_SAFE_RANDOM'
-
-    newGame: ->
-        Dispatcher.dispatch
-            type: 'TILES_NEW_GAME'
+module.exports = Reflux.createActions [
+    "clearSafeRandomTile"
+    "newGame"
+    "tileToggleFlag"
+    "tileClear"
+]
