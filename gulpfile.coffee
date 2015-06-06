@@ -40,7 +40,6 @@ gulp.task 'js:coffee', ['js:clean'], ->
     b = browserify(
         entries: [
             paths.coffee.src
-            paths.npm + 'flux/index.js'
         ]
         debug: true
         paths: paths.npm
