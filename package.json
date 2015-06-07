@@ -23,9 +23,9 @@
     "vinyl-source-stream": "1.1.0"
   },
   "dependencies": {
-    "flux": "2.0.3",
     "object-assign": "2.0.0",
-    "react": "0.13.3"
+    "react": "0.13.3",
+    "reflux": "0.2.7"
   },
   "scripts": {
     "test": "jest"
