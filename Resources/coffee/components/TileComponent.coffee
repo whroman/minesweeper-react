@@ -14,7 +14,6 @@ Tile = React.createClass
 
     clickHandler: ($event) ->
         if !$event
-            console.log TilesActions
             return TilesActions.tileClear @props.tile.model.uid
 
         flagKeyWasPressed = (

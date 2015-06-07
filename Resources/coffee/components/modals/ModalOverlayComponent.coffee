@@ -10,7 +10,6 @@ ModalOverlay = React.createClass
     displayName: 'ModalOverlay'
 
     getClass: ->
-        console.log @props.modals
         if @props.modals and @props.modals.newGame
             return ''
         else if @props.modals and @props.modals.instructions

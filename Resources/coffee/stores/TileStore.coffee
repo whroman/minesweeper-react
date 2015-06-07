@@ -1,4 +1,5 @@
 Reflux = require 'reflux'
+assign = require 'object-assign'
 
 TilesActions = require '../actions/TilesActions.coffee'
 ModalActions = require '../actions/ModalActions.coffee'
@@ -8,19 +9,8 @@ TilesCollection = require '../collections/TilesCollection.coffee'
 Tiles = new TilesCollection()
 Tiles.newGame 10, 10, 25
 
-changeModal = (name) ->
-    if !name
-        ModalActions.reset()
-    else
-        ModalActions.toggle name
-
-    TileStore.getInfo()
-
-TileStore = Reflux.createStore
-    listenables: [TilesActions]
-
+store =
     all: []
-
     info: {}
 
     get: (attrs) ->
@@ -44,7 +34,8 @@ TileStore = Reflux.createStore
     newGame: (x, y, mines) ->
         Tiles.newGame x, y, mines
 
-        # asdf
+handlers =
+    listenables: [TilesActions]
 
     onClearSafeRandomTile: ->
         tile = @randomSafeTile()
@@ -54,7 +45,7 @@ TileStore = Reflux.createStore
 
     onNewGame: ->
         @newGame 10, 10, 25
-        changeModal 'newGame'
+        ModalActions.change 'newGame'
         @update()
 
     onTileFlagToggle: (uid) ->
@@ -63,7 +54,6 @@ TileStore = Reflux.createStore
         @update()
 
     onTileClear: (uid) ->
-        console.log uid
         attrs = uid: uid
         tile = @get attrs
         tile.clear()
@@ -73,5 +63,8 @@ TileStore = Reflux.createStore
         @trigger
             all: @getAll()
             info: @getInfo()
+
+TileStore = Reflux.createStore assign {}, store, handlers
+        # asdf
 
 module.exports = TileStore

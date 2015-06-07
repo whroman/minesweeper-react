@@ -8,8 +8,6 @@ Tiles = React.createClass
     displayName: 'Tiles'
 
     render: ->
-        console.log @props.tiles
-        # console.log @props.tiles.value
         tiles = []
         if @props.tiles
             tiles = @props.tiles.map (item, index) =>

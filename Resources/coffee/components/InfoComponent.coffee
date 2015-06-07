@@ -6,7 +6,6 @@ Info = React.createClass
     displayName: 'Info'
 
     render: ->
-        console.log @props.info
         components = []
 
         if @props.info

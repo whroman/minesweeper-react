@@ -1,20 +1,17 @@
 Reflux = require 'reflux'
+assign = require 'object-assign'
 
 ModalActions = require '../actions/ModalActions.coffee'
 ModalsCollection = require '../collections/ModalsCollection.coffee'
-EventEmitter = require('events').EventEmitter
-assign = require 'object-assign'
 
 Modals = new ModalsCollection()
 Modals.set 'newGame'
 Modals.set 'instructions'
 
-ModalStore = Reflux.createStore
-
-    all: {}
+store =
+    modals: {}
 
     getAll: ->
-        Modals.show
         @modals = Modals.show
 
     reset: ->
@@ -23,13 +20,28 @@ ModalStore = Reflux.createStore
     toggle: (modalName) ->
         Modals.toggle modalName
 
-    # 
+handlers =
     listenables: [ModalActions]
 
     onToggle: (name) ->
         ModalStore.toggle name
+        @update()
 
     onReset: ->
-        changeModal()
+        @onChange()
+        @update()
+
+    onChange: (name) ->
+        if !name
+            ModalStore.reset()
+            return
+        ModalStore.toggle name
+        @update()
+
+    update: ->
+        @trigger @getAll()
+
+
+ModalStore = Reflux.createStore assign {}, store, handlers
 
 module.exports = ModalStore

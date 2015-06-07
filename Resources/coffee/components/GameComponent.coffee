@@ -46,27 +46,9 @@ window.Game = Game = React.createClass
 
     componentDidMount: ->
         TileStore.update()
-    #     TileStore.addChangeListener @_onTileStoreChange
-    #     ModalStore.addChangeListener @_onModalStoreChange
-
-    # componentWillUnmount: ->
-    #     TileStore.removeChangeListener @_onTileStoreChange
-    #     ModalStore.removeChangeListener @_onModalStoreChange
-
-    # _onTileStoreChange: ->
-        # tilesState = getTileStoreState()
-        # if @state.info.win or @state.info.loss
-            # queue -> ModalActions.toggle 'newGame'
-
-    # _onModalStoreChange: ->
-        # @setState getModalStoreState()
 
     render: ->
         parent = this
-        console.log parent.linkState('tiles').value.info
-
-        window.foo = ->
-            parent.linkState 'tiles'
 
         info = React.createElement InfoComponent,
             key: 'info'
