@@ -48,7 +48,7 @@ handlers =
         ModalActions.change 'newGame'
         @update()
 
-    onTileFlagToggle: (uid) ->
+    onTileToggleFlag: (uid) ->
         tile = @get uid: uid
         tile.toggleFlag()
         @update()
@@ -65,6 +65,5 @@ handlers =
             info: @getInfo()
 
 TileStore = Reflux.createStore assign {}, store, handlers
-        # asdf
 
 module.exports = TileStore

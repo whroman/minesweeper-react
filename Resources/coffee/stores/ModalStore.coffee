@@ -9,10 +9,10 @@ Modals.set 'newGame'
 Modals.set 'instructions'
 
 store =
-    modals: {}
+    show: {}
 
     getAll: ->
-        @modals = Modals.show
+        @show = Modals.show
 
     reset: ->
         Modals.reset()

@@ -17,18 +17,6 @@ R = React.DOM
 
 queue = (fn) -> setTimeout fn, 0
 
-# getState = ->
-#     return assign {},
-#         getTileStoreState(),
-#         getModalStoreState()
-
-# # getTileStoreState = ->
-#     all: TileStore.getAll()
-#     info: TileStore.getInfo()
-
-# getModalStoreState = ->
-#     modals: ModalStore.getAll()
-
 window.Game = Game = React.createClass
     displayName: 'Game'
     mixins: [
@@ -46,6 +34,7 @@ window.Game = Game = React.createClass
 
     componentDidMount: ->
         TileStore.update()
+        ModalStore.update()
 
     render: ->
         parent = this
