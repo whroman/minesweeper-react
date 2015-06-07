@@ -14,7 +14,6 @@ changeModal = (name) ->
     else
         ModalActions.toggle name
 
-onTilesChange = ->
     TileStore.getInfo()
 
 TileStore = Reflux.createStore
@@ -51,28 +50,28 @@ TileStore = Reflux.createStore
         tile = @randomSafeTile()
         if tile
             tile.clear()
-            onTilesChange()
-
-        @trigger @getAll()
+            @update()
 
     onNewGame: ->
         @newGame 10, 10, 25
-        onTilesChange()
         changeModal 'newGame'
-        @trigger @getAll()
+        @update()
 
     onTileFlagToggle: (uid) ->
         tile = @get uid: uid
         tile.toggleFlag()
-        onTilesChange()
-        @trigger @getAll()
+        @update()
 
     onTileClear: (uid) ->
         console.log uid
         attrs = uid: uid
         tile = @get attrs
         tile.clear()
-        onTilesChange()
-        @trigger @getAll()
+        @update()
+
+    update: ->
+        @trigger
+            all: @getAll()
+            info: @getInfo()
 
 module.exports = TileStore

@@ -28,7 +28,6 @@ ModalStore = Reflux.createStore
 
     onToggle: (name) ->
         ModalStore.toggle name
-        ModalStore.emitChange()
 
     onReset: ->
         changeModal()

@@ -33,16 +33,19 @@ window.Game = Game = React.createClass
     displayName: 'Game'
     mixins: [
         mixins: [React.addons.LinkedStateMixin] # exposes this.linkState used in render
-        Reflux.connect(TileStore,"all")
-        Reflux.connect(TileStore,"info")
-        Reflux.connect(ModalStore,"modals")
+        Reflux.connect TileStore, "tiles"
+        Reflux.connect ModalStore, "modals"
     ]
     getInitialState: ->
-        all: []
-        info: {}
-        modals: {}
+        tiles:
+            value:
+                all: []
+                info: {}
+        modals:
+            value: {}
 
-    # componentDidMount: ->
+    componentDidMount: ->
+        TileStore.update()
     #     TileStore.addChangeListener @_onTileStoreChange
     #     ModalStore.addChangeListener @_onModalStoreChange
 
@@ -50,23 +53,28 @@ window.Game = Game = React.createClass
     #     TileStore.removeChangeListener @_onTileStoreChange
     #     ModalStore.removeChangeListener @_onModalStoreChange
 
-    _onTileStoreChange: ->
+    # _onTileStoreChange: ->
         # tilesState = getTileStoreState()
-        if @state.info.win or @state.info.loss
-            queue -> ModalActions.toggle 'newGame'
+        # if @state.info.win or @state.info.loss
+            # queue -> ModalActions.toggle 'newGame'
 
-    _onModalStoreChange: ->
+    # _onModalStoreChange: ->
         # @setState getModalStoreState()
 
     render: ->
         parent = this
+        console.log parent.linkState('tiles').value.info
+
+        window.foo = ->
+            parent.linkState 'tiles'
+
         info = React.createElement InfoComponent,
             key: 'info'
-            info: parent.linkState('info')
+            info: parent.linkState('tiles').value.info
 
         tiles = React.createElement TilesComponent,
                 key: 'tiles'
-                tiles: parent.linkState('all')
+                tiles: parent.linkState('tiles').value.all
 
         boardWrappper = R.div {
             id:'board-wrappper'
@@ -81,8 +89,8 @@ window.Game = Game = React.createClass
 
         overlays = React.createElement ModalOverlayComponent,
             key: 'modal-overlay'
-            info: parent.linkState('info')
-            modals: parent.linkState('modals')
+            info: parent.linkState('tiles').value.info
+            modals: parent.linkState('modals').value
 
         R.div null, [
             overlays
