@@ -22,7 +22,7 @@ ModalOverlay = React.createClass
             return 'new game?'
         else if @props.win and !@props.loss
             return 'you won!'
-        else if !@props.win and !@props.win
+        else if !@props.win and @props.loss
             return 'you lost...'
 
     clickHandlerNewGame: ->

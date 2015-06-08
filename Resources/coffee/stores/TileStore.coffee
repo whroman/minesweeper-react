@@ -45,7 +45,7 @@ handlers =
 
     onNewGame: ->
         @newGame 10, 10, 25
-        ModalActions.change 'newGame'
+        ModalActions.change()
         @update()
 
     onTileToggleFlag: (uid) ->
@@ -60,9 +60,13 @@ handlers =
         @update()
 
     update: ->
+        all = @getAll()
+        info = @getInfo()
         @trigger
-            all: @getAll()
-            info: @getInfo()
+            all: all
+            info: info
+        if info.win or info.loss
+            ModalActions.change 'newGame'
 
 TileStore = Reflux.createStore assign {}, store, handlers
 

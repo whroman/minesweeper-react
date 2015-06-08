@@ -39,13 +39,13 @@ ModalOverlay = React.createClass
                     show: @props.modals.instructions
                 }
 
-        if @props.info
-            components.push React.createElement NewGameComponent, {
-                key: 'modal-new-game'
-                show: @props.modals.newGame
-                win: @props.info.win
-                loss: @props.info.loss
-            }
+            if @props.info
+                components.push React.createElement NewGameComponent, {
+                    key: 'modal-new-game'
+                    show: @props.modals.newGame
+                    win: @props.info.win
+                    loss: @props.info.loss
+                }
 
         R.div null, components
 

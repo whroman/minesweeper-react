@@ -8,7 +8,8 @@ Modals = new ModalsCollection()
 Modals.set 'newGame'
 Modals.set 'instructions'
 
-store =
+
+ModalStore = Reflux.createStore #assign {}, store, handlers
     show: {}
 
     getAll: ->
@@ -20,7 +21,6 @@ store =
     toggle: (modalName) ->
         Modals.toggle modalName
 
-handlers =
     listenables: [ModalActions]
 
     onToggle: (name) ->
@@ -34,14 +34,12 @@ handlers =
     onChange: (name) ->
         if !name
             ModalStore.reset()
-            return
-        ModalStore.toggle name
+        else
+            ModalStore.toggle name
         @update()
 
     update: ->
         @trigger @getAll()
 
-
-ModalStore = Reflux.createStore assign {}, store, handlers
 
 module.exports = ModalStore
