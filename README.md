@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/whroman/minesweeper-react.svg?branch=master)](https://travis-ci.org/whroman/minesweeper-react)
+[![Build Status](https://travis-ci.org/whroman/minesweeper-react.svg?branch=master)](https://travis-ci.org/whroman/minesweeper-react) [![Test Coverage](https://codeclimate.com/github/whroman/minesweeper-react/badges/coverage.svg)](https://codeclimate.com/github/whroman/minesweeper-react/coverage)
 
 # [Minesweeper React](http://whroman.github.io/minesweeper-react/)
 
