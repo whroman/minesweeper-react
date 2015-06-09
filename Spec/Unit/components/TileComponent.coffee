@@ -1,6 +1,6 @@
 require 'coffee-script/register'
 assert = require('chai').assert
-require(process.cwd() + '/Spec/testdom')('<html><body></body></html>');
+require(process.cwd() + '/Spec/testDOM')('<html><body></body></html>');
 React = require 'react/addons'
 TestUtils = React.addons.TestUtils
 

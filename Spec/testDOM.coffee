@@ -1,3 +1,5 @@
+require 'coffee-script/register'
+
 module.exports = (markup) ->
     if typeof document isnt 'undefined'
         return
