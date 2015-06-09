@@ -67,6 +67,7 @@ gulp.task 'js:coffee', ['js:clean'], ->
         .on 'error', (err) ->
             console.log 'browserify error:'
             console.log err
+            @emit 'end'
         .pipe vinyl.source 'build.js'
         .pipe vinyl.buffer()
         .pipe gp.sourcemaps.init(loadMaps : true)
@@ -81,24 +82,6 @@ gulp.task 'js:build', ['js:coffee'], ->
         .pipe gp.sourcemaps.write('./maps')
         .pipe gulp.dest paths.build
 
-
-test = ->
-    childProcess = spawn 'npm', ['test']
-
-    print = (data) ->
-        if data
-            console.log String(data)
-
-    childProcess.stdout.on 'data', print
-    childProcess.stderr.on 'data', (data) ->
-        print data
-        childProcess.kill()
-
-gulp.task 'js:test', ['js:build'], test
-
-gulp.task 'test', test
-
-
 gulp.task 'server', ->
     gp.liveServer.static '.', 8890, false
         .start()
@@ -106,10 +89,10 @@ gulp.task 'server', ->
 
 gulp.task 'watch', ->
     gulp.watch paths.scss.watch, options.gulpNoRead, ['sass']
-    gulp.watch [paths.coffee.watch, paths.tests.watch], options.gulpNoRead, ['js:test']
+    gulp.watch [paths.coffee.watch], options.gulpNoRead, ['js:build']
 
 gulp.task 'build', [
-    'js:test'
+    'js:build'
     'sass'
 ]
 

@@ -16,17 +16,9 @@ paths.coffee =
     dest    : paths.build + 'js/'
     watch   : paths.root + 'coffee/**/*.coffee'
 
-paths.tests =
-    watch   : './Spec/Unit/**/*.coffee'
-
 paths.js =
     build   : paths.build + 'build.js'
 
-    libs: [
-        'react/dist/react.js'
-        'react-slider/react-slider.js'
-    ].map (file) -> paths.npm + file
-
-paths.js.all = paths.js.libs.concat(paths.coffee.dest + '**/*.js')
+paths.js.all = [paths.coffee.dest + '**/*.js']
 
 module.exports = paths

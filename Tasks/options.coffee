@@ -5,7 +5,7 @@ options =
         read : false
 
     scss:
-        style : 'compressed'
+        outputStyle : 'compressed'
         sourcemap : true
         noCache : true
 
