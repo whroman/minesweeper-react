@@ -1,10 +1,10 @@
-assert = require('chai').assert
 require 'coffee-script/register'
+assert = require('chai').assert
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
 describe 'TilesCollection.clearNeighbors(tile)', ->
-    it 'should clear all neighbors of given tile if it has 0 neighbors with mines', ->
+    it 'should clear all neighbors if given tile has 0 neighbors with mines', ->
         for test in tests
             # Init
             Tiles = new TilesCollection()
@@ -17,18 +17,28 @@ describe 'TilesCollection.clearNeighbors(tile)', ->
                 Tiles.all[i].isMine = true
 
             # Grab safe tile
-            safeTiles = Tiles.getAll
+            safeTile = Tiles.get
                 adjacentMines: 0
                 isMine: false
 
-            safeTile = safeTiles[0]
-
             if safeTile
-                # Clear safe tile's neighboring tiles
+                # Clear safeTile's neighboring tiles, but not safeTile itself
                 Tiles.clearNeighbors safeTile
+
                 clearedTiles = Tiles.getAll isClear: true
 
-                tileIsOnEdge = (
+                tileIsOnCorner = -> (
+                    safeTile.model.x is 0 and (
+                        safeTile.model.y is 0 or
+                        safeTile.model.y is test.y - 1
+                    ) or
+                    safeTile.model.x is test.x - 1 and (
+                        safeTile.model.y is 0 or
+                        safeTile.model.y is test.y - 1
+                    )
+                )
+
+                tileIsOnEdge = -> (
                     safeTile.model.x is 0 or
                     safeTile.model.y is 0 or
                     safeTile.model.x is test.x - 1 or
@@ -37,7 +47,13 @@ describe 'TilesCollection.clearNeighbors(tile)', ->
 
                 minNumCleared = 9
 
-                if tileIsOnEdge
-                    minNumCleared = 3
+                if tileIsOnCorner()
+                    minNumCleared = 4
+                else if tileIsOnEdge()
+                    minNumCleared = 6
 
-                assert.equal clearedTiles.length >= minNumCleared, true
+                # clearedTiles.length + 2
+                # - One is to simulate isGreaterThan
+                # - One is to offset the fact that safeTile itself is not cleared
+                assert.isAbove clearedTiles.length + 2,
+                    minNumCleared

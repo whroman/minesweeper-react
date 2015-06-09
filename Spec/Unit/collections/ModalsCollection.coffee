@@ -1,5 +1,5 @@
-assert = require('chai').assert
 require 'coffee-script/register'
+assert = require('chai').assert
 ModalsCollection = require process.cwd() + '/Resources/coffee/collections/ModalsCollection.coffee'
 
 describe 'ModalsCollection', ->

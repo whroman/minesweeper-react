@@ -1,5 +1,5 @@
-assert = require('chai').assert
 require 'coffee-script/register'
+assert = require('chai').assert
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 
 tests = [

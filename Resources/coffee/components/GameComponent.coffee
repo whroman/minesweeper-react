@@ -15,8 +15,6 @@ assign = require 'object-assign'
 
 R = React.DOM
 
-queue = (fn) -> setTimeout fn, 0
-
 window.Game = Game = React.createClass
     displayName: 'Game'
     mixins: [

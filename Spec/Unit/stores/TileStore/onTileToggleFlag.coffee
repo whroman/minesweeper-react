@@ -1,5 +1,5 @@
-assert = require('chai').assert
 require 'coffee-script/register'
+assert = require('chai').assert
 freshStores = require './_freshStores'
 
 describe 'TileStore.onTileToggleFlag(uid)', ->

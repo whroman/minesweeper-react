@@ -1,5 +1,5 @@
-assert = require('chai').assert
 require 'coffee-script/register'
+assert = require('chai').assert
 TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
 
 describe 'TileModel instantiation', ->
