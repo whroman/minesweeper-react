@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
@@ -40,5 +40,4 @@ describe 'TilesCollection.clearNeighbors(tile)', ->
                 if tileIsOnEdge
                     minNumCleared = 3
 
-                expect clearedTiles.length >= minNumCleared
-                    .toBe true
+                assert.equal clearedTiles.length >= minNumCleared, true

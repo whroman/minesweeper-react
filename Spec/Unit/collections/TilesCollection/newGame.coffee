@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
@@ -9,8 +9,6 @@ describe 'TilesCollection.newGame(x, y, mines)', ->
             Tiles = new TilesCollection()
             Tiles.newGame test.x, test.y, test.mines
 
-            expect Tiles.all.length
-                .toBe test.x * test.y
+            assert.equal Tiles.all.length, test.x * test.y
 
-            expect Tiles.numOfMines
-                .toBe test.mines
+            assert.equal Tiles.numOfMines, test.mines

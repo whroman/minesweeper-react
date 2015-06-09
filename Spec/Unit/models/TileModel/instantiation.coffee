@@ -1,9 +1,8 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
 
 describe 'TileModel instantiation', ->
     it 'should require `x` and `y` as properties of instantiation argument object', ->
-        expect( ->
+        assert.throw ->
             new TileModel()
-        ).toThrow()

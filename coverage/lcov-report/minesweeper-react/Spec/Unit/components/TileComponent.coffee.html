@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for minesweeper-react/Spec/Unit/components/TileComponent.coffee</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">minesweeper-react/Spec/Unit/components/TileComponent.coffee</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">minesweeper-react/Spec/Unit/components/</a> &#187; TileComponent.coffee</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"># React = require 'react/addons'
+# TestUtils = React.addons.TestUtils
+&nbsp;
+# tests = require process.cwd() + '/Spec/Unit/_testTiles.coffee'
+# queue = (fn) -&gt; setTimeout fn, 0
+&nbsp;
+# TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
+# TileComponent = require process.cwd() + '/Resources/coffee/components/TileComponent.coffee'
+&nbsp;
+# describe 'TileComponent', -&gt;
+#     tiles = []
+&nbsp;
+#     beforeEach -&gt;
+#         for test in tests
+#             model = new TileModel test.attrs
+&nbsp;
+#             tileEl = React.createElement TileComponent, {
+#                     tile: model
+#                 }
+&nbsp;
+#             tileInDom = TestUtils.renderIntoDocument tileEl
+#             component =  TestUtils.findRenderedDOMComponentWithTag tileInDom, 'li'
+#             tiles.push
+#                 mock: test
+#                 component: component
+&nbsp;
+#     it 'should contain correct text after init', -&gt;
+#         for tile in tiles
+#             expect tile.component.getDOMNode().textContent
+#                 .toBe tile.mock.expected.text
+&nbsp;
+#     it 'should contain correct text after being clicked', -&gt;
+#         for tile in tiles
+#             TestUtils.Simulate.click tile.component.getDOMNode(), uid: tile.mock.expected.uid
+&nbsp;
+#             tileIsMine = !!tile.mock.attrs.isMine
+&nbsp;
+#             queue -&gt;
+#                 if tileIsMine
+#                     expect tile.component.getDOMNode().textContent
+#                         .toBe 'X'
+#                 else
+#                     expect tile.component.getDOMNode().textContent
+#                         .toBe String tile.mock.attrs.adjacentMines
+&nbsp;
+#     it 'should contain correct text after being flagged', -&gt;
+#         for tile in tiles
+#             TestUtils.Simulate.click tile.component.getDOMNode(),
+#                 uid: tile.mock.expected.uid
+#                 shiftKey: true
+&nbsp;
+#             queue -&gt;
+#                 expect tile.component.getDOMNode().textContent
+#                     .toBe '?'</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 09 2015 17:06:38 GMT-0500 (CDT)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

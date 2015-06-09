@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TileModel = require process.cwd() + '/Resources/coffee/models/TileModel.coffee'
 tests = require process.cwd() + '/Spec/Unit/_testTiles.coffee'
 
@@ -8,5 +8,4 @@ describe 'TileModel.toggleFlag', ->
         for test in tests
             tile = new TileModel(test.attrs)
             tile.toggleFlag()
-            expect tile.model.isFlagged
-                .toBe(!test.attrs.isFlagged)
+            assert.equal tile.model.isFlagged, !test.attrs.isFlagged

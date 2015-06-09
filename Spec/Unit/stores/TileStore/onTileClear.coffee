@@ -1,4 +1,6 @@
-jest.autoMockOff()
+assert = require('chai').assert
+require 'coffee-script/register'
+
 freshStores = require './_freshStores'
 
 describe 'TileStore.onTileClear(uid)', ->
@@ -10,8 +12,7 @@ describe 'TileStore.onTileClear(uid)', ->
 
             for tileStore in stores
                 expectedMinTilesCleared = tileStore.all.length - tileStore.info.numOfMines - 1
-                expect expectedMinTilesCleared >= tileStore.info.numOfUncleared
-                    .toBe true
+                assert.equal expectedMinTilesCleared >= tileStore.info.numOfUncleared, true
 
         it 'should update after a clear in each corner of board', ->
             stores = freshStores (store, test) ->
@@ -23,8 +24,7 @@ describe 'TileStore.onTileClear(uid)', ->
 
             for tileStore in stores
                 expectedMinTilesCleared = tileStore.all.length - tileStore.info.numOfMines - 4
-                expect expectedMinTilesCleared >= tileStore.info.numOfUncleared
-                    .toBe true
+                assert.equal expectedMinTilesCleared >= tileStore.info.numOfUncleared, true
 
     describe 'updates .loss property of obj returned by Store.getInfo()', ->
         it 'should update if a tile with a mine is cleared', ->
@@ -34,8 +34,7 @@ describe 'TileStore.onTileClear(uid)', ->
                 store
 
             for tileStore in stores
-                expect tileStore.info.loss
-                    .toBe true
+                assert.equal tileStore.info.loss, true
 
     describe 'updates .win property of obj returned by Store.getInfo()', ->
         it 'should update if all tiles without mines are cleared', ->
@@ -46,5 +45,4 @@ describe 'TileStore.onTileClear(uid)', ->
                 store
 
             for tileStore in stores
-                expect tileStore.info.win
-                    .toBe true
+                assert.equal tileStore.info.win, true

@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
@@ -13,8 +13,7 @@ describe 'TilesCollection.noMineFirstClick()', ->
 
             Tiles.noMineFirstClick tileWithMine
 
-            expect tileWithMine.model.isMine
-                .toBe false
+            assert.equal tileWithMine.model.isMine, false
 
     it 'should set a random, clear tile as having a mine', ->
         for test in tests
@@ -26,5 +25,4 @@ describe 'TilesCollection.noMineFirstClick()', ->
             Tiles.noMineFirstClick tileWithMine
 
             # the same amount of mines should exist on the board as did initially
-            expect Tiles.getAll(isMine: true).length
-                .toBe test.mines
+            assert.equal Tiles.getAll(isMine: true).length, test.mines

@@ -1,4 +1,5 @@
-jest.autoMockOff()
+assert = require('chai').assert
+require 'coffee-script/register'
 freshStores = require './_freshStores'
 
 describe 'TileStore.onTileToggleFlag(uid)', ->
@@ -9,8 +10,7 @@ describe 'TileStore.onTileToggleFlag(uid)', ->
                 store
 
             for tileStore in stores
-                expect tileStore.info.numOfFlags
-                    .toBe 1
+                assert.equal tileStore.info.numOfFlags, 1
 
         it 'should update after a flag in each corner of board', ->
             stores = freshStores (store, test) ->
@@ -21,5 +21,4 @@ describe 'TileStore.onTileToggleFlag(uid)', ->
                 store
 
             for tileStore in stores
-                expect tileStore.info.numOfFlags
-                    .toBe 4
+                assert.equal tileStore.info.numOfFlags, 4

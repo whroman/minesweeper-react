@@ -1,0 +1,4 @@
+verbose: true
+instrumentation:
+    extensions:
+        - .coffee

@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
@@ -11,5 +11,4 @@ describe 'TilesCollection.randomSafeTile()', ->
 
             safeTile = Tiles.randomSafeTile()
 
-            expect safeTile.model.isMine
-                .toBe false
+            assert.equal safeTile.model.isMine, false

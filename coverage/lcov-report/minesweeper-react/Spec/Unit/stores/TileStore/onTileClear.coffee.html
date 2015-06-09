@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for minesweeper-react/Spec/Unit/stores/TileStore/onTileClear.coffee</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">minesweeper-react/Spec/Unit/stores/TileStore/onTileClear.coffee</span></h1>
+    <h2>
+        Statements: <span class="metric">0% <small>(0 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">0% <small>(0 / 38)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">minesweeper-react/Spec/Unit/stores/TileStore/</a> &#187; onTileClear.coffee</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</td><td class="line-coverage"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >require 'coffee-script/register'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >freshStores = require './_freshStores'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >describe 'TileStore.onTileClear(uid)', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >    describe 'updates .numOfUncleared property of obj returned by Store.getInfo()', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >        it 'should update after a single clear', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >            stores = freshStores <span class="fstat-no" title="function not covered" >(store) -&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear '0-0'</span>
+<span class="cstat-no" title="statement not covered" >                store</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for tileStore in stores</span>
+<span class="cstat-no" title="statement not covered" >                expectedMinTilesCleared = tileStore.all.length - tileStore.info.numOfMines - 1</span>
+<span class="cstat-no" title="statement not covered" >                expect expectedMinTilesCleared &gt;= tileStore.info.numOfUncleared</span>
+                    .toBe true
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        it 'should update after a clear in each corner of board', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >            stores = freshStores <span class="fstat-no" title="function not covered" >(store, test) -&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear '0-0'</span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear((<span class="cstat-no" title="statement not covered" >test.x - 1</span>) + '-0')</span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear('0-' + (<span class="cstat-no" title="statement not covered" >test.y - 1</span>))</span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear((<span class="cstat-no" title="statement not covered" >test.x - 1</span>) + '-' + (<span class="cstat-no" title="statement not covered" >test.y - 1</span>))</span>
+<span class="cstat-no" title="statement not covered" >                store</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for tileStore in stores</span>
+<span class="cstat-no" title="statement not covered" >                expectedMinTilesCleared = tileStore.all.length - tileStore.info.numOfMines - 4</span>
+<span class="cstat-no" title="statement not covered" >                expect expectedMinTilesCleared &gt;= tileStore.info.numOfUncleared</span>
+                    .toBe true
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    describe 'updates .loss property of obj returned by Store.getInfo()', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >        it 'should update if a tile with a mine is cleared', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >            stores = freshStores <span class="fstat-no" title="function not covered" >(store, test) -&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >                tileWithMine = store.get isMine: true</span>
+<span class="cstat-no" title="statement not covered" >                store.onTileClear tileWithMine.model.uid</span>
+<span class="cstat-no" title="statement not covered" >                store</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for tileStore in stores</span>
+<span class="cstat-no" title="statement not covered" >                expect tileStore.info.loss</span>
+                    .toBe true
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    describe 'updates .win property of obj returned by Store.getInfo()', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >        it 'should update if all tiles without mines are cleared', <span class="fstat-no" title="function not covered" >-&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >            stores = freshStores <span class="fstat-no" title="function not covered" >(store, test) -&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >                safeTiles = store.getAll isMine: false</span>
+<span class="cstat-no" title="statement not covered" >                for safeTile in safeTiles</span>
+<span class="cstat-no" title="statement not covered" >                    store.onTileClear safeTile.model.uid</span>
+<span class="cstat-no" title="statement not covered" >                store</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for tileStore in stores</span>
+<span class="cstat-no" title="statement not covered" >                expect tileStore.info.win</span>
+                    .toBe true</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 09 2015 17:06:38 GMT-0500 (CDT)</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

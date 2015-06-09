@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for minesweeper-react/Resources/coffee/components/TileComponent.coffee</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">minesweeper-react/Resources/coffee/components/TileComponent.coffee</span></h1>
+    <h2>
+        Statements: <span class="metric">0% <small>(0 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">0% <small>(0 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">minesweeper-react/Resources/coffee/components/</a> &#187; TileComponent.coffee</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</td><td class="line-coverage"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >TilesActions = require '../actions/TilesActions.coffee'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >React = require 'react/addons'</span>
+<span class="cstat-no" title="statement not covered" >R = React.DOM</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >Tile = React.createClass</span>
+    displayName: 'Tile'
+&nbsp;
+<span class="fstat-no" title="function not covered" >    render: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        R.li {</span>
+            className: this.getClass(),
+            onClick: this.clickHandler
+        }, R.span null, @getText()
+&nbsp;
+<span class="fstat-no" title="function not covered" >    clickHandler: ($event) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        if !$event</span>
+<span class="cstat-no" title="statement not covered" >            return TilesActions.tileClear @props.tile.model.uid</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        flagKeyWasPressed = (</span>
+<span class="cstat-no" title="statement not covered" >            $event.shiftKey is true or</span>
+            $event.altKey is true
+        )
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if flagKeyWasPressed</span>
+<span class="cstat-no" title="statement not covered" >            return TilesActions.tileToggleFlag @props.tile.model.uid</span>
+        else
+<span class="cstat-no" title="statement not covered" >            return TilesActions.tileClear @props.tile.model.uid</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    isFirstColumn: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @props.tile.model.x is 0</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    hasBeenFlagged: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @props.tile.model.isClear isnt true and</span>
+        @props.tile.model.isFlagged is true
+&nbsp;
+<span class="fstat-no" title="function not covered" >    hasBeenCleared: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @props.tile.model.isClear is true</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    hasMine: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @props.tile.model.isMine is true</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    shouldDisplayMine: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @hasBeenCleared() and</span>
+        @hasMine()
+&nbsp;
+<span class="fstat-no" title="function not covered" >    hasZeroAdjacentMines: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @props.tile.model.adjacentMines is 0 and</span>
+        # !@hasMine()
+        @hasBeenCleared()
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getText: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        text = ''</span>
+        # if true
+<span class="cstat-no" title="statement not covered" >        if @shouldDisplayMine()</span>
+<span class="cstat-no" title="statement not covered" >            text = 'X'</span>
+        else <span class="cstat-no" title="statement not covered" >if @hasBeenCleared()</span>
+<span class="cstat-no" title="statement not covered" >            text = @props.tile.model.adjacentMines</span>
+        else <span class="cstat-no" title="statement not covered" >if @hasBeenFlagged()</span>
+<span class="cstat-no" title="statement not covered" >            text = '?'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        text</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getClass: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        [</span>
+            'tile'
+            # 'clear'
+            if @isFirstColumn() then <span class="cstat-no" title="statement not covered" >'nth'</span>
+            if @hasBeenCleared() then <span class="cstat-no" title="statement not covered" >'clear'</span>
+            if @hasBeenFlagged() then <span class="cstat-no" title="statement not covered" >'flagged'</span>
+            if @shouldDisplayMine() then <span class="cstat-no" title="statement not covered" >'mine'</span>
+            if @hasZeroAdjacentMines() then <span class="cstat-no" title="statement not covered" >'zero'</span>
+&nbsp;
+        ].join(' ')
+&nbsp;
+<span class="cstat-no" title="statement not covered" >module.exports = Tile</span></pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 09 2015 17:17:12 GMT-0500 (CDT)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,4 +1,6 @@
-jest.autoMockOff()
+assert = require('chai').assert
+require 'coffee-script/register'
+
 freshStores = require './_freshStores'
 
 describe 'TileStore.onClearSafeRandomTile()', ->
@@ -13,13 +15,11 @@ describe 'TileStore.onClearSafeRandomTile()', ->
         it 'changes should appear in TileStore.getInfo().numOfUncleared', ->
             for tileStore in stores
                 maxAmountOfUnclearedTiles = tileStore.all.length - tileStore.test.mines - 1
-                expect maxAmountOfUnclearedTiles >= tileStore.info.numOfUncleared
-                    .toBe true
+                assert.equal maxAmountOfUnclearedTiles >= tileStore.info.numOfUncleared, true
 
         it 'should not lose the game, according to TileStore.getInfo().loss', ->
             for tileStore in stores
-                expect tileStore.info.loss
-                    .toBe false
+                assert.equal tileStore.info.loss, false
 
     describe 'when called until game all tiles without mines have been cleared', ->
         stores = []
@@ -33,15 +33,12 @@ describe 'TileStore.onClearSafeRandomTile()', ->
 
         it 'changes should appear in TileStore.getInfo().win', ->
             for tileStore in stores
-                expect tileStore.info.win
-                    .toBe true
+                assert.equal tileStore.info.win, true
 
         it 'changes should appear in TileStore.getInfo().loss', ->
             for tileStore in stores
-                expect tileStore.info.loss
-                    .toBe false
+                assert.equal tileStore.info.loss, false
 
         it 'changes should appear in TileStore.getInfo().numOfUncleared', ->
             for tileStore in stores
-                expect tileStore.info.numOfUncleared
-                    .toBe 0
+                assert.equal tileStore.info.numOfUncleared, 0

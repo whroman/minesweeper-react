@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coffee/components/modals/ModalOverlayComponent.coffee</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../prettify.css">
+    <link rel="stylesheet" href="../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">coffee/components/modals/ModalOverlayComponent.coffee</span></h1>
+    <h2>
+        Statements: <span class="metric">0% <small>(0 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">0% <small>(0 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">coffee/components/modals/</a> &#187; ModalOverlayComponent.coffee</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</td><td class="line-coverage"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >React = require 'react/addons'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >ModalActions = require '../../actions/ModalActions.coffee'</span>
+<span class="cstat-no" title="statement not covered" >InstructionsComponent = require './ModalInstructionsComponent.coffee'</span>
+<span class="cstat-no" title="statement not covered" >NewGameComponent = require './ModalNewGameComponent.coffee'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >R = React.DOM</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >ModalOverlay = React.createClass</span>
+    displayName: 'ModalOverlay'
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getClass: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        if @props.modals and @props.modals.newGame</span>
+<span class="cstat-no" title="statement not covered" >            return ''</span>
+        else <span class="cstat-no" title="statement not covered" >if @props.modals and @props.modals.instructions</span>
+<span class="cstat-no" title="statement not covered" >            return ''</span>
+<span class="cstat-no" title="statement not covered" >        return 'hide'</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    resetHandler: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        if !@props.info.loss &amp;&amp; !@props.info.win</span>
+<span class="cstat-no" title="statement not covered" >            ModalActions.reset()</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    instructionsHandler: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        ModalActions.toggle 'instructions'</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    render: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        overlay = R.div {</span>
+            id: 'overlay'
+            key: 'overlay'
+            className: @getClass()
+            onClick: @resetHandler
+        }, null
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        components = [overlay]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if @props.modals</span>
+<span class="cstat-no" title="statement not covered" >            components.push React.createElement InstructionsComponent, {</span>
+                    key: 'modal-instructions'
+                    show: @props.modals.instructions
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if @props.info</span>
+<span class="cstat-no" title="statement not covered" >                components.push React.createElement NewGameComponent, {</span>
+                    key: 'modal-new-game'
+                    show: @props.modals.newGame
+                    win: @props.info.win
+                    loss: @props.info.loss
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        R.div null, components</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >module.exports = ModalOverlay</span></pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 09 2015 17:18:15 GMT-0500 (CDT)</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

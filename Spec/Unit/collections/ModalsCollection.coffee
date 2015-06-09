@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 ModalsCollection = require process.cwd() + '/Resources/coffee/collections/ModalsCollection.coffee'
 
 describe 'ModalsCollection', ->
@@ -13,8 +13,7 @@ describe 'ModalsCollection', ->
 
     it '.set(name)', ->
         for key, modal of Modals.show
-            expect modal
-                .toBe false
+            assert.equal modal, false
 
     it '.reset()', ->
         for key, modal of Modals.show
@@ -22,8 +21,7 @@ describe 'ModalsCollection', ->
 
         Modals.reset()
 
-        expect Modals.show
-            .toEqual {
+        assert.deepEqual Modals.show, {
                 foo: false
                 bar: false
                 star: false
@@ -32,8 +30,7 @@ describe 'ModalsCollection', ->
     it '.toggle(name)', ->
         Modals.toggle('foo')
 
-        expect Modals.show
-            .toEqual {
+        assert.deepEqual Modals.show, {
                 foo: true
                 bar: false
                 star: false
@@ -41,8 +38,7 @@ describe 'ModalsCollection', ->
 
         Modals.toggle('bar')
 
-        expect Modals.show
-            .toEqual {
+        assert.deepEqual Modals.show, {
                 foo: false
                 bar: true
                 star: false
@@ -50,8 +46,7 @@ describe 'ModalsCollection', ->
 
         Modals.toggle('star')
 
-        expect Modals.show
-            .toEqual {
+        assert.deepEqual Modals.show, {
                 foo: false
                 bar: false
                 star: true

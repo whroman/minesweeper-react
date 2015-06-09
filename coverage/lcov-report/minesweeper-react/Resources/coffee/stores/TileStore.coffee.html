@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for minesweeper-react/Resources/coffee/stores/TileStore.coffee</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">minesweeper-react/Resources/coffee/stores/TileStore.coffee</span></h1>
+    <h2>
+        Statements: <span class="metric">0% <small>(0 / 36)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">0% <small>(0 / 36)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">minesweeper-react/Resources/coffee/stores/</a> &#187; TileStore.coffee</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >Reflux = require 'reflux'</span>
+<span class="cstat-no" title="statement not covered" >assign = require 'object-assign'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >TilesActions = require '../actions/TilesActions.coffee'</span>
+<span class="cstat-no" title="statement not covered" >ModalActions = require '../actions/ModalActions.coffee'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >TilesCollection = require '../collections/TilesCollection.coffee'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >Tiles = new TilesCollection()</span>
+<span class="cstat-no" title="statement not covered" >Tiles.newGame 10, 10, 25</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >store =</span>
+    all: []
+    info: {}
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get: (attrs) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        Tiles.get attrs</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getAll: (attrs) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @all = Tiles.getAll(attrs)</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    getInfo: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @info =</span>
+            win: Tiles.win
+            loss: Tiles.loss
+            numOfTiles: Tiles.all.length
+            numOfMines: Tiles.numOfMines
+            numOfFlags: Tiles.numOfFlags
+            numOfUncleared: Tiles.all.length - Tiles.numOfMines - Tiles.numOfClears
+&nbsp;
+<span class="fstat-no" title="function not covered" >    randomSafeTile: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        Tiles.randomSafeTile()</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    newGame: (x, y, mines) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        Tiles.newGame x, y, mines</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >handlers =</span>
+    # Check Actions source for list of events that Store will be listening for.
+    #   When heard, callback will fire based on name of listener.
+    #   Ex: Actions.change() will fire "onChange" in Store if "change" is listed in Actions
+    listenables: [TilesActions]
+&nbsp;
+<span class="fstat-no" title="function not covered" >    onClearSafeRandomTile: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        tile = @randomSafeTile()</span>
+<span class="cstat-no" title="statement not covered" >        if tile</span>
+<span class="cstat-no" title="statement not covered" >            tile.clear()</span>
+<span class="cstat-no" title="statement not covered" >            @update()</span>
+<span class="cstat-no" title="statement not covered" >        tile</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    onNewGame: (x, y, mines) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        @newGame x, y, mines</span>
+<span class="cstat-no" title="statement not covered" >        ModalActions.change()</span>
+<span class="cstat-no" title="statement not covered" >        @update()</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    onTileToggleFlag: (uid) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        tile = @get uid: uid</span>
+<span class="cstat-no" title="statement not covered" >        tile.toggleFlag()</span>
+<span class="cstat-no" title="statement not covered" >        @update()</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    onTileClear: (uid) -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        attrs = uid: uid</span>
+<span class="cstat-no" title="statement not covered" >        tile = @get attrs</span>
+<span class="cstat-no" title="statement not covered" >        tile.clear()</span>
+<span class="cstat-no" title="statement not covered" >        @update()</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    update: -&gt;</span>
+<span class="cstat-no" title="statement not covered" >        all = @getAll()</span>
+<span class="cstat-no" title="statement not covered" >        info = @getInfo()</span>
+<span class="cstat-no" title="statement not covered" >        @trigger</span>
+            all: all
+            info: info
+<span class="cstat-no" title="statement not covered" >        if info.win or info.loss</span>
+<span class="cstat-no" title="statement not covered" >            ModalActions.change 'newGame'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >TileStore = Reflux.createStore assign {}, store, handlers</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >module.exports = TileStore</span></pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jun 09 2015 17:17:12 GMT-0500 (CDT)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -32,6 +32,7 @@
   },
   "jest": {
     "scriptPreprocessor": "Spec/preprocessor.js",
+    "collectCoverage": true,
     "testFileExtensions": [
       "coffee",
       "litcoffee",
@@ -47,6 +48,9 @@
     "testPathIgnorePatterns": [
       "/_.*\\..*"
     ],
+    "collectCoverageOnlyFrom": {
+      "Resources/build/build.js": true
+    },
     "testDirectoryName": "Spec/Unit"
   }
 }

@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 
 tests = [
@@ -44,5 +44,4 @@ describe 'TilesCollection.add(tileAttrs)', ->
             tile = Tiles.add test
 
             for key, val of test
-                expect val
-                    .toBe tile.model[key]
+                assert.equal val, tile.model[key]

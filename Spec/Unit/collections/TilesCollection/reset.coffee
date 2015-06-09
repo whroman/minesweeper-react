@@ -1,5 +1,5 @@
-jest.autoMockOff()
-
+assert = require('chai').assert
+require 'coffee-script/register'
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
@@ -10,5 +10,4 @@ describe 'TilesCollection.reset()', ->
             Tiles.newGame test.x, test.y, test.mines
             Tiles.reset()
 
-            expect Tiles.all.length
-                .toBe 0
+            assert.equal Tiles.all.length, 0
