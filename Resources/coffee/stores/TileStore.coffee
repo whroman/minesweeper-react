@@ -46,8 +46,8 @@ handlers =
             tile.clear()
             @update()
 
-    onNewGame: ->
-        @newGame 10, 10, 25
+    onNewGame: (x, y, mines) ->
+        @newGame x, y, mines
         ModalActions.change()
         @update()
 

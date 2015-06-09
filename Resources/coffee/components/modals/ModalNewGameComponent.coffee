@@ -26,7 +26,7 @@ ModalOverlay = React.createClass
             return 'you lost...'
 
     clickHandlerNewGame: ->
-        TilesActions.newGame()
+        TilesActions.newGame 10, 10, 25
 
     clickHandlerExitModal: ->
         ModalActions.reset()

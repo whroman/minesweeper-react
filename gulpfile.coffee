@@ -65,6 +65,7 @@ gulp.task 'js:coffee', ['js:clean'], ->
 
     b.bundle()
         .on 'error', (err) ->
+            console.log 'browserify error:'
             console.log err
         .pipe vinyl.source 'build.js'
         .pipe vinyl.buffer()
