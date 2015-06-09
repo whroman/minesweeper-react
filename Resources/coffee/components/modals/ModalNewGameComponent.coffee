@@ -40,7 +40,7 @@ ModalOverlay = React.createClass
             }, 'restart!'
         ]
 
-        if !@props.loss
+        if !@props.loss and !@props.win
             buttons.push R.div {
                 key: 'new-game-resume'
                 className: 'button'
