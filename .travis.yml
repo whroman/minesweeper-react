@@ -2,3 +2,10 @@ language: node_js
 
 node_js:
   - "0.10.36"
+
+addons:
+  code_climate:
+    repo_token: 66e0132039532dda91c44b4f2e675abde485be7a51a603c147dc3a3d7cc5d732
+
+after_script:
+  - node_modules/.bin/codeclimate < ./coverage/lcov.info
