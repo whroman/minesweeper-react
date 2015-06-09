@@ -44,6 +44,9 @@
       "coffee.md",
       "js"
     ],
+    "testPathIgnorePatterns": [
+      "/_.*\\..*"
+    ],
     "testDirectoryName": "Spec/Unit"
   }
 }

@@ -36,3 +36,15 @@ describe 'TileStore.onTileClear(uid)', ->
             for tileStore in stores
                 expect tileStore.info.loss
                     .toBe true
+
+    describe 'updates .win property of obj returned by Store.getInfo()', ->
+        it 'should update if all tiles without mines are cleared', ->
+            stores = freshStores (store, test) ->
+                safeTiles = store.getAll isMine: false
+                for safeTile in safeTiles
+                    store.onTileClear safeTile.model.uid
+                store
+
+            for tileStore in stores
+                expect tileStore.info.win
+                    .toBe true
