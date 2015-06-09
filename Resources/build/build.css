@@ -103,10 +103,14 @@ li {
   border-radius: 18px;
   margin: 10px 0 38px 0; }
 
-#board::selection {
+#board *::selection,
+#dashboard *::selection,
+#dashboard::selection {
   background: transparent; }
 
-#board::-moz-selection {
+#board *::-moz-selection,
+#dashboard *::-moz-selection,
+#dashboard::-moz-selection {
   background: transparent; }
 
 .tile {
@@ -189,7 +193,6 @@ li {
   display: inline-block;
   padding: 8px 18px;
   font-weight: 200;
-  top: 84px;
   position: absolute;
   z-index: 2;
   width: 436px;

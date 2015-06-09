@@ -11,8 +11,17 @@
     margin: 10px 0 38px 0;
 }
 
-#board::selection { background: transparent; }
-#board::-moz-selection { background: transparent; }
+#board *::selection,
+#dashboard *::selection,
+#dashboard::selection {
+    background: transparent;
+}
+
+#board *::-moz-selection,
+#dashboard *::-moz-selection,
+#dashboard::-moz-selection {
+    background: transparent;
+}
 
 .tile {
     width: 32px;

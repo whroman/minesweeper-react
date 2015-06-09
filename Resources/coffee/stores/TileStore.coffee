@@ -35,6 +35,9 @@ store =
         Tiles.newGame x, y, mines
 
 handlers =
+    # Check Actions source for list of events that Store will be listening for.
+    #   When heard, callback will fire based on name of listener.
+    #   Ex: Actions.change() will fire "onChange" in Store if "change" is listed in Actions
     listenables: [TilesActions]
 
     onClearSafeRandomTile: ->
