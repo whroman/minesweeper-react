@@ -81,7 +81,7 @@ gulp.task 'js:build', ['js:coffee'], ->
         .pipe gulp.dest paths.build
 
 
-gulp.task 'js:test', ['js:build'], ->
+test = ->
     childProcess = spawn 'npm', ['test']
 
     print = (data) ->
@@ -92,6 +92,10 @@ gulp.task 'js:test', ['js:build'], ->
     childProcess.stderr.on 'data', (data) ->
         print data
         childProcess.kill()
+
+gulp.task 'js:test', ['js:build'], test
+
+gulp.task 'test', test
 
 
 gulp.task 'server', ->

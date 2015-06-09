@@ -3,7 +3,7 @@ jest.autoMockOff()
 TilesCollection = require process.cwd() + '/Resources/coffee/collections/TilesCollection.coffee'
 tests = require '../../_testGames.coffee'
 
-describe 'TilesCollection.firstClickNoMine()', ->
+describe 'TilesCollection.noMineFirstClick()', ->
     it 'should unset `isMine` if the given tile has a mine', ->
         for test in tests
             Tiles = new TilesCollection()

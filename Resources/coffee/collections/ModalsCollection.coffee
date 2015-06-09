@@ -2,16 +2,15 @@ class ModalsCollection
     constructor: () ->
         @show = {}
 
-    set : (fileName) ->
-        this.show[fileName] = false
+    set : (name) ->
+        this.show[name] = false
         @
 
     toggle : (name) ->
+        @reset()
         for modalName, isBeingShown of @show
             if modalName is name
                 @show[modalName] = !isBeingShown
-            else
-                isBeingShown = false
 
     reset : () ->
         for key, showModal of this.show
