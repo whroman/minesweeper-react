@@ -8,5 +8,3 @@ React.render(
     ViewController,
     document.getElementById 'minesweeper'
 )
-
-console.log 'FOO'

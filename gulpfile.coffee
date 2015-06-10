@@ -1,12 +1,10 @@
 require 'coffee-script/register'
 
 gulp = require 'gulp'
-del = require 'del'
 browserify = require 'browserify'
 coffee = require 'coffee-script'
 spawn = require('child_process').spawn
 vinyl =
-    paths: require 'vinyl-paths'
     buffer: require 'vinyl-buffer'
     source: require 'vinyl-source-stream'
 
