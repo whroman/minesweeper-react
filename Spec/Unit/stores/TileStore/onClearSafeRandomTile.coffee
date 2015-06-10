@@ -21,14 +21,19 @@ describe 'TileStore.onClearSafeRandomTile()', ->
             for tileStore in stores
                 assert.equal tileStore.info.loss, false
 
-    describe 'when called until game all tiles without mines have been cleared', ->
+    describe 'when called until all tiles without mines have been cleared', ->
         stores = []
 
         beforeEach ->
             stores = freshStores (store, test) ->
                 clearedTile = store.onClearSafeRandomTile()
-                while clearedTile
+                i = 0
+                while (
+                    typeof clearedTile isnt 'undefined' and
+                    i < test.x * test.y
+                )
                     clearedTile = store.onClearSafeRandomTile()
+                    i++
                 store
 
         it 'changes should appear in TileStore.getInfo().win', ->

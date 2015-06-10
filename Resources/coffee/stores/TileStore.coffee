@@ -45,7 +45,9 @@ handlers =
         if tile
             tile.clear()
             @update()
-        tile
+            return tile
+        else
+            return null
 
     onNewGame: (x, y, mines) ->
         @newGame x, y, mines

@@ -29,8 +29,8 @@
     "reflux": "0.2.7"
   },
   "scripts": {
-    "test": "npm run mocha Spec/Unit/; npm run cover",
-    "mocha": "mocha --compilers coffee:coffee-script/register --recursive --require ./Spec/cs-coverage-loader.js -t 15000 -R spec",
+    "test": "mocha -d --compilers coffee:coffee-script/register --recursive --require ./Spec/cs-coverage-loader.js -t 20000 -R spec Spec/Unit; istanbul report;",
+    "mocha": "mocha -d --compilers coffee:coffee-script/register --recursive --require ./Spec/cs-coverage-loader.js -t 20000 -R spec",
     "cover": "istanbul report;"
   }
 }
