@@ -37,6 +37,12 @@ class TilesCollection
         @tallyMines()
         @gameUpdate()
 
+    loadGame: (savedTiles) ->
+        @reset()
+        for tile in savedTiles
+            @add tile.model
+        @gameUpdate()
+
     # Finds an empty tile and marks it as a mine if no tiles
     # have yet to be cleared AND the given tile is a mine
     noMineFirstClick: (tile) ->

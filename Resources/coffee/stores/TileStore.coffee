@@ -1,3 +1,4 @@
+# Packages
 Reflux = require 'reflux'
 assign = require 'object-assign'
 
@@ -6,9 +7,25 @@ ModalActions = require '../actions/ModalActions.coffee'
 
 TilesCollection = require '../collections/TilesCollection.coffee'
 
-Tiles = new TilesCollection()
-Tiles.newGame 10, 10, 25
+# Bootstrap
+loadedTiles = {}
+loadedTiles.string = localStorage.getItem 'tiles'
+loadedTiles.isValid = loadedTiles.string[0] is '['
+loadedTiles.all = []
+loadedTiles.success = false
 
+Tiles = new TilesCollection()
+
+if loadedTiles.isValid
+    loadedTiles.all = JSON.parse loadedTiles.string
+    if loadedTiles.all.length > 0
+        Tiles.loadGame loadedTiles.all
+        loadedTiles.success = true
+
+if !loadedTiles.success
+    Tiles.newGame 10, 10, 25
+
+# Exposing `Tiles` methods
 store =
     all: []
     info: {}
@@ -34,6 +51,7 @@ store =
     newGame: (x, y, mines) ->
         Tiles.newGame x, y, mines
 
+# `TileStore` actions
 handlers =
     # Check Actions source for list of events that Store will be listening for.
     #   When heard, callback will fire based on name of listener.
@@ -73,6 +91,8 @@ handlers =
             info: info
         if info.win or info.loss
             ModalActions.change 'newGame'
+
+        localStorage.setItem 'tiles', JSON.stringify all
 
 TileStore = Reflux.createStore assign {}, store, handlers
 
