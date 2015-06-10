@@ -2,7 +2,8 @@
 
 # [Minesweeper React](http://whroman.github.io/minesweeper-react/)
 
-A single-page Minesweeper app built using:
+A single-page Minesweeper app.
+View live [here](http://whroman.github.io/minesweeper-react/).
 
 ### Languages
 
@@ -11,7 +12,7 @@ A single-page Minesweeper app built using:
 
 ### Client Code
 
-* [Browserify](http://browserify.org/) - Brings node `require`s to client scripts
+* [Browserify](http://browserify.org/) - Brings Node's `require` module pattern to client scripts
 * [React](https://facebook.github.io/react/) - Frontend JS Framework
 * [Reflux](https://github.com/spoike/refluxjs) - Provides helpers for establishing a [Flux architecture](https://facebook.github.io/flux/) on the client
 
@@ -23,7 +24,6 @@ A single-page Minesweeper app built using:
 * [CoffeeCoverage](https://github.com/benbria/coffee-coverage) - Code coverage tool for Coffeescript
 * [Istanbul](https://github.com/gotwarlost/istanbul) - Used here only to generate code coverage data file for Code Climate (`coverage/lcov.info`)
 
-View live [here](http://whroman.github.io/minesweeper-react/).
 
 ## Requirements
 
