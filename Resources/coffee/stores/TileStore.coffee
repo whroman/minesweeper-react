@@ -17,7 +17,7 @@ store =
         Tiles.get attrs
 
     getAll: (attrs) ->
-        @all = Tiles.getAll(attrs)
+        @all = Tiles.getAll attrs
 
     getInfo: ->
         @info =

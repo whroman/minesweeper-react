@@ -5,28 +5,23 @@ module.exports = [
         mines: 4
     }
     {
-        x: 7
-        y: 9
-        mines: 8
-    }
-    {
-        x: 13
-        y: 31
-        mines: 30
-    }
-    {
-        x: 61
-        y: 16
-        mines: 41
-    }
-    {
-        x: 20
-        y: 20
-        mines: 20
+        x: 11
+        y: 11
+        mines: 50
     }
     {
         x: 10
-        y: 15
-        mines: 40
+        y: 10
+        mines: 50
+    }
+    {
+        x: 12
+        y: 21
+        mines: 101
+    }
+    {
+        x: 5
+        y: 5
+        mines: 5
     }
 ]
