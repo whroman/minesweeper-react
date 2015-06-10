@@ -21,7 +21,7 @@ Tasks = require './Tasks'
 paths = Tasks.paths
 options = Tasks.options
 
-gulp.task 'sass', ->
+gulp.task 'css:build', ->
     gulp.src paths.scss.src
         .pipe gp.sourcemaps.init()
             .pipe gp.rename 'build.scss'
@@ -32,10 +32,7 @@ gulp.task 'sass', ->
         .pipe gp.sourcemaps.write('./sass-maps')
         .pipe gulp.dest paths.build
 
-gulp.task 'js:clean', (cb) ->
-    del paths.coffee.dest, cb
-
-gulp.task 'js:coffee', ['js:clean'], ->
+gulp.task 'js:build', ->
 
     b = browserify(
         entries: [
@@ -72,15 +69,15 @@ gulp.task 'js:coffee', ['js:clean'], ->
         .pipe vinyl.buffer()
         .pipe gp.sourcemaps.init(loadMaps : true)
             .pipe gp.uglify options.uglify
-        .pipe gp.sourcemaps.write()
-        .pipe gulp.dest paths.coffee.dest
-
-gulp.task 'js:build', ['js:coffee'], ->
-    gulp.src paths.js.all
-        .pipe gp.sourcemaps.init(loadMaps : true)
-            .pipe gp.concat 'build.js'
-        .pipe gp.sourcemaps.write('./maps')
+        .pipe gp.sourcemaps.write('.maps')
         .pipe gulp.dest paths.build
+
+# gulp.task 'js:build', ['js:coffee'], ->
+#     gulp.src paths.js.all
+#         .pipe gp.sourcemaps.init(loadMaps : true)
+#             .pipe gp.concat 'build.js'
+#         .pipe gp.sourcemaps.write('./maps')
+#         .pipe gulp.dest paths.build
 
 gulp.task 'server', ->
     gp.liveServer.static '.', 8890, false
@@ -88,12 +85,12 @@ gulp.task 'server', ->
 
 
 gulp.task 'watch', ->
-    gulp.watch paths.scss.watch, options.gulpNoRead, ['sass']
+    gulp.watch paths.scss.watch, options.gulpNoRead, ['css:build']
     gulp.watch [paths.coffee.watch], options.gulpNoRead, ['js:build']
 
 gulp.task 'build', [
     'js:build'
-    'sass'
+    'css:build'
 ]
 
 gulp.task 'dev', [

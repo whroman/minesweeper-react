@@ -13,7 +13,6 @@ paths.scss =
 
 paths.coffee =
     src     : paths.root + 'coffee/App.coffee'
-    dest    : paths.build + 'js/'
     watch   : paths.root + 'coffee/**/*.coffee'
 
 paths.js =

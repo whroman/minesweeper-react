@@ -4,11 +4,16 @@
 
 A single-page Minesweeper app built using:
 
-* [React](https://facebook.github.io/react/)
 * [Coffeescript](http://coffeescript.org/)
 * [Sass](http://sass-lang.com/)
-* [Gulp](http://gulpjs.com/)
-* [Jest](https://facebook.github.io/jest/)
+
+* [React](https://facebook.github.io/react/) - Frontend JS Framework
+* [Mocha](http://mochajs.org/) - JS test framework
+* [Chai](http://chaijs.com/) - Assertion library for writing test
+* [CoffeeCoverage](https://github.com/benbria/coffee-coverage) - Code coverage tool for Coffeescript
+* [Istanbul](https://github.com/gotwarlost/istanbul) - Used here only to generate code coverage data file for Code Climate (`coverage/lcov.info`)
+* [jsdom](https://github.com/tmpvar/jsdom) - Used here to spoof the DOM's JS API in tests regarding views
+* [Gulp](http://gulpjs.com/) - Task manager
 
 View live [here](http://whroman.github.io/minesweeper-react/).
 
