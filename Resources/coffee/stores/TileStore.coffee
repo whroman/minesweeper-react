@@ -8,19 +8,20 @@ ModalActions = require '../actions/ModalActions.coffee'
 TilesCollection = require '../collections/TilesCollection.coffee'
 
 # Bootstrap
-loadedTiles = {}
-loadedTiles.string = localStorage.getItem 'tiles'
-loadedTiles.isValid = loadedTiles.string[0] is '['
-loadedTiles.all = []
-loadedTiles.success = false
-
 Tiles = new TilesCollection()
+loadedTiles =
+    all: []
+    success: false
 
-if loadedTiles.isValid
-    loadedTiles.all = JSON.parse loadedTiles.string
-    if loadedTiles.all.length > 0
-        Tiles.loadGame loadedTiles.all
-        loadedTiles.success = true
+if window.localStorage
+    loadedTiles.string = window.localStorage.getItem 'tiles'
+    loadedTiles.isValid = loadedTiles.string[0] is '['
+
+    if loadedTiles.isValid
+        loadedTiles.all = JSON.parse loadedTiles.string
+        if loadedTiles.all.length > 0
+            Tiles.loadGame loadedTiles.all
+            loadedTiles.success = true
 
 if !loadedTiles.success
     Tiles.newGame 10, 10, 25
@@ -92,7 +93,8 @@ handlers =
         if info.win or info.loss
             ModalActions.change 'newGame'
 
-        localStorage.setItem 'tiles', JSON.stringify all
+        if window.localStorage
+            window.localStorage.setItem 'tiles', JSON.stringify all
 
 TileStore = Reflux.createStore assign {}, store, handlers
 

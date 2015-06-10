@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">coffee/collections/ModalsCollection.coffee</span></h1>
     <h2>
-        Statements: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(12 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(12 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">coffee/collections/</a> &#187; ModalsCollection.coffee</div>
@@ -44,50 +44,50 @@
 17
 18
 19
-20</td><td class="line-coverage"><span class="cline-any cline-no">&nbsp;</span>
+20</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">99</span>
+<span class="cline-any cline-yes">48</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >class <span class="fstat-no" title="function not covered" >ModalsCollection</span></span>
-<span class="fstat-no" title="function not covered" >    constructor: ()</span> -&gt;
-<span class="cstat-no" title="statement not covered" >        @show = {}</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">117</span>
+<span class="cline-any cline-yes">238</span>
+<span class="cline-any cline-yes">117</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">class ModalsCollection
+    constructor: () -&gt;
+        @show = {}
 &nbsp;
-<span class="fstat-no" title="function not covered" >    set : (name) -&gt;</span>
-<span class="cstat-no" title="statement not covered" >        this.show[name] = false</span>
-<span class="cstat-no" title="statement not covered" >        @</span>
+    set : (name) -&gt;
+        this.show[name] = false
+        @
 &nbsp;
-<span class="fstat-no" title="function not covered" >    toggle : (name) -&gt;</span>
-<span class="cstat-no" title="statement not covered" >        @reset()</span>
-<span class="cstat-no" title="statement not covered" >        for modalName, isBeingShown of @show</span>
-<span class="cstat-no" title="statement not covered" >            if modalName is name</span>
-<span class="cstat-no" title="statement not covered" >                @show[modalName] = !isBeingShown</span>
+    toggle : (name) -&gt;
+        @reset()
+        for modalName, isBeingShown of @show
+            if modalName is name
+                @show[modalName] = !isBeingShown
 &nbsp;
-<span class="fstat-no" title="function not covered" >    reset : ()</span> -&gt;
-<span class="cstat-no" title="statement not covered" >        for key, showModal of this.show</span>
-<span class="cstat-no" title="statement not covered" >            this.show[key] = false</span>
-<span class="cstat-no" title="statement not covered" >        @</span>
+    reset : () -&gt;
+        for key, showModal of this.show
+            this.show[key] = false
+        @
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = ModalsCollection</span></pre></td></tr>
+module.exports = ModalsCollection</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 10 2015 11:28:16 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 10 2015 11:47:27 GMT-0500 (CDT)</div>
 </div>
 <script src="../../prettify.js"></script>
 <script>

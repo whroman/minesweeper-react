@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">coffee/models/TileModel.coffee</span></h1>
     <h2>
-        Statements: <span class="metric">15.79% <small>(3 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">14.29% <small>(1 / 7)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">15.79% <small>(3 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">84.21% <small>(16 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">50% <small>(1 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">85.71% <small>(6 / 7)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">84.21% <small>(16 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">coffee/models/</a> &#187; TileModel.coffee</div>
@@ -86,9 +86,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12002</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12001</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -97,25 +97,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12001</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12001</span>
+<span class="cline-any cline-yes">24105</span>
+<span class="cline-any cline-yes">24105</span>
+<span class="cline-any cline-yes">12001</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13092</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1345</span>
+<span class="cline-any cline-yes">1345</span>
+<span class="cline-any cline-yes">1345</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">Number.isInteger = Number.isInteger or <span class="fstat-no" title="function not covered" >(value) -&gt;</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
@@ -131,10 +131,10 @@ module.exports =
             [-1,  0],           [ 1,  0],
             [-1,  1], [ 0,  1], [ 1,  1],
         ]
-<span class="fstat-no" title="function not covered" >        constructor: (attrs) -&gt;</span>
-<span class="cstat-no" title="statement not covered" >            if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)</span>
+        constructor: (attrs) -&gt;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)
 <span class="cstat-no" title="statement not covered" >                throw "`x` and `y` are required Integer attributes to instantiate Tile"</span>
-<span class="cstat-no" title="statement not covered" >            @model =</span>
+            @model =
                 x : undefined
                 y : undefined
                 uid : undefined
@@ -143,32 +143,32 @@ module.exports =
                 isFlagged : false
                 adjacentMines : 0
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            @set attrs</span>
+            @set attrs
 &nbsp;
-<span class="fstat-no" title="function not covered" >        set: (attrs) -&gt;</span>
-<span class="cstat-no" title="statement not covered" >            for key, attr of attrs</span>
-<span class="cstat-no" title="statement not covered" >                @model[key] = attr</span>
-<span class="cstat-no" title="statement not covered" >                @model.uid = String(attrs.x) + '-' + String(attrs.y)</span>
-<span class="cstat-no" title="statement not covered" >            @</span>
+        set: (attrs) -&gt;
+            for key, attr of attrs
+                @model[key] = attr
+                @model.uid = String(attrs.x) + '-' + String(attrs.y)
+            @
 &nbsp;
-<span class="fstat-no" title="function not covered" >        getAdjacentTiles: -&gt;</span>
-<span class="cstat-no" title="statement not covered" >            adjacentTiles</span>
+        getAdjacentTiles: -&gt;
+            adjacentTiles
 &nbsp;
-<span class="fstat-no" title="function not covered" >        toggleFlag: -&gt;</span>
-<span class="cstat-no" title="statement not covered" >            @model.isFlagged = !@model.isFlagged</span>
-<span class="cstat-no" title="statement not covered" >            @</span>
+        toggleFlag: -&gt;
+            @model.isFlagged = !@model.isFlagged
+            @
 &nbsp;
-<span class="fstat-no" title="function not covered" >        clear: -&gt;</span>
-<span class="cstat-no" title="statement not covered" >            @model.isClear = true</span>
-<span class="cstat-no" title="statement not covered" >            @model.isFlagged = false</span>
-<span class="cstat-no" title="statement not covered" >            @</span>
+        clear: -&gt;
+            @model.isClear = true
+            @model.isFlagged = false
+            @
 &nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 10 2015 11:28:16 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 10 2015 11:47:27 GMT-0500 (CDT)</div>
 </div>
 <script src="../../prettify.js"></script>
 <script>
