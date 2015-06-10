@@ -1,0 +1,35 @@
+body {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.slider {
+    font-weight: 100;
+    color: #444;
+
+}
+
+.horizontal-slider {
+    width: 100%;
+    height: 4px;
+    background-color: #999;
+    border-radius: 8px;
+    margin-top: 38px;
+
+    .handle {
+        margin-top: -10px;
+        width: 24px;
+        height: 24px;
+        border: 4px solid #999;
+        background-color: #fff;
+        border-radius: 100%;
+        cursor: pointer;
+
+        > * {
+            position: absolute;
+            border-radius: 100%;
+            top: -1.7em;
+            left: -0.65em;
+            width: 2em;
+        }
+    }
+}

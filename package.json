@@ -26,7 +26,8 @@
   "dependencies": {
     "object-assign": "2.0.0",
     "react": "0.13.3",
-    "reflux": "0.2.7"
+    "reflux": "0.2.7",
+    "react-slider-custom": "git@github.com:whroman/react-slider.git"
   },
   "scripts": {
     "test": "mocha -d --compilers coffee:coffee-script/register --recursive --require ./Spec/cs-coverage-loader.js -t 20000 -R spec Spec/Unit; istanbul report;",
