@@ -33,7 +33,6 @@ gulp.task 'css:build', ->
         .pipe gulp.dest paths.build
 
 gulp.task 'js:build', ->
-
     b = browserify(
         entries: [
             paths.coffee.src
@@ -72,17 +71,9 @@ gulp.task 'js:build', ->
         .pipe gp.sourcemaps.write('.maps')
         .pipe gulp.dest paths.build
 
-# gulp.task 'js:build', ['js:coffee'], ->
-#     gulp.src paths.js.all
-#         .pipe gp.sourcemaps.init(loadMaps : true)
-#             .pipe gp.concat 'build.js'
-#         .pipe gp.sourcemaps.write('./maps')
-#         .pipe gulp.dest paths.build
-
 gulp.task 'server', ->
     gp.liveServer.static '.', 8890, false
         .start()
-
 
 gulp.task 'watch', ->
     gulp.watch paths.scss.watch, options.gulpNoRead, ['css:build']

@@ -4,82 +4,77 @@
 
 A single-page Minesweeper app built using:
 
+### Languages
+
 * [Coffeescript](http://coffeescript.org/)
 * [Sass](http://sass-lang.com/)
 
+### Client Code
+
+* [Browserify](http://browserify.org/) - Brings node `require`s to client scripts
 * [React](https://facebook.github.io/react/) - Frontend JS Framework
+* [Reflux](https://github.com/spoike/refluxjs) - Provides helpers for establishing a [Flux architecture](https://facebook.github.io/flux/) on the client
+
+### Tests
+
 * [Mocha](http://mochajs.org/) - JS test framework
-* [Chai](http://chaijs.com/) - Assertion library for writing test
+* [Chai](http://chaijs.com/) - Test assertion library
+* [jsdom](https://github.com/tmpvar/jsdom) - Used here to spoof the DOM's JS API in tests regarding views
 * [CoffeeCoverage](https://github.com/benbria/coffee-coverage) - Code coverage tool for Coffeescript
 * [Istanbul](https://github.com/gotwarlost/istanbul) - Used here only to generate code coverage data file for Code Climate (`coverage/lcov.info`)
-* [jsdom](https://github.com/tmpvar/jsdom) - Used here to spoof the DOM's JS API in tests regarding views
-* [Gulp](http://gulpjs.com/) - Task manager
 
 View live [here](http://whroman.github.io/minesweeper-react/).
 
-##Application
+## Requirements
 
-### Requirements
-To work on the front-end code of the application, you'll need to have the following packages installed before continuing.
+To work on the app client code, you'll need to have the following packages installed before continuing.
 
-* [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
-* [Gulp](http://gulpjs.com/): Run `[sudo] npm install -g gulp`
+* [Node.js](http://nodejs.org)
+* [Gulp](http://gulpjs.com/)
 
-## Tasks
+Then run `npm install`.
 
-### Structure
+## Commands
 
-```
-minesweeper-react
-├── Gulpfile.coffee
-│       // Holds project tasks, including:
-│       // - Spinning up a local server
-│       // - Sass compiling
-│       // - Scripts
-│       //      - Coffeescript compiling
-│       //      - Uglify-ing
-│       //      - Browserify-ing
-│       //      - Concatenation
-│       //      - Testing
-│
-└── Tasks
-    │
-    ├── index   // Exports `paths` and `options`
-    ├── options // Exposes Gulp plugin option objects
-    └── paths   // Exposes file paths of Resources manipulated by Gulp tasks
+* `npm test` - Runs Mocha tests on all files in `Spec` except those that start with an underscore (eg. `Spec/_willNotRun.js`).
 
-```
-### Usage
+Destination of build files is defined in `Tasks/paths.js`
+
+* `gulp css:build`
+    * Compiles and builds Sass
+
+* `gulp js:build`
+    * Compiles and builds Coffeescript
 
 * `gulp build`
-    * Compiles, builds and live-reloads Sass
-    * Compiles and builds Coffeescript
-    * Destination of build files is defined in `Tasks//paths.js`
+    * Runs `css:build` and `js:build`
 
 * `gulp` or `gulp dev`
-    * Watches all \*.scss and \*.coffee files, automatically compiling and building the resources when a change is detected
-
+    * Boots up a server at [127.0.0.1:8890/](http://127.0.0.1:8890/)
+    * Runs `css:build` when a change is made in `Resources/scss/**/*.scss`
+    * Runs `js:build` when a change is made in `Resources/coffee/**/*.coffee`
 
 ## Development
 
 ### Getting Started
 
-It is imperative to have the default `gulp` (or `gulp dev`) task running while developing. The dev server is located at `http://localhost:8890`.
+It is imperative to have the default `gulp` (or `gulp dev`) task running while writing scss or coffee.
 
-### Adding New JS Libraries
+### Adding Third-Party JS
 
-1. Add lib to project using `npm` from the project root
-2. Declare the path to the lib file in `[root]/Tasks//paths.js` as an Array item in `path.js.libs`. The files will be concat'd in listed order.
+The project is currently only set up to accept libraries that have `browserify` support.
 
+1) Install the library via `npm install <lib>`
+
+2) Use `require` syntax to include the package in Coffee files
 
 ### Adding New Coffeescript Files
 
 1) Create a `.coffee` file within `/Resources/coffee/`
 
-2) The file will automatically show up in `index.html`
-
-2+) The project currently uses only Angular modules, which, combined with this project's Gulp tasks, allows us to not have to declare any new files anyhwere for them to be compiled and built.
+2) The file will be automagically built into `build.js`
 
 ### Adding New SCSS Files
 
-* Include new stylesheets in `/Resources/scss/app.scss` using `@import "path/to/file.scss"`
+1) Include new stylesheets in `/Resources/scss/app.scss` using `@import "path/to/file.scss"`
+2) The file will be automagically built into `build.css`

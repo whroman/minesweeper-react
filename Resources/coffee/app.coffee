@@ -9,4 +9,4 @@ React.render(
     document.getElementById 'minesweeper'
 )
 
-console.log 'asdfds'
+console.log 'FOO'
