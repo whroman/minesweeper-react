@@ -32,28 +32,5 @@
     "test": "npm run mocha Spec/Unit/; npm run cover",
     "mocha": "mocha --compilers coffee:coffee-script/register --recursive --require ./Spec/cs-coverage-loader.js -t 15000 -R spec",
     "cover": "istanbul report;"
-  },
-  "jest": {
-    "scriptPreprocessor": "Spec/preprocessor.js",
-    "collectCoverage": true,
-    "testFileExtensions": [
-      "coffee",
-      "litcoffee",
-      "coffee.md",
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "coffee",
-      "litcoffee",
-      "coffee.md",
-      "js"
-    ],
-    "testPathIgnorePatterns": [
-      "/_.*\\..*"
-    ],
-    "collectCoverageOnlyFrom": {
-      "Resources/build/build.js": true
-    },
-    "testDirectoryName": "Spec/Unit"
   }
 }

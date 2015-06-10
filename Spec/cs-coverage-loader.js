@@ -15,7 +15,6 @@ coffeeCoverage.register({
         '/Spec',
         '/Resources/build',
         '/Resources/scss',
-        '/Resources/coffee/components',
         'gulpfile.coffee'
     ],
     coverageVar: coverageVar,
