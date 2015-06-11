@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 ReactSlider = React.createFactory require 'react-slider'
 
 NewGameActions = require '../actions/NewGameActions.coffee'

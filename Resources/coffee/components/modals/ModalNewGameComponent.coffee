@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 Reflux = require 'reflux'
 React.initializeTouchEvents true
 
@@ -12,10 +12,7 @@ SliderComponent = require '../SliderComponent.coffee'
 ModalOverlay = React.createClass
     displayName: 'ModalNewGame'
 
-    mixins: [
-        mixins: [React.addons.LinkedStateMixin]
-        Reflux.connect NewGameStore, "data"
-    ]
+    mixins: [Reflux.connect NewGameStore, "data"]
 
     getInitialState: ->
         data:
@@ -27,10 +24,6 @@ ModalOverlay = React.createClass
                 min: 10
                 max: 50
                 value: 25
-
-
-    componentDidMount: ->
-        NewGameStore.update()
 
     getClass: ->
         classes = [

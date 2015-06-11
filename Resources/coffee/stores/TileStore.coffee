@@ -15,7 +15,7 @@ loadedTiles =
 
 if window.localStorage
     loadedTiles.string = window.localStorage.getItem 'tiles'
-    loadedTiles.isValid = loadedTiles.string[0] is '['
+    loadedTiles.isValid = loadedTiles.string && loadedTiles.string[0] is '['
 
     if loadedTiles.isValid
         loadedTiles.all = JSON.parse loadedTiles.string

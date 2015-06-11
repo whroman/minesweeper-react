@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 Reflux = require 'reflux'
 
 TileStore = require '../stores/TileStore.coffee'
@@ -18,17 +18,15 @@ R = React.DOM
 window.Game = Game = React.createClass
     displayName: 'Game'
     mixins: [
-        mixins: [React.addons.LinkedStateMixin] # exposes this.linkState used in render
         Reflux.connect TileStore, "tiles"
         Reflux.connect ModalStore, "modals"
     ]
     getInitialState: ->
         tiles:
-            value:
-                all: []
-                info: {}
-        modals:
-            value: {}
+            all: []
+            info: {}
+
+        modals: {}
 
     componentDidMount: ->
         TileStore.update()
@@ -39,11 +37,11 @@ window.Game = Game = React.createClass
 
         info = React.createElement InfoComponent,
             key: 'info'
-            info: parent.linkState('tiles').value.info
+            info: @state.tiles.info
 
         tiles = React.createElement TilesComponent,
                 key: 'tiles'
-                tiles: parent.linkState('tiles').value.all
+                tiles: @state.tiles.all
 
         boardWrappper = R.div {
             id:'board-wrappper'
@@ -58,8 +56,8 @@ window.Game = Game = React.createClass
 
         overlays = React.createElement ModalOverlayComponent,
             key: 'modal-overlay'
-            info: parent.linkState('tiles').value.info
-            modals: parent.linkState('modals').value
+            info: @state.tiles.info
+            modals: @state.modals
 
         R.div null, [
             overlays

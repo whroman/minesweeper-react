@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 
 ModalActions = require '../../actions/ModalActions.coffee'
 InstructionsComponent = require './ModalInstructionsComponent.coffee'

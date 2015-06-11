@@ -1,6 +1,6 @@
 TilesActions = require '../actions/TilesActions.coffee'
 
-React = require 'react/addons'
+React = require 'react'
 R = React.DOM
 
 Tile = React.createClass
