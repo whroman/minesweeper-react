@@ -10,8 +10,26 @@ store =
             value: 10
         mines:
             value: 25
-            min: 10
-            max: 50
+            min: null
+            max: null
+
+    setMineVals: ->
+        currentVal = @data.mines.val
+        newVal = Math.floor( @data.x.value * @data.y.value / 4 )
+        newMin = Math.floor( @data.x.value * @data.y.value / 5 )
+        newMax = Math.floor( @data.x.value * @data.y.value / 2 )
+
+        @data.mines.min = newMin
+        @data.mines.max = newMax
+
+        if (
+            !currentVal or
+            parseFloat(currentVal) < newFrom or
+            parseFloat(currentVal) > newTo
+        )
+            @data.mines.value = newVal
+
+store.setMineVals()
 
 handlers =
     # listenables:
@@ -25,22 +43,10 @@ handlers =
 
             # If `x` or `y` was changed, alter `mines` values accordingly
             if key isnt 'mines'
-                currentVal = @data.mines.val
-                newVal = Math.floor( @data.x.value * @data.y.value / 4 )
-                newMin = Math.floor( @data.x.value * @data.y.value / 5 )
-                newMax = Math.floor( @data.x.value * @data.y.value / 2 )
-
-                @data.mines.min = newMin
-                @data.mines.max = newMax
-
-                if (
-                    !currentVal or
-                    parseFloat(currentVal) < newFrom or
-                    parseFloat(currentVal) > newTo
-                )
-                    @data.mines.value = newVal
-
+                @setMineVals()
             @update()
+        else
+            throw 'given `key` is not a property of `NewGameStore.data`'
 
     update: ->
         @trigger @data

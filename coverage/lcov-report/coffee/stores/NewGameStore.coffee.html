@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">coffee/stores/NewGameStore.coffee</span></h1>
     <h2>
-        Statements: <span class="metric">33.33% <small>(7 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">33.33% <small>(7 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(24 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(3 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(24 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">coffee/stores/</a> &#187; NewGameStore.coffee</div>
@@ -74,7 +74,13 @@
 47
 48
 49
-50</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -89,6 +95,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -96,30 +120,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,8 +147,26 @@ store =
             value: 10
         mines:
             value: 25
-            min: 10
-            max: 50
+            min: null
+            max: null
+&nbsp;
+    setMineVals: -&gt;
+        currentVal = @data.mines.val
+        newVal = Math.floor( @data.x.value * @data.y.value / 4 )
+        newMin = Math.floor( @data.x.value * @data.y.value / 5 )
+        newMax = Math.floor( @data.x.value * @data.y.value / 2 )
+&nbsp;
+        @data.mines.min = newMin
+        @data.mines.max = newMax
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (
+            !currentVal or
+            parseFloat(currentVal) &lt; newFrom or
+            parseFloat(currentVal) &gt; newTo
+        )
+            @data.mines.value = newVal
+&nbsp;
+store.setMineVals()
 &nbsp;
 handlers =
     # listenables:
@@ -144,31 +174,19 @@ handlers =
     #   Actions.change() will fire "onChange" in Store if "change" is listed in Actions
     listenables: [NewGameActions]
 &nbsp;
-<span class="fstat-no" title="function not covered" >    onChange: (key, val) -&gt;</span>
-<span class="cstat-no" title="statement not covered" >        if @data[key] isnt undefined and @data[key] isnt null</span>
-<span class="cstat-no" title="statement not covered" >            @data[key].value = val</span>
+    onChange: (key, val) -&gt;
+        if @data[key] isnt undefined and @data[key] isnt null
+            @data[key].value = val
 &nbsp;
             # If `x` or `y` was changed, alter `mines` values accordingly
-<span class="cstat-no" title="statement not covered" >            if key isnt 'mines'</span>
-<span class="cstat-no" title="statement not covered" >                currentVal = @data.mines.val</span>
-<span class="cstat-no" title="statement not covered" >                newVal = Math.floor( @data.x.value * @data.y.value / 4 )</span>
-<span class="cstat-no" title="statement not covered" >                newMin = Math.floor( @data.x.value * @data.y.value / 5 )</span>
-<span class="cstat-no" title="statement not covered" >                newMax = Math.floor( @data.x.value * @data.y.value / 2 )</span>
+            if key isnt 'mines'
+                @setMineVals()
+            @update()
+        else
+            throw 'given `key` is not a property of `NewGameStore.data`'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                @data.mines.min = newMin</span>
-<span class="cstat-no" title="statement not covered" >                @data.mines.max = newMax</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >                if (</span>
-<span class="cstat-no" title="statement not covered" >                    !currentVal or</span>
-                    parseFloat(currentVal) &lt; newFrom or
-                    parseFloat(currentVal) &gt; newTo
-                )
-<span class="cstat-no" title="statement not covered" >                    @data.mines.value = newVal</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            @update()</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >    update: -&gt;</span>
-<span class="cstat-no" title="statement not covered" >        @trigger @data</span>
+    update: -&gt;
+        @trigger @data
 &nbsp;
 NewGameStore = Reflux.createStore assign {}, store, handlers
 &nbsp;
@@ -177,7 +195,7 @@ module.exports = NewGameStore</pre></td></tr>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 10:14:29 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 16:01:49 GMT-0500 (CDT)</div>
 </div>
 <script src="../../prettify.js"></script>
 <script>
