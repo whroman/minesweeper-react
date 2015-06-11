@@ -4,9 +4,14 @@ NewGameActions = require '../actions/NewGameActions.coffee'
 
 store =
     data:
-        x: 10
-        y: 10
-        mines: 25
+        x:
+            value: 10
+        y:
+            value: 10
+        mines:
+            value: 25
+            min: 10
+            max: 50
 
 handlers =
     # listenables:
@@ -16,8 +21,26 @@ handlers =
 
     onChange: (key, val) ->
         if @data[key] isnt undefined and @data[key] isnt null
-            @data[key] = val
-        @update()
+            @data[key].value = val
+
+            # If `x` or `y` was changed, alter `mines` values accordingly
+            if key isnt 'mines'
+                currentVal = @data.mines.val
+                newVal = Math.floor( @data.x.value * @data.y.value / 4 )
+                newMin = Math.floor( @data.x.value * @data.y.value / 5 )
+                newMax = Math.floor( @data.x.value * @data.y.value / 2 )
+
+                @data.mines.min = newMin
+                @data.mines.max = newMax
+
+                if (
+                    !currentVal or
+                    parseFloat(currentVal) < newFrom or
+                    parseFloat(currentVal) > newTo
+                )
+                    @data.mines.value = newVal
+
+            @update()
 
     update: ->
         @trigger @data

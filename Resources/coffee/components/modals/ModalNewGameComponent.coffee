@@ -2,54 +2,32 @@ React = require 'react/addons'
 Reflux = require 'reflux'
 React.initializeTouchEvents true
 
-ReactSlider = React.createFactory require 'react-slider'
 R = React.DOM
 
 ModalActions = require '../../actions/ModalActions.coffee'
 TilesActions = require '../../actions/TilesActions.coffee'
-NewGameActions = require '../../actions/NewGameActions.coffee'
-
 NewGameStore = require '../../stores/NewGameStore.coffee'
-
-map = (v, f, context) ->
-    if v && v.map
-        return v.map f, context
-    return f.call context, v, 0
-
-Slider = React.createClass
-    displayName: 'Slider'
-    getInitialState: ->
-        return value: this.props.defaultValue
-
-    onChange: (value) ->
-        this.setState value: value
-        console.log 'slider change'
-        NewGameActions.change @props.field, value
-
-    render: ->
-        ReactSlider React.__spread({
-            className: this.props.orientation + '-slider'
-            pearling: true
-            value: this.state.value
-            onChange: this.onChange
-        }, this.props), map this.state.value, (value, i) ->
-            return R.div {
-                key: i
-            }, value
-
+SliderComponent = require '../SliderComponent.coffee'
 
 ModalOverlay = React.createClass
     displayName: 'ModalNewGame'
 
     mixins: [
-        mixins: [React.addons.LinkedStateMixin] # exposes this.linkState used in render
+        mixins: [React.addons.LinkedStateMixin]
         Reflux.connect NewGameStore, "data"
     ]
 
     getInitialState: ->
         data:
-            x: 10
-            y: 10
+            x:
+                value: 10
+            y:
+                value: 10
+            mines:
+                min: 10
+                max: 50
+                value: 25
+
 
     componentDidMount: ->
         NewGameStore.update()
@@ -73,8 +51,7 @@ ModalOverlay = React.createClass
             return 'you lost...'
 
     clickHandlerNewGame: ->
-        console.log @state.data.x, @state.data.y
-        TilesActions.newGame @state.data.x, @state.data.y, 25
+        TilesActions.newGame @state.data.x.value, @state.data.y.value, @state.data.mines.value
 
     clickHandlerExitModal: ->
         ModalActions.reset()
@@ -114,8 +91,8 @@ ModalOverlay = React.createClass
                 className: 'slider'
                 key: 'slider-x'
             }, [
-                R.div key: 'slider-x-header', @state.data.x + ' tiles wide'
-                React.createElement Slider, {
+                R.div key: 'slider-x-header', @state.data.x.value + ' tiles wide'
+                React.createElement SliderComponent, {
                     key: 'slider-x-ui'
                     orientation: 'horizontal'
                     field: 'x'
@@ -128,14 +105,29 @@ ModalOverlay = React.createClass
                 className: 'slider'
                 key: 'slider-y'
             }, [
-                R.div key: 'slider-y-header', @state.data.y + ' tiles tall'
-                React.createElement Slider, {
+                R.div key: 'slider-y-header', @state.data.y.value + ' tiles tall'
+                React.createElement SliderComponent, {
                     key: 'slider-y-ui'
                     orientation: 'horizontal'
                     field: 'y'
                     min: 5
                     defaultValue: 10
                     max: 20
+                }
+            ]
+            R.div {
+                className: 'slider'
+                key: 'slider-mines'
+            }, [
+                R.div key: 'slider-mines-header', @state.data.mines.value + ' mines'
+                React.createElement SliderComponent, {
+                    key: 'slider-mines-ui'
+                    orientation: 'horizontal'
+                    field: 'mines'
+                    min: @state.data.mines.min
+                    defaultValue: @state.data.mines.value
+                    value: @state.data.mines.value
+                    max: @state.data.mines.max
                 }
             ]
         ]
