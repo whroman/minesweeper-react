@@ -92,9 +92,7 @@
 65
 66
 67
-68
-69
-70</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+68</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -118,9 +116,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,39 +127,39 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1357</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1355</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">React = require 'react/addons'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">React = require 'react'
 Reflux = require 'reflux'
 &nbsp;
 TileStore = require '../stores/TileStore.coffee'
@@ -183,17 +179,15 @@ R = React.DOM
 window.Game = Game = React.createClass
     displayName: 'Game'
     mixins: [
-        mixins: [React.addons.LinkedStateMixin] # exposes this.linkState used in render
         Reflux.connect TileStore, "tiles"
         Reflux.connect ModalStore, "modals"
     ]
     getInitialState: -&gt;
         tiles:
-            value:
-                all: []
-                info: {}
-        modals:
-            value: {}
+            all: []
+            info: {}
+&nbsp;
+        modals: {}
 &nbsp;
     componentDidMount: -&gt;
         TileStore.update()
@@ -204,11 +198,11 @@ window.Game = Game = React.createClass
 &nbsp;
         info = React.createElement InfoComponent,
             key: 'info'
-            info: parent.linkState('tiles').value.info
+            info: @state.tiles.info
 &nbsp;
         tiles = React.createElement TilesComponent,
                 key: 'tiles'
-                tiles: parent.linkState('tiles').value.all
+                tiles: @state.tiles.all
 &nbsp;
         boardWrappper = R.div {
             id:'board-wrappper'
@@ -223,8 +217,8 @@ window.Game = Game = React.createClass
 &nbsp;
         overlays = React.createElement ModalOverlayComponent,
             key: 'modal-overlay'
-            info: parent.linkState('tiles').value.info
-            modals: parent.linkState('modals').value
+            info: @state.tiles.info
+            modals: @state.modals
 &nbsp;
         R.div null, [
             overlays
@@ -237,7 +231,7 @@ module.exports = Game</pre></td></tr>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 10 2015 11:47:27 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 10:14:29 GMT-0500 (CDT)</div>
 </div>
 <script src="../../prettify.js"></script>
 <script>
