@@ -13,7 +13,7 @@ describe 'TilesCollection.noMineFirstClick()', ->
 
             Tiles.noMineFirstClick tileWithMine
 
-            assert.equal tileWithMine.model.isMine, false, tileWithMine
+            assert.equal tileWithMine.model.isMine, false, JSON.stringify(tileWithMine)
 
     it 'should set a random, clear tile as having a mine', ->
         for test in tests

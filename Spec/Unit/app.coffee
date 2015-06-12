@@ -6,5 +6,5 @@ require process.cwd() + '/Resources/coffee/app.coffee'
 
 describe 'App', ->
     it 'should render', ->
-        id = document.getElementById 'wrapper'
-        assert.isDefined id
+        el = document.getElementById 'minesweeper'
+        assert.isAbove el.childNodes.length, 0, el.childNodes.length
