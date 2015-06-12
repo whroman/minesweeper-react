@@ -46,5 +46,9 @@ describe 'TileComponent', ->
                 uid: tile.mock.expected.uid
                 shiftKey: true
 
+            expect = '?'
+            if tile.mock.attrs.isClear
+                expect = tile.mock.attrs.adjacentMines
+
             queue ->
-                assert.equal tile.component.getDOMNode().textContent, '?'
+                assert.equal tile.component.getDOMNode().textContent, expect
