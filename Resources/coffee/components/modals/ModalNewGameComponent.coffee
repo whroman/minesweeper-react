@@ -65,7 +65,7 @@ ModalOverlay = React.createClass
                 onClick: @clickHandlerExitModal
             }, 'resume...'
 
-        R.div key: 'new-game-buttons', buttons
+        buttons
 
     render: ->
         title = R.div {
@@ -132,7 +132,7 @@ ModalOverlay = React.createClass
         }, [
             title
             sliders
-            @renderButtons()
+            R.div key: 'new-game-buttons', @renderButtons()
         ]
 
 module.exports = ModalOverlay
