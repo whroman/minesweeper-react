@@ -46,6 +46,7 @@ class TilesCollection
     # Finds an empty tile and marks it as a mine if no tiles
     # have yet to be cleared AND the given tile is a mine
     noMineFirstClick: (tile) ->
+        ### istanbul ignore else ###
         if @numOfClears is 0 and tile.model.isMine is true
             tile.model.isMine = false
             @randomSafeTile().model.isMine = true

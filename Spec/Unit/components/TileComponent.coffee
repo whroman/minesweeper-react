@@ -17,10 +17,7 @@ describe 'TileComponent', ->
         for test in tests
             model = new TileModel test.attrs
 
-            tileEl = React.createElement TileComponent, {
-                    tile: model
-                }
-
+            tileEl = React.createElement TileComponent, tile: model
             tileInDom = TestUtils.renderIntoDocument tileEl
             component =  TestUtils.findRenderedDOMComponentWithTag tileInDom, 'li'
             tiles.push

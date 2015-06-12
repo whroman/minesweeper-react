@@ -78,11 +78,12 @@ ModalOverlay = React.createClass
                 }, @getTitleText()
 
         sliders = R.div {
+            key: 'slider'
             className: 'sliders'
         }, [
             R.div {
-                className: 'slider'
                 key: 'slider-x'
+                className: 'slider'
             }, [
                 R.div key: 'slider-x-header', @state.data.x.value + ' tiles wide'
                 React.createElement SliderComponent, {
@@ -95,8 +96,8 @@ ModalOverlay = React.createClass
                 }
             ]
             R.div {
-                className: 'slider'
                 key: 'slider-y'
+                className: 'slider'
             }, [
                 R.div key: 'slider-y-header', @state.data.y.value + ' tiles tall'
                 React.createElement SliderComponent, {
@@ -109,8 +110,8 @@ ModalOverlay = React.createClass
                 }
             ]
             R.div {
-                className: 'slider'
                 key: 'slider-mines'
+                className: 'slider'
             }, [
                 R.div key: 'slider-mines-header', @state.data.mines.value + ' mines'
                 React.createElement SliderComponent, {

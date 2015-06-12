@@ -17,11 +17,11 @@ ModalOverlay = React.createClass
         return 'hide'
 
     resetHandler: ->
+        # Client should not be allowed to exit the modal by clicking the overlay
+        #   if the game has been won or lost
+        ### istanbul ignore else ###
         if !@props.info.loss && !@props.info.win
             ModalActions.reset()
-
-    instructionsHandler: ->
-        ModalActions.toggle 'instructions'
 
     render: ->
         overlay = R.div {
@@ -33,19 +33,17 @@ ModalOverlay = React.createClass
 
         components = [overlay]
 
-        if @props.modals
-            components.push React.createElement InstructionsComponent, {
-                    key: 'modal-instructions'
-                    show: @props.modals.instructions
-                }
+        components.push React.createElement InstructionsComponent, {
+            key: 'modal-instructions'
+            show: @props.modals.instructions
+        }
 
-            if @props.info
-                components.push React.createElement NewGameComponent, {
-                    key: 'modal-new-game'
-                    show: @props.modals.newGame
-                    win: @props.info.win
-                    loss: @props.info.loss
-                }
+        components.push React.createElement NewGameComponent, {
+            key: 'modal-new-game'
+            show: @props.modals.newGame
+            win: @props.info.win
+            loss: @props.info.loss
+        }
 
         R.div null, components
 

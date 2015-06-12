@@ -23,6 +23,8 @@ if window.localStorage
             Tiles.loadGame loadedTiles.all
             loadedTiles.success = true
 
+# We only want run `newGame` if program was successful in loading a game
+### istanbul ignore else ###
 if !loadedTiles.success
     Tiles.newGame 10, 10, 25
 

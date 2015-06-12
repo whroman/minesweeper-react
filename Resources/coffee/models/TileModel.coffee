@@ -15,6 +15,7 @@ module.exports =
         constructor: (attrs) ->
             if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)
                 throw "`x` and `y` are required Integer attributes to instantiate Tile"
+
             @model =
                 x : undefined
                 y : undefined

@@ -161,7 +161,8 @@
 134
 135
 136
-137</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+137
+138</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,22 +190,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
-<span class="cline-any cline-yes">431</span>
+<span class="cline-any cline-yes">1377</span>
+<span class="cline-any cline-yes">414</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
-<span class="cline-any cline-yes">876</span>
+<span class="cline-any cline-yes">1377</span>
+<span class="cline-any cline-yes">878</span>
 <span class="cline-any cline-yes">499</span>
-<span class="cline-any cline-yes">64</span>
-<span class="cline-any cline-yes">435</span>
-<span class="cline-any cline-yes">67</span>
+<span class="cline-any cline-yes">82</span>
+<span class="cline-any cline-yes">417</span>
+<span class="cline-any cline-yes">43</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -213,7 +214,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,17 +222,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
-<span class="cline-any cline-yes">1244</span>
+<span class="cline-any cline-yes">1377</span>
+<span class="cline-any cline-yes">1252</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -240,7 +241,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -288,7 +289,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1375</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1377</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -377,11 +379,12 @@ ModalOverlay = React.createClass
                 }, @getTitleText()
 &nbsp;
         sliders = R.div {
+            key: 'slider'
             className: 'sliders'
         }, [
             R.div {
-                className: 'slider'
                 key: 'slider-x'
+                className: 'slider'
             }, [
                 R.div key: 'slider-x-header', @state.data.x.value + ' tiles wide'
                 React.createElement SliderComponent, {
@@ -394,8 +397,8 @@ ModalOverlay = React.createClass
                 }
             ]
             R.div {
-                className: 'slider'
                 key: 'slider-y'
+                className: 'slider'
             }, [
                 R.div key: 'slider-y-header', @state.data.y.value + ' tiles tall'
                 React.createElement SliderComponent, {
@@ -408,8 +411,8 @@ ModalOverlay = React.createClass
                 }
             ]
             R.div {
-                className: 'slider'
                 key: 'slider-mines'
+                className: 'slider'
             }, [
                 R.div key: 'slider-mines-header', @state.data.mines.value + ' mines'
                 React.createElement SliderComponent, {
@@ -438,7 +441,7 @@ module.exports = ModalOverlay</pre></td></tr>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 16:01:49 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 19:20:18 GMT-0500 (CDT)</div>
 </div>
 <script src="../../../prettify.js"></script>
 <script>

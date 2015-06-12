@@ -22,6 +22,9 @@ store =
         @data.mines.min = newMin
         @data.mines.max = newMax
 
+        # We only want to alter `mines.value` if its old value does not fit within the
+        #   new constraints defined by newMin and newMax
+        ### istanbul ignore else ###
         if (
             !currentVal or
             parseFloat(currentVal) < newFrom or

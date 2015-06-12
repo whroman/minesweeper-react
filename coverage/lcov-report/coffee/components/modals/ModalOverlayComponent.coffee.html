@@ -15,11 +15,11 @@
 <div class="header high">
     <h1>Code coverage report for <span class="entity">coffee/components/modals/ModalOverlayComponent.coffee</span></h1>
     <h2>
-        Statements: <span class="metric">86.36% <small>(19 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">60% <small>(6 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">50% <small>(2 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">86.36% <small>(19 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">89.47% <small>(17 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">66.67% <small>(2 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">89.47% <small>(17 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric">1 branch</span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">coffee/components/modals/</a> &#187; ModalOverlayComponent.coffee</div>
 </div>
@@ -74,9 +74,7 @@
 47
 48
 49
-50
-51
-52</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+50</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
@@ -88,44 +86,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
-<span class="cline-any cline-yes">944</span>
-<span class="cline-any cline-yes">419</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">963</span>
+<span class="cline-any cline-yes">402</span>
 <span class="cline-any cline-yes">12</span>
-<span class="cline-any cline-yes">407</span>
+<span class="cline-any cline-yes">390</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
+<span class="cline-any cline-yes">1365</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
+<span class="cline-any cline-yes">1365</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
-<span class="cline-any cline-yes">1363</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
-<span class="cline-any cline-yes">1363</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1363</span>
+<span class="cline-any cline-yes">1365</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">React = require 'react'
 &nbsp;
@@ -146,11 +142,11 @@ ModalOverlay = React.createClass
         return 'hide'
 &nbsp;
 <span class="fstat-no" title="function not covered" >    resetHandler: -&gt;</span>
+        # Client should not be allowed to exit the modal by clicking the overlay
+        #   if the game has been won or lost
+        ### istanbul ignore else ###
 <span class="cstat-no" title="statement not covered" >        if !@props.info.loss &amp;&amp; !@props.info.win</span>
 <span class="cstat-no" title="statement not covered" >            ModalActions.reset()</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >    instructionsHandler: -&gt;</span>
-<span class="cstat-no" title="statement not covered" >        ModalActions.toggle 'instructions'</span>
 &nbsp;
     render: -&gt;
         overlay = R.div {
@@ -162,19 +158,17 @@ ModalOverlay = React.createClass
 &nbsp;
         components = [overlay]
 &nbsp;
-        <span class="missing-if-branch" title="else path not taken" >E</span>if @props.modals
-            components.push React.createElement InstructionsComponent, {
-                    key: 'modal-instructions'
-                    show: @props.modals.instructions
-                }
+        components.push React.createElement InstructionsComponent, {
+            key: 'modal-instructions'
+            show: @props.modals.instructions
+        }
 &nbsp;
-            <span class="missing-if-branch" title="else path not taken" >E</span>if @props.info
-                components.push React.createElement NewGameComponent, {
-                    key: 'modal-new-game'
-                    show: @props.modals.newGame
-                    win: @props.info.win
-                    loss: @props.info.loss
-                }
+        components.push React.createElement NewGameComponent, {
+            key: 'modal-new-game'
+            show: @props.modals.newGame
+            win: @props.info.win
+            loss: @props.info.loss
+        }
 &nbsp;
         R.div null, components
 &nbsp;
@@ -183,7 +177,7 @@ module.exports = ModalOverlay</pre></td></tr>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 16:01:49 GMT-0500 (CDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jun 11 2015 19:20:18 GMT-0500 (CDT)</div>
 </div>
 <script src="../../../prettify.js"></script>
 <script>
