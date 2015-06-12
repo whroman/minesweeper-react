@@ -44,5 +44,4 @@ describe 'NewGameStore.onChange(key, val)', ->
     it 'should fail if given incorrect `key`', ->
         Store = getStore()
         assert.throw ->
-            console.log Store.data.foo
             Store.onChange 'foo', 10

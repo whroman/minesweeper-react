@@ -1,9 +1,4 @@
-Number.isInteger = Number.isInteger or (value) ->
-    return (
-        typeof value is "number" and
-        isFinite(value) and
-        Math.floor(value) is value
-    )
+Number.isInteger = require('../shims/isInteger.coffee')()
 
 module.exports =
     class TileModel
@@ -12,6 +7,7 @@ module.exports =
             [-1,  0],           [ 1,  0],
             [-1,  1], [ 0,  1], [ 1,  1],
         ]
+
         constructor: (attrs) ->
             if !Number.isInteger(attrs.x) or !Number.isInteger(attrs.y)
                 throw "`x` and `y` are required Integer attributes to instantiate Tile"
